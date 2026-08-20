@@ -85,11 +85,11 @@ function Index() {
             <a href="#services" className="hidden hover:text-background md:inline">
               Services
             </a>
-            <a href="#services" className="hidden hover:text-background md:inline">
-              Services
-            </a>
-            <Link to="/admin" className="hover:text-background">
-              Admin
+            <Link to="/brands" className="hover:text-background">
+              Brands
+            </Link>
+            <Link to="/news" className="hover:text-background">
+              News
             </Link>
           </nav>
         </div>
