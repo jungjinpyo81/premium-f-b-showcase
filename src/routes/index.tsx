@@ -110,10 +110,10 @@ function Index() {
             <p className="text-[11px] uppercase tracking-[0.45em] text-background/70">
               Europe Connect · F&amp;B Sourcing &amp; Logistics Consulting
             </p>
-            <h1 className="mt-10 font-display text-5xl leading-[1.06] text-background md:text-7xl">
+            <h1 className="mt-10 font-display text-4xl leading-[1.08] text-background md:text-6xl">
               유럽 프리미엄 F&amp;B 브랜드와
               <br />
-              한국 시장을 잇는 독보적인 브릿지.
+              한국 시장을 잇는 독보적인 브릿지
             </h1>
             <p className="mt-10 max-w-xl text-sm leading-8 text-background/75">
               17년 이상의 소싱·통관·물류 실무 위에서, 브랜드가 한국 시장에 안착하기까지의 모든
