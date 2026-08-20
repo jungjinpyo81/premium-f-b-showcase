@@ -166,9 +166,9 @@ function Index() {
           <div className="md:col-span-7">
             <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">Our Role</p>
             <h2 className="mt-8 max-w-xl font-display text-4xl leading-tight md:text-5xl">
-              우리는 만들지 않습니다.
+              우리는 상품과 고객을
               <br />
-              연결하고, 운영합니다.
+              연결하고{"\u00a0"}
             </h2>
             <div
               className="rich-content mt-12 max-w-2xl text-sm leading-8 text-foreground/85"
