@@ -85,8 +85,8 @@ function Index() {
             <a href="#services" className="hidden hover:text-background md:inline">
               Services
             </a>
-            <a href="#showroom" className="hidden hover:text-background md:inline">
-              Showroom
+            <a href="#services" className="hidden hover:text-background md:inline">
+              Services
             </a>
             <Link to="/admin" className="hover:text-background">
               Admin
@@ -245,39 +245,6 @@ function Index() {
               className="w-full object-cover"
             />
           </div>
-        </div>
-      </section>
-
-      {/* Private showroom */}
-      <section id="showroom" className="relative">
-        <img
-          src={showroomImg}
-          alt="회원제 폐쇄형 프리미엄 식품 쇼룸 내부"
-          width={1408}
-          height={1008}
-          loading="lazy"
-          className="absolute inset-0 size-full object-cover"
-        />
-        <div className="absolute inset-0 bg-[oklch(0.12_0_0/0.78)]" />
-        <div className="relative mx-auto max-w-[1400px] px-6 py-32 md:px-10">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-background/70">
-            Private Showroom
-          </p>
-          <h2 className="mt-8 max-w-2xl font-display text-4xl leading-tight text-background md:text-5xl">
-            초대된 파트너에게만 열리는
-            <br />
-            폐쇄형 쇼룸.
-          </h2>
-          <p className="mt-10 max-w-xl text-sm leading-8 text-background/75">
-            유럽 현지에서 큐레이션한 브랜드를 직접 시식하고 검토하실 수 있습니다. 사전 심사 후
-            방문 일정이 안내됩니다.
-          </p>
-          <a
-            href="#inquiry"
-            className="mt-12 inline-flex h-14 items-center justify-center border border-background/50 px-10 text-[11px] uppercase tracking-[0.3em] text-background transition-colors hover:bg-background hover:text-foreground"
-          >
-            쇼룸 방문 신청
-          </a>
         </div>
       </section>
 
