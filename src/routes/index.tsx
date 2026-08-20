@@ -50,7 +50,7 @@ const LOGISTICS_SERVICES = [
   {
     no: "03",
     title: "유통 채널 입점 운영",
-    body: "프리미엄 그로서리, 호텔·다이닝, 온라인 채널별 입점 전략과 가격 구조를 정렬하고, 입점 이후의 운영까지 이어서 관리합니다.",
+    body: "프리미엄 그로서리, 호텔·다이닝, 온라인 등\n채널별 입점 전략과 가격 구조를 정렬하고, 입점 이후의 운영까지 이어서 관리합니다.",
   },
 ];
 
@@ -194,7 +194,7 @@ function Index() {
                   {s.no}
                 </p>
                 <h3 className="mt-8 font-display text-2xl">{s.title}</h3>
-                <p className="mt-6 text-sm leading-7 text-muted-foreground">{s.body}</p>
+                <p className="mt-6 text-sm leading-7 text-muted-foreground whitespace-pre-line">{s.body}</p>
               </article>
             ))}
           </div>
