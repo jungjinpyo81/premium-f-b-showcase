@@ -178,28 +178,10 @@ function Index() {
         </div>
       </section>
 
-      {/* Services — logistics 30% weight */}
+      {/* Services — sourcing first */}
       <section id="services" className="border-y border-border">
         <div className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
           <div className="flex flex-wrap items-baseline justify-between gap-6">
-            <h2 className="font-display text-4xl md:text-5xl">Logistics &amp; Customs</h2>
-            <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-              물류 · 통관 컨설팅
-            </p>
-          </div>
-          <div className="mt-16 grid gap-px bg-border md:grid-cols-3">
-            {LOGISTICS_SERVICES.map((s) => (
-              <article key={s.no} className="bg-background px-8 py-14">
-                <p className="font-display text-sm tracking-[0.3em] text-muted-foreground">
-                  {s.no}
-                </p>
-                <h3 className="mt-8 font-display text-2xl">{s.title}</h3>
-                <p className="mt-6 text-sm leading-7 text-muted-foreground whitespace-pre-line">{s.body}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-28 flex flex-wrap items-baseline justify-between gap-6">
             <h2 className="font-display text-4xl md:text-5xl">Brand Sourcing</h2>
             <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
               브랜드 소싱 · 큐레이션
@@ -213,6 +195,24 @@ function Index() {
                 </p>
                 <h3 className="mt-8 font-display text-2xl">{s.title}</h3>
                 <p className="mt-6 max-w-xl text-sm leading-7 text-muted-foreground">{s.body}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-28 flex flex-wrap items-baseline justify-between gap-6">
+            <h2 className="font-display text-4xl md:text-5xl">Logistics &amp; Customs</h2>
+            <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+              물류 · 통관 컨설팅
+            </p>
+          </div>
+          <div className="mt-16 grid gap-px bg-border md:grid-cols-3">
+            {LOGISTICS_SERVICES.map((s) => (
+              <article key={s.no} className="bg-background px-8 py-14">
+                <p className="font-display text-sm tracking-[0.3em] text-muted-foreground">
+                  {s.no}
+                </p>
+                <h3 className="mt-8 font-display text-2xl">{s.title}</h3>
+                <p className="mt-6 text-sm leading-7 text-muted-foreground whitespace-pre-line">{s.body}</p>
               </article>
             ))}
           </div>
