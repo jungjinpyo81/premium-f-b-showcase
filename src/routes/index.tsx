@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import heroImg from "@/assets/hero.jpg";
 import storyImg from "@/assets/story.jpg";
 import logisticsImg from "@/assets/logistics.jpg";
-import showroomImg from "@/assets/showroom.jpg";
+
 import { InquiryForm } from "@/components/InquiryForm";
 import { defaultContent, loadContent, type SiteContent } from "@/lib/site-content";
 
