@@ -194,7 +194,7 @@ function Index() {
                   {s.no}
                 </p>
                 <h3 className="mt-8 font-display text-2xl">{s.title}</h3>
-                <p className="mt-6 text-sm leading-7 text-muted-foreground">{s.body}</p>
+                <p className="mt-6 text-sm leading-7 text-muted-foreground whitespace-pre-line">{s.body}</p>
               </article>
             ))}
           </div>
