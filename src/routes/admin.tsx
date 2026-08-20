@@ -7,12 +7,12 @@ import { defaultContent, loadContent, saveContent, type SiteContent } from "@/li
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "콘텐츠 관리자 — MAISON GRAIN" },
+      { title: "콘텐츠 관리자 — EUROPE CONNECT" },
       {
         name: "description",
         content: "브랜드 스토리와 물류 정보를 글꼴·정렬까지 시각적으로 편집하는 관리자 페이지.",
       },
-      { property: "og:title", content: "콘텐츠 관리자 — MAISON GRAIN" },
+      { property: "og:title", content: "콘텐츠 관리자 — EUROPE CONNECT" },
       { property: "og:description", content: "브랜드 스토리와 물류 정보를 직접 편집합니다." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -35,7 +35,7 @@ function Admin() {
       <header className="border-b border-border bg-background">
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
           <Link to="/" className="font-display text-sm tracking-[0.35em]">
-            MAISON GRAIN
+            EUROPE CONNECT
           </Link>
           <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
             Content Admin
