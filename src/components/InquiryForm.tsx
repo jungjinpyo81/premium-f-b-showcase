@@ -1,26 +1,26 @@
 import { useState } from "react";
 import { toast } from "sonner";
 
-const BUDGETS = ["5천만원 이하", "5천만 – 2억", "2억 – 5억", "5억 이상"];
-const NEEDS = ["브랜드 컨설팅", "메뉴 개발", "콜드체인 공급", "공간·서비스 설계"];
+const PURPOSES = ["유럽 브랜드 소싱", "수입·통관 컨설팅", "물류 프레임워크 구축", "유통 채널 입점"];
+const STAGES = ["검토 단계", "브랜드 선정 완료", "수입 진행 중", "채널 확장"];
 
 export function InquiryForm() {
-  const [need, setNeed] = useState(NEEDS[0]!);
-  const [budget, setBudget] = useState(BUDGETS[1]!);
+  const [purpose, setPurpose] = useState(PURPOSES[0]!);
+  const [stage, setStage] = useState(STAGES[0]!);
 
   const field =
-    "h-12 w-full rounded-none border-0 border-b border-border bg-transparent px-0 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none";
+    "h-12 w-full rounded-none border-0 border-b border-border bg-transparent px-0 text-sm text-foreground placeholder:text-muted-foreground focus:border-foreground focus:outline-none";
 
   const chip = (selected: boolean) =>
-    `rounded-full border px-4 py-2 text-xs transition-colors ${
+    `border px-4 py-2 text-xs transition-colors ${
       selected
-        ? "border-primary bg-primary text-primary-foreground"
-        : "border-border text-muted-foreground hover:border-primary/50"
+        ? "border-foreground bg-foreground text-background"
+        : "border-border text-muted-foreground hover:border-foreground/60"
     }`;
 
   return (
     <form
-      className="space-y-8"
+      className="space-y-10"
       onSubmit={(e) => {
         e.preventDefault();
         const data = new FormData(e.currentTarget);
@@ -40,27 +40,27 @@ export function InquiryForm() {
       </div>
 
       <div className="space-y-3">
-        <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">문의 유형</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">비즈니스 목적</p>
         <div className="flex flex-wrap gap-2">
-          {NEEDS.map((n) => (
-            <button key={n} type="button" className={chip(need === n)} onClick={() => setNeed(n)}>
-              {n}
+          {PURPOSES.map((p) => (
+            <button
+              key={p}
+              type="button"
+              className={chip(purpose === p)}
+              onClick={() => setPurpose(p)}
+            >
+              {p}
             </button>
           ))}
         </div>
       </div>
 
       <div className="space-y-3">
-        <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">예산 범위</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">진행 단계</p>
         <div className="flex flex-wrap gap-2">
-          {BUDGETS.map((b) => (
-            <button
-              key={b}
-              type="button"
-              className={chip(budget === b)}
-              onClick={() => setBudget(b)}
-            >
-              {b}
+          {STAGES.map((s) => (
+            <button key={s} type="button" className={chip(stage === s)} onClick={() => setStage(s)}>
+              {s}
             </button>
           ))}
         </div>
@@ -69,19 +69,22 @@ export function InquiryForm() {
       <textarea
         name="message"
         rows={4}
-        className="w-full resize-none rounded-none border-0 border-b border-border bg-transparent px-0 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
-        placeholder="프로젝트 개요를 간단히 적어주세요"
+        className="w-full resize-none rounded-none border-0 border-b border-border bg-transparent px-0 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-foreground focus:outline-none"
+        placeholder="찾고 계신 카테고리 또는 프로젝트 개요를 간단히 남겨주세요"
       />
 
-      <button
-        type="submit"
-        className="inline-flex h-14 items-center justify-center bg-primary px-10 text-xs uppercase tracking-[0.3em] text-primary-foreground transition-opacity hover:opacity-90"
-      >
-        문의 보내기
-      </button>
-      <p className="text-xs text-muted-foreground">
-        선택하신 항목 ({need} · {budget})이 함께 전달되어, 담당 디렉터가 바로 배정됩니다.
-      </p>
+      <div className="space-y-4">
+        <button
+          type="submit"
+          className="inline-flex h-14 w-full items-center justify-center bg-foreground px-10 text-[11px] uppercase tracking-[0.3em] text-background transition-opacity hover:opacity-90 sm:w-auto"
+        >
+          파트너십 문의 보내기
+        </button>
+        <p className="text-xs leading-6 text-muted-foreground">
+          선택하신 항목({purpose} · {stage})이 함께 전달되며, 담당 디렉터가 배정되어 폐쇄형 쇼룸
+          방문 일정까지 안내드립니다.
+        </p>
+      </div>
     </form>
   );
 }

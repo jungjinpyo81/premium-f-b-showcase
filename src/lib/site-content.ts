@@ -3,11 +3,11 @@ export type SiteContent = {
   logistics: string;
 };
 
-export const STORAGE_KEY = "maison-site-content";
+export const STORAGE_KEY = "europe-connect-site-content";
 
 export const defaultContent: SiteContent = {
-  brandStory: `<p style="text-align:justify"><span style="font-family:'Nanum Myeongjo',serif">우리는 음식이 아니라 <b>브랜드의 시간</b>을 다룹니다. 2011년 첫 다이닝 컨설팅을 시작한 이후, 국내외 137개 프리미엄 F&amp;B 브랜드의 메뉴 설계, 공간 서사, 서비스 프로토콜을 함께 만들어 왔습니다.</span></p><p style="text-align:justify"><span style="font-family:'Noto Sans KR',sans-serif">한 접시에 담기는 온도와 침묵의 간격까지 설계합니다. 화려한 수사 대신, 반복 가능한 품질과 검증된 운영 데이터를 남깁니다.</span></p>`,
-  logistics: `<p style="text-align:left"><span style="font-family:'Noto Sans KR',sans-serif">전국 4개 콜드체인 허브에서 <b>2°C ~ 4°C</b> 정온 배송을 운영합니다. 산지 입고부터 매장 도착까지 평균 <b>18시간</b>, 온도 이탈률 0.3% 이하를 유지합니다.</span></p><p style="text-align:left"><span style="font-family:'Noto Sans KR',sans-serif">수도권 익일 새벽 입고 · 전국 광역시 익일 오전 입고 · 특수 품목 전용 차량 상시 배차.</span></p>`,
+  brandStory: `<p style="text-align:justify"><span style="font-family:'Noto Serif KR',serif">유럽커넥트는 제조사가 아닙니다. 우리는 유럽 현지의 프리미엄 F&amp;B 브랜드를 발굴하고, 한국 시장에 안착시키는 <b>전문 오퍼레이터이자 큐레이터</b>입니다.</span></p><p style="text-align:justify"><span style="font-family:'Noto Sans KR',sans-serif">17년 이상 축적된 소싱 네트워크와 통관 실무 경험을 바탕으로, 브랜드 발굴부터 수입 통관, 물류 프레임워크 설계, 유통 채널 입점까지 하나의 팀이 통합 관리합니다. 브랜드가 감당해야 할 리스크를 우리가 구조로 흡수합니다.</span></p>`,
+  logistics: `<p style="text-align:left"><span style="font-family:'Noto Sans KR',sans-serif">유럽 산지 출고부터 국내 물류센터 입고까지, 온도대별 정온 관리와 수입 식품 규격 검토를 병행합니다. 라벨 심사, 성분 검토, 식약처 신고 등 까다로운 절차를 사전 설계 단계에서 해소합니다.</span></p><p style="text-align:left"><span style="font-family:'Noto Sans KR',sans-serif">파트너 브랜드는 재고 회전과 채널 전략에만 집중하고, 통관 리스크와 물류 변수는 유럽커넥트가 책임집니다.</span></p>`,
 };
 
 export function loadContent(): SiteContent {
