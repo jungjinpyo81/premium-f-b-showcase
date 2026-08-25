@@ -54,6 +54,7 @@ export function LocaleSwitcher({ variant = "dark" }: { variant?: "dark" | "light
 
       {open && (
         <div
+          data-testid="locale-panel"
           className={`
             absolute right-0 top-full z-50 min-w-[4.5rem] border py-1.5 shadow-sm
             ${
