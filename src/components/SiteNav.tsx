@@ -111,7 +111,6 @@ export function SiteNav() {
         </nav>
 
         <div className="flex items-center gap-4 lg:hidden">
-          <LocaleSwitcher />
           <L
             to="/"
             hash="inquiry"
@@ -124,27 +123,30 @@ export function SiteNav() {
 
       {/* Mobile */}
       <div className="border-t border-border lg:hidden">
-        <div className="mx-auto flex max-w-[1400px] gap-5 overflow-x-auto px-6 py-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-          <L to="/" hash="services" className="whitespace-nowrap hover:text-foreground">
-            {copy.nav.sourcing}
-          </L>
-          <L to="/" hash="services" className="whitespace-nowrap hover:text-foreground">
-            {copy.nav.logistics}
-          </L>
-          <L to="/news" className="whitespace-nowrap hover:text-foreground">
-            {copy.nav.news}
-          </L>
-          {copy.collections.map((c) => (
-            <L
-              key={c.slug}
-              to="/collections/$slug"
-              params={{ slug: c.slug }}
-              activeProps={{ className: "text-foreground" }}
-              className="whitespace-nowrap hover:text-foreground"
-            >
-              {c.title}
+        <div className="mx-auto flex max-w-[1400px] flex-col items-center gap-3 px-6 py-3">
+          <div className="flex w-full justify-center gap-5 overflow-x-auto text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            <L to="/" hash="services" className="whitespace-nowrap hover:text-foreground">
+              {copy.nav.sourcing}
             </L>
-          ))}
+            <L to="/" hash="services" className="whitespace-nowrap hover:text-foreground">
+              {copy.nav.logistics}
+            </L>
+            <L to="/news" className="whitespace-nowrap hover:text-foreground">
+              {copy.nav.news}
+            </L>
+            {copy.collections.map((c) => (
+              <L
+                key={c.slug}
+                to="/collections/$slug"
+                params={{ slug: c.slug }}
+                activeProps={{ className: "text-foreground" }}
+                className="whitespace-nowrap hover:text-foreground"
+              >
+                {c.title}
+              </L>
+            ))}
+          </div>
+          <LocaleSwitcher />
         </div>
       </div>
     </header>
