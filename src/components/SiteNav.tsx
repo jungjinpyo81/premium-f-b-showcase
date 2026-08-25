@@ -1,10 +1,67 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { COLLECTIONS } from "@/lib/collections";
 
-export function SiteNav() {
+function TasteJourneyDropdown({ variant = "dark" }: { variant?: "dark" | "light" }) {
   const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const isLight = variant === "light";
 
+  useEffect(() => {
+    if (!open) return;
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [open]);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className={`flex items-center gap-1.5 ${isLight ? "hover:text-background" : "hover:text-foreground"}`}
+        aria-expanded={open}
+        aria-haspopup="menu"
+      >
+        Taste Journey
+        <svg
+          width="8"
+          height="5"
+          viewBox="0 0 8 5"
+          fill="currentColor"
+          className={`transition-transform ${open ? "rotate-180" : ""}`}
+          aria-hidden="true"
+        >
+          <path d="M0 0h8L4 5z" />
+        </svg>
+      </button>
+      {open && (
+        <div
+          className={`absolute left-0 top-full z-50 min-w-[14rem] border py-2 shadow-sm ${isLight ? "border-background/20 bg-background" : "border-border bg-background"}`}
+        >
+          {COLLECTIONS.map((c) => (
+            <Link
+              key={c.slug}
+              to="/collections/$slug"
+              params={{ slug: c.slug }}
+              activeProps={{ className: "text-foreground" }}
+              className={`block px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] hover:bg-muted/40 hover:text-foreground ${isLight ? "text-foreground/80" : "text-muted-foreground"}`}
+              onClick={() => setOpen(false)}
+            >
+              {c.title}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function SiteNav() {
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 md:px-10">
@@ -14,47 +71,7 @@ export function SiteNav() {
 
         {/* Desktop */}
         <nav className="hidden items-center gap-7 text-[10px] uppercase tracking-[0.22em] text-muted-foreground lg:flex">
-          {/* Taste Journey dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => setOpen(true)}
-            onMouseLeave={() => setOpen(false)}
-          >
-            <button
-              type="button"
-              onClick={() => setOpen((v) => !v)}
-              className="flex items-center gap-1.5 hover:text-foreground"
-              aria-expanded={open}
-              aria-haspopup="menu"
-            >
-              Taste Journey
-              <svg
-                width="8"
-                height="5"
-                viewBox="0 0 8 5"
-                fill="currentColor"
-                className={`transition-transform ${open ? "rotate-180" : ""}`}
-                aria-hidden="true"
-              >
-                <path d="M0 0h8L4 5z" />
-              </svg>
-            </button>
-            {open && (
-              <div className="absolute left-0 top-full min-w-[14rem] border border-border bg-background py-2 shadow-sm">
-                {COLLECTIONS.map((c) => (
-                  <Link
-                    key={c.slug}
-                    to="/collections/$slug"
-                    params={{ slug: c.slug }}
-                    activeProps={{ className: "text-foreground" }}
-                    className="block px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] text-muted-foreground hover:bg-muted/40 hover:text-foreground"
-                  >
-                    {c.title}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
+          <TasteJourneyDropdown variant="dark" />
 
           <Link
             to="/"
