@@ -90,7 +90,7 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
             isDark ? "text-background/80" : "text-muted-foreground"
           }`}
         >
-          <TasteJourneyDropdown variant={isDark ? "light" : "dark"} />
+          <TasteJourneyDropdown variant={isDark ? "dark" : "light"} />
 
           <L
             to="/"
@@ -125,7 +125,7 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
             {copy.nav.contact}
           </L>
           <span className={`h-3 w-px ${isDark ? "bg-background/30" : "bg-border"}`} />
-          <LocaleSwitcher variant={isDark ? "light" : "dark"} />
+          <LocaleSwitcher variant={isDark ? "dark" : "light"} />
         </nav>
 
         <div className="flex items-center gap-4 lg:hidden">
@@ -187,7 +187,7 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
               </L>
             ))}
           </div>
-          <LocaleSwitcher variant={isDark ? "light" : "dark"} />
+          <LocaleSwitcher variant={isDark ? "dark" : "light"} />
         </div>
       </div>
     </header>
