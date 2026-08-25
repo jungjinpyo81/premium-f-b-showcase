@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { L } from "@/components/L";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
@@ -30,6 +30,58 @@ function useActiveSection(slugs: string[]) {
   return active;
 }
 
+
+/** Grouped "Taste Journey" dropdown holding the five lifestyle collections. */
+function TasteJourneyMenu({ active }: { active: string | null }) {
+  const copy = useCopy();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [open]);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center gap-2 py-2 transition-colors hover:text-beige"
+        aria-expanded={open}
+      >
+        {copy.nav.tasteJourney}
+        <span
+          className={`text-[8px] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+        >
+          &#9662;
+        </span>
+      </button>
+      {open ? (
+        <div className="absolute left-0 top-full z-50 min-w-52 border border-beige/15 bg-ink/95 py-2 backdrop-blur-md">
+          {copy.collections.map((c) => (
+            <L
+              key={c.slug}
+              to="/"
+              hash={c.slug}
+              onClick={() => setOpen(false)}
+              className={`block px-5 py-2.5 text-[11px] tracking-[0.2em] transition-colors hover:text-beige ${
+                active === c.slug ? "text-beige" : "text-beige/55"
+              }`}
+            >
+              {c.titleLocal}
+            </L>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 /**
  * Persistent global navigation. Fixed to the top of the viewport on every
  * page; the collection items act as anchors into the full-page snap sections.
@@ -51,10 +103,10 @@ export function SiteNav() {
             {copy.nav.brands}
           </L>
           <L to="/" hash="services" className="transition-colors hover:text-beige">
-            {copy.nav.services}
+            {copy.nav.sourcing}
           </L>
           <L to="/" hash="gift" className="transition-colors hover:text-beige">
-            {copy.nav.gift}
+            {copy.nav.logistics}
           </L>
         </nav>
 
@@ -77,7 +129,7 @@ export function SiteNav() {
             {copy.nav.brands}
           </L>
           <L to="/" hash="services" className="whitespace-nowrap transition-colors hover:text-beige">
-            {copy.nav.services}
+            {copy.nav.sourcing}
           </L>
         </div>
       </div>
