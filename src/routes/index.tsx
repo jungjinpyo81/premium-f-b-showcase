@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero.jpg";
 import giftImg from "@/assets/gift.jpg";
@@ -6,41 +6,35 @@ import storyImg from "@/assets/story.jpg";
 import logisticsImg from "@/assets/logistics.jpg";
 
 import { InquiryForm } from "@/components/InquiryForm";
+import { L } from "@/components/L";
+import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteNav";
-import { COLLECTIONS } from "@/lib/collections";
-import { defaultContent, loadContent, type SiteContent } from "@/lib/site-content";
+import { getCopy, useCopy } from "@/lib/content";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "유럽커넥트 | 유럽 프리미엄 F&B 소싱·수입 물류 컨설팅" },
-      {
-        name: "description",
-        content:
-          "유럽 프리미엄 F&B 브랜드와 한국 시장을 잇는 브릿지. 17년 이상의 소싱·통관·물류·유통 채널 통합 오퍼레이팅을 제공하는 B2B 컨설팅 에이전시입니다.",
-      },
-      { property: "og:title", content: "유럽커넥트 | 유럽 프리미엄 F&B 소싱·물류 컨설팅" },
-      {
-        property: "og:description",
-        content:
-          "브랜드 소싱부터 수입 통관, 물류 프레임워크, 유통 채널 입점까지 통합 관리하는 전문 오퍼레이터.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  loaderDeps: ({ search }) => ({ lang: search.lang }),
+  loader: ({ deps }) => ({ lang: deps.lang }),
+  head: ({ loaderData }) => {
+    const meta = getCopy(loaderData?.lang).meta.home;
+    return {
+      meta: [
+        { title: meta.title },
+        { name: "description", content: meta.description },
+        { property: "og:title", content: meta.ogTitle },
+        { property: "og:description", content: meta.ogDescription },
+        { property: "og:type", content: "website" },
+        { property: "og:url", content: "/" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+      links: [{ rel: "canonical", href: "/" }],
+    };
+  },
   component: Index,
 });
 
-const FIGURES = [
-  { value: "17+", label: "수입·유통 오퍼레이팅 경력" },
-  { value: "EU", label: "유럽 현지 소싱 네트워크" },
-  { value: "1:1", label: "브랜드 전담 디렉터 배정" },
-  { value: "B2B", label: "폐쇄형 파트너십 구조" },
-];
-
 function HeroNav() {
+  const copy = useCopy();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -65,7 +59,7 @@ function HeroNav() {
           aria-expanded={open}
           aria-haspopup="menu"
         >
-          Taste Journey
+          {copy.nav.tasteJourney}
           <svg
             width="8"
             height="5"
@@ -79,8 +73,8 @@ function HeroNav() {
         </button>
         {open && (
           <div className="absolute left-0 top-full z-50 min-w-[14rem] border border-background/20 bg-background py-2 shadow-sm">
-            {COLLECTIONS.map((c) => (
-              <Link
+            {copy.collections.map((c) => (
+              <L
                 key={c.slug}
                 to="/collections/$slug"
                 params={{ slug: c.slug }}
@@ -88,66 +82,35 @@ function HeroNav() {
                 onClick={() => setOpen(false)}
               >
                 {c.title}
-              </Link>
+              </L>
             ))}
           </div>
         )}
       </div>
-      <Link to="/" hash="services" className="hidden hover:text-background lg:inline">
-        Brand Sourcing
-      </Link>
-      <Link to="/" hash="services" className="hidden hover:text-background lg:inline">
-        Logistics & Customs
-      </Link>
-      <Link to="/news" className="hover:text-background">
-        News
-      </Link>
+      <L to="/" hash="services" className="hidden hover:text-background lg:inline">
+        {copy.nav.sourcing}
+      </L>
+      <L to="/" hash="services" className="hidden hover:text-background lg:inline">
+        {copy.nav.logistics}
+      </L>
+      <L to="/news" className="hover:text-background">
+        {copy.nav.news}
+      </L>
+      <LocaleSwitcher variant="light" />
     </nav>
   );
 }
 
-const LOGISTICS_SERVICES = [
-  {
-    no: "01",
-    title: "수입 통관 컨설팅",
-    body: "품목 분류, 라벨 심사, 성분 검토, 식약처 신고까지 수입 절차 전반을 사전 설계합니다. 통관 지연과 반송 리스크를 계약 이전 단계에서 제거합니다.",
-  },
-  {
-    no: "02",
-    title: "물류 프레임워크 구축",
-    body: "유럽 산지 출고부터 국내 입고까지 온도대별 정온 관리 체계를 설계하고, 리드타임과 재고 회전을 브랜드 규모에 맞춰 표준화합니다.",
-  },
-  {
-    no: "03",
-    title: "유통 채널 입점 운영",
-    body: "프리미엄 그로서리, 호텔·다이닝, 온라인 등\n채널별 입점 전략과 가격 구조를 정렬하고, 입점 이후의 운영까지 이어서 관리합니다.",
-  },
-];
-
-const SOURCING_SERVICES = [
-  {
-    no: "04",
-    title: "브랜드 발굴 및 큐레이션",
-    body: "유럽 현지 네트워크를 통해 한국 시장에 적합한 브랜드를 직접 검증하고 선별합니다. 제조가 아닌 큐레이션이 우리의 역할입니다.",
-  },
-  {
-    no: "05",
-    title: "독점 계약 및 브랜드 관리",
-    body: "수입 판권 협상과 브랜드 가이드라인 이행을 관리하여, 국내에서도 원 브랜드의 격이 유지되도록 합니다.",
-  },
-];
-
 function Index() {
-  const [content, setContent] = useState<SiteContent>(defaultContent);
-  useEffect(() => setContent(loadContent()), []);
+  const copy = useCopy();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="absolute inset-x-0 top-0 z-20 border-b border-background/20">
         <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 md:px-10">
-          <Link to="/" className="font-display text-lg tracking-[0.35em] text-background">
+          <L to="/" className="font-display text-lg tracking-[0.35em] text-background">
             EUROPE CONNECT
-          </Link>
+          </L>
           <HeroNav />
         </div>
       </header>
@@ -156,7 +119,7 @@ function Index() {
       <section className="relative min-h-[94vh] overflow-hidden">
         <img
           src={heroImg}
-          alt="유럽 현지 프리미엄 식품 보관 창고 내부"
+          alt={copy.hero.titleLines.join(" ")}
           width={1920}
           height={1280}
           className="absolute inset-0 size-full object-cover"
@@ -166,21 +129,25 @@ function Index() {
           <div className="max-w-3xl">
             <Reveal immediate>
               <p className="text-[11px] uppercase tracking-[0.45em] text-background/70">
-                Europe Connect · F&amp;B Sourcing &amp; Logistics Consulting
+                {copy.hero.eyebrow}
               </p>
             </Reveal>
             <Reveal immediate delay={120}>
               <h1 className="mt-10 font-display text-3xl leading-[1.15] text-background md:text-5xl">
-                글로벌 프리미엄 F&B브랜드와
-                <br />
-                한국 시장을 잇는 브릿지
+                {copy.hero.titleLines.map((line, i) => (
+                  <span key={line} className="block">
+                    {i > 0 ? line : line}
+                  </span>
+                ))}
               </h1>
             </Reveal>
             <Reveal immediate delay={240}>
               <p className="mt-10 max-w-xl text-sm leading-8 text-background/75">
-                17년 이상의 소싱·통관·물류 실무 위에서, 브랜드가 한국 시장에 안착하기까지의 모든
-                <br />
-                과정을 하나의 팀이 통합 관리합니다.
+                {copy.hero.leadLines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
               </p>
             </Reveal>
             <Reveal immediate delay={360}>
@@ -189,13 +156,13 @@ function Index() {
                   href="#inquiry"
                   className="inline-flex h-14 items-center justify-center bg-background px-10 text-[11px] uppercase tracking-[0.3em] text-foreground transition-opacity hover:opacity-90"
                 >
-                  파트너십 문의
+                  {copy.hero.ctaPrimary}
                 </a>
                 <a
                   href="#role"
                   className="inline-flex h-14 items-center justify-center border border-background/40 px-10 text-[11px] uppercase tracking-[0.3em] text-background transition-colors hover:border-background"
                 >
-                  우리의 역할
+                  {copy.hero.ctaSecondary}
                 </a>
               </div>
             </Reveal>
@@ -206,7 +173,7 @@ function Index() {
       {/* Figures */}
       <section className="border-b border-border">
         <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-px bg-border md:grid-cols-4">
-          {FIGURES.map((f, i) => (
+          {copy.figures.map((f, i) => (
             <Reveal key={f.label} delay={i * 80} className="bg-background px-8 py-12">
               <p className="font-display text-4xl">{f.value}</p>
               <p className="mt-3 text-xs leading-5 text-muted-foreground">{f.label}</p>
@@ -215,13 +182,13 @@ function Index() {
         </div>
       </section>
 
-      {/* Our role — editorial column */}
+      {/* Our role */}
       <section id="role" className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
         <div className="grid gap-16 md:grid-cols-12">
           <Reveal className="md:col-span-5">
             <img
               src={storyImg}
-              alt="유럽 프리미엄 식자재 정물 사진"
+              alt={copy.role.eyebrow}
               width={1200}
               height={1504}
               loading="lazy"
@@ -231,35 +198,38 @@ function Index() {
           <div className="md:col-span-7">
             <Reveal delay={120}>
               <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
-                Our Role
+                {copy.role.eyebrow}
               </p>
               <h2 className="mt-8 max-w-xl font-display text-4xl leading-tight md:text-5xl">
-                우리는 상품과 고객을
-                <br />
-                연결하고{"\u00a0"}
+                {copy.role.titleLines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
               </h2>
             </Reveal>
             <Reveal delay={220}>
-              <div
-                className="rich-content mt-12 max-w-2xl text-sm leading-8 text-foreground/85"
-                dangerouslySetInnerHTML={{ __html: content.brandStory }}
-              />
+              <div className="mt-12 max-w-2xl space-y-6 text-sm leading-8 text-foreground/85">
+                {copy.role.paragraphs.map((p) => (
+                  <p key={p}>{p}</p>
+                ))}
+              </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Services — sourcing first */}
+      {/* Services */}
       <section id="services" className="border-y border-border">
         <div className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
           <Reveal className="flex flex-wrap items-baseline justify-between gap-6">
-            <h2 className="font-display text-4xl md:text-5xl">Brand Sourcing</h2>
+            <h2 className="font-display text-4xl md:text-5xl">{copy.services.sourcing.title}</h2>
             <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-              브랜드 소싱 · 큐레이션
+              {copy.services.sourcing.subtitle}
             </p>
           </Reveal>
           <div className="mt-16 grid gap-px bg-border md:grid-cols-2">
-            {SOURCING_SERVICES.map((s, i) => (
+            {copy.services.sourcing.items.map((s, i) => (
               <Reveal key={s.no} as="article" delay={i * 90} className="bg-background px-8 py-14">
                 <p className="font-display text-sm tracking-[0.3em] text-muted-foreground">
                   {s.no}
@@ -271,19 +241,19 @@ function Index() {
           </div>
 
           <Reveal className="mt-28 flex flex-wrap items-baseline justify-between gap-6">
-            <h2 className="font-display text-4xl md:text-5xl">Logistics &amp; Customs</h2>
+            <h2 className="font-display text-4xl md:text-5xl">{copy.services.logistics.title}</h2>
             <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-              물류 · 통관 컨설팅
+              {copy.services.logistics.subtitle}
             </p>
           </Reveal>
           <div className="mt-16 grid gap-px bg-border md:grid-cols-3">
-            {LOGISTICS_SERVICES.map((s, i) => (
+            {copy.services.logistics.items.map((s, i) => (
               <Reveal key={s.no} as="article" delay={i * 90} className="bg-background px-8 py-14">
                 <p className="font-display text-sm tracking-[0.3em] text-muted-foreground">
                   {s.no}
                 </p>
                 <h3 className="mt-8 font-display text-2xl">{s.title}</h3>
-                <p className="mt-6 text-sm leading-7 text-muted-foreground whitespace-pre-line">
+                <p className="mt-6 whitespace-pre-line text-sm leading-7 text-muted-foreground">
                   {s.body}
                 </p>
               </Reveal>
@@ -292,26 +262,30 @@ function Index() {
         </div>
       </section>
 
-      {/* Logistics detail */}
+      {/* Operating framework */}
       <section className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
         <div className="grid items-center gap-16 md:grid-cols-12">
           <Reveal className="md:col-span-6">
             <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
-              Operating Framework
+              {copy.framework.eyebrow}
             </p>
             <h2 className="mt-8 font-display text-4xl leading-tight md:text-5xl">
-              통관은 절차가 아니라
-              <br /> 설계의 문제입니다.
+              {copy.framework.titleLines.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
             </h2>
-            <div
-              className="rich-content mt-12 text-sm leading-8 text-foreground/85"
-              dangerouslySetInnerHTML={{ __html: content.logistics }}
-            />
+            <div className="mt-12 space-y-6 text-sm leading-8 text-foreground/85">
+              {copy.framework.paragraphs.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
           </Reveal>
           <Reveal delay={120} className="md:col-span-6">
             <img
               src={logisticsImg}
-              alt="정온 콜드체인 물류 센터 통로"
+              alt={copy.framework.eyebrow}
               width={1408}
               height={1008}
               loading="lazy"
@@ -321,23 +295,25 @@ function Index() {
         </div>
       </section>
 
-      {/* Collections — lifestyle curation */}
+      {/* Collections */}
       <section id="collections" className="border-b border-border">
         <div className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
           <Reveal>
             <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
-              Collections
+              {copy.collectionsSection.eyebrow}
             </p>
             <h2 className="mt-8 max-w-2xl font-display text-4xl leading-tight md:text-5xl">
-              카테고리가 아니라
-              <br />
-              하루의 장면으로 나눕니다.
+              {copy.collectionsSection.titleLines.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
             </h2>
           </Reveal>
           <div className="mt-20 border-t border-border">
-            {COLLECTIONS.map((c, i) => (
+            {copy.collections.map((c, i) => (
               <Reveal key={c.slug} delay={i * 70}>
-                <Link
+                <L
                   to="/collections/$slug"
                   params={{ slug: c.slug }}
                   className="group grid gap-4 border-b border-border py-10 md:grid-cols-12 md:items-baseline"
@@ -350,22 +326,22 @@ function Index() {
                   </h3>
                   <p className="text-sm leading-7 text-muted-foreground md:col-span-5">{c.lead}</p>
                   <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground md:col-span-2 md:text-right">
-                    {c.titleKo}
+                    {c.titleLocal}
                   </p>
-                </Link>
+                </L>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Gift & B2B partnership */}
+      {/* Gift & B2B */}
       <section id="gift" className="border-b border-border">
         <div className="mx-auto grid max-w-[1400px] items-center gap-16 px-6 py-32 md:grid-cols-12 md:px-10">
           <Reveal className="md:col-span-6">
             <img
               src={giftImg}
-              alt="프리미엄 기업 선물용 틴 케이스와 리본 포장 기프트 박스"
+              alt={copy.gift.eyebrow}
               width={1408}
               height={1008}
               loading="lazy"
@@ -374,42 +350,33 @@ function Index() {
           </Reveal>
           <Reveal delay={120} className="md:col-span-6">
             <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
-              Premium Gift &amp; B2B
+              {copy.gift.eyebrow}
             </p>
             <h2 className="mt-8 font-display text-4xl leading-tight md:text-5xl">
-              건네는 순간까지
-              <br />
-              브랜드의 일부입니다.
+              {copy.gift.titleLines.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
             </h2>
             <p className="mt-10 max-w-lg text-sm leading-8 text-muted-foreground">
-              처칠스의 틴 케이스처럼, 다 먹고 난 뒤에도 책상 위에 남는 패키지가 있습니다. 기업 명절
-              선물, 임직원 웰컴 기프트, 호텔·리테일 시즌 프로그램에 맞춰 구성과 물량, 리드타임을
-              함께 설계합니다.
+              {copy.gift.lead}
             </p>
             <dl className="mt-12 grid gap-px border border-border bg-border sm:grid-cols-2">
-              <div className="bg-background px-6 py-8">
-                <dt className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-                  Corporate Gifting
-                </dt>
-                <dd className="mt-4 text-sm leading-7 text-muted-foreground">
-                  틴 케이스·기프트 박스 중심의 구성 제안과 시즌 물량 계획.
-                </dd>
-              </div>
-              <div className="bg-background px-6 py-8">
-                <dt className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-                  Retail Partnership
-                </dt>
-                <dd className="mt-4 text-sm leading-7 text-muted-foreground">
-                  국내 리테일 유통은 전략적 파트너사인 와이디컴퍼니(YD Company)와의 협업 구조로
-                  운영됩니다.
-                </dd>
-              </div>
+              {copy.gift.cards.map((card) => (
+                <div key={card.title} className="bg-background px-6 py-8">
+                  <dt className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+                    {card.title}
+                  </dt>
+                  <dd className="mt-4 text-sm leading-7 text-muted-foreground">{card.body}</dd>
+                </div>
+              ))}
             </dl>
             <a
               href="#inquiry"
               className="mt-12 inline-flex h-14 items-center bg-foreground px-10 text-[11px] uppercase tracking-[0.3em] text-background transition-opacity hover:opacity-90"
             >
-              B2B 문의하기
+              {copy.gift.cta}
             </a>
           </Reveal>
         </div>
@@ -419,13 +386,14 @@ function Index() {
       <section id="inquiry" className="border-t border-border">
         <div className="mx-auto grid max-w-[1400px] gap-16 px-6 py-32 md:grid-cols-12 md:px-10">
           <Reveal className="md:col-span-5">
-            <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">Contact</p>
+            <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
+              {copy.inquiry.eyebrow}
+            </p>
             <h2 className="mt-8 font-display text-4xl leading-tight md:text-5xl">
-              B2B 파트너십 문의.
+              {copy.inquiry.title}
             </h2>
             <p className="mt-10 max-w-sm text-sm leading-7 text-muted-foreground">
-              몇 가지 항목만 선택하고 목적을 남겨주시면, 담당 디렉터가 배정되어 영업일 기준 24시간
-              내에 회신드립니다.
+              {copy.inquiry.lead}
             </p>
           </Reveal>
           <Reveal delay={120} className="md:col-span-7">

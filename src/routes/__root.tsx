@@ -10,6 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import { Toaster } from "@/components/ui/sonner";
+import { isLocale, LOCALES, type Locale } from "@/lib/content/types";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -75,6 +76,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  validateSearch: (search: Record<string, unknown>): { lang?: Locale | undefined } => ({
+    lang: isLocale(search["lang"]) ? search["lang"] : undefined,
+  }),
   head: () => ({
     meta: [
       { charSet: "utf-8" },

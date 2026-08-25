@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
-import { COLLECTIONS } from "@/lib/collections";
+
+import { L } from "@/components/L";
+import { LocaleSwitcher } from "@/components/LocaleSwitcher";
+import { useCopy } from "@/lib/content";
 
 function TasteJourneyDropdown({ variant = "dark" }: { variant?: "dark" | "light" }) {
+  const copy = useCopy();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const isLight = variant === "light";
@@ -27,7 +30,7 @@ function TasteJourneyDropdown({ variant = "dark" }: { variant?: "dark" | "light"
         aria-expanded={open}
         aria-haspopup="menu"
       >
-        Taste Journey
+        {copy.nav.tasteJourney}
         <svg
           width="8"
           height="5"
@@ -43,8 +46,8 @@ function TasteJourneyDropdown({ variant = "dark" }: { variant?: "dark" | "light"
         <div
           className={`absolute left-0 top-full z-50 min-w-[14rem] border py-2 shadow-sm ${isLight ? "border-background/20 bg-background" : "border-border bg-background"}`}
         >
-          {COLLECTIONS.map((c) => (
-            <Link
+          {copy.collections.map((c) => (
+            <L
               key={c.slug}
               to="/collections/$slug"
               params={{ slug: c.slug }}
@@ -53,7 +56,7 @@ function TasteJourneyDropdown({ variant = "dark" }: { variant?: "dark" | "light"
               onClick={() => setOpen(false)}
             >
               {c.title}
-            </Link>
+            </L>
           ))}
         </div>
       )}
@@ -62,70 +65,77 @@ function TasteJourneyDropdown({ variant = "dark" }: { variant?: "dark" | "light"
 }
 
 export function SiteNav() {
+  const copy = useCopy();
+
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 md:px-10">
-        <Link to="/" className="font-display text-lg tracking-[0.35em]">
+        <L to="/" className="font-display text-lg tracking-[0.35em]">
           EUROPE CONNECT
-        </Link>
+        </L>
 
         {/* Desktop */}
         <nav className="hidden items-center gap-7 text-[10px] uppercase tracking-[0.22em] text-muted-foreground lg:flex">
           <TasteJourneyDropdown variant="dark" />
 
-          <Link
+          <L
             to="/"
             hash="services"
             activeProps={{ className: "text-foreground" }}
             className="hover:text-foreground"
           >
-            Brand Sourcing
-          </Link>
-          <Link
+            {copy.nav.sourcing}
+          </L>
+          <L
             to="/"
             hash="services"
             activeProps={{ className: "text-foreground" }}
             className="hover:text-foreground"
           >
-            Logistics & Customs
-          </Link>
+            {copy.nav.logistics}
+          </L>
 
           <span className="h-3 w-px bg-border" />
-          <Link
+          <L
             to="/news"
             activeProps={{ className: "text-foreground" }}
             className="hover:text-foreground"
           >
-            News
-          </Link>
-          <Link to="/" hash="inquiry" className="hover:text-foreground">
-            Contact
-          </Link>
+            {copy.nav.news}
+          </L>
+          <L to="/" hash="inquiry" className="hover:text-foreground">
+            {copy.nav.contact}
+          </L>
+          <span className="h-3 w-px bg-border" />
+          <LocaleSwitcher />
         </nav>
 
-        <Link
-          to="/"
-          hash="inquiry"
-          className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground hover:text-foreground lg:hidden"
-        >
-          Contact
-        </Link>
+        <div className="flex items-center gap-4 lg:hidden">
+          <LocaleSwitcher />
+          <L
+            to="/"
+            hash="inquiry"
+            className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground hover:text-foreground"
+          >
+            {copy.nav.contact}
+          </L>
+        </div>
       </div>
 
       {/* Mobile */}
       <div className="border-t border-border lg:hidden">
         <div className="mx-auto flex max-w-[1400px] gap-5 overflow-x-auto px-6 py-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-          <Link to="/" hash="services" className="whitespace-nowrap hover:text-foreground">
-            Brand Sourcing
-          </Link>
-          <Link to="/" hash="services" className="whitespace-nowrap hover:text-foreground">
-            Logistics & Customs
-          </Link>
-          <Link to="/news" className="whitespace-nowrap hover:text-foreground">
-            News
-          </Link>
-          {COLLECTIONS.map((c) => (
-            <Link
+          <L to="/" hash="services" className="whitespace-nowrap hover:text-foreground">
+            {copy.nav.sourcing}
+          </L>
+          <L to="/" hash="services" className="whitespace-nowrap hover:text-foreground">
+            {copy.nav.logistics}
+          </L>
+          <L to="/news" className="whitespace-nowrap hover:text-foreground">
+            {copy.nav.news}
+          </L>
+          {copy.collections.map((c) => (
+            <L
               key={c.slug}
               to="/collections/$slug"
               params={{ slug: c.slug }}
@@ -133,7 +143,7 @@ export function SiteNav() {
               className="whitespace-nowrap hover:text-foreground"
             >
               {c.title}
-            </Link>
+            </L>
           ))}
         </div>
       </div>
@@ -142,6 +152,8 @@ export function SiteNav() {
 }
 
 export function SiteFooter() {
+  const copy = useCopy();
+
   return (
     <footer className="border-t border-border">
       <div className="mx-auto grid max-w-[1400px] gap-10 px-6 py-16 md:grid-cols-3 md:px-10">
@@ -150,33 +162,39 @@ export function SiteFooter() {
             EUROPE CONNECT
           </span>
           <p className="mt-5 max-w-xs text-xs leading-6 text-muted-foreground">
-            유럽 프리미엄 F&amp;B 브랜드를 발굴하고 한국 시장에 안착시키는 큐레이터이자
-            오퍼레이터입니다.
+            {copy.footer.about}
           </p>
+          <div className="mt-6">
+            <LocaleSwitcher />
+          </div>
         </div>
         <div className="text-xs leading-7 text-muted-foreground">
-          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-foreground">Taste Journey</p>
-          {COLLECTIONS.map((c) => (
-            <Link
+          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-foreground">
+            {copy.footer.tasteJourney}
+          </p>
+          {copy.collections.map((c) => (
+            <L
               key={c.slug}
               to="/collections/$slug"
               params={{ slug: c.slug }}
               className="block hover:text-foreground"
             >
               {c.title}
-            </Link>
+            </L>
           ))}
-          <Link to="/" hash="services" className="mt-4 block hover:text-foreground">
-            Brand Sourcing
-          </Link>
-          <Link to="/" hash="services" className="block hover:text-foreground">
-            Logistics & Customs
-          </Link>
+          <L to="/" hash="services" className="mt-4 block hover:text-foreground">
+            {copy.nav.sourcing}
+          </L>
+          <L to="/" hash="services" className="block hover:text-foreground">
+            {copy.nav.logistics}
+          </L>
         </div>
         <div className="text-xs leading-7 text-muted-foreground">
-          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-foreground">Partnership</p>
-          <p>국내 리테일 유통 파트너 · 와이디컴퍼니(YD Company)</p>
-          <p className="mt-4">Europe Connect · B2B Inquiry Only</p>
+          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-foreground">
+            {copy.footer.partnership}
+          </p>
+          <p>{copy.footer.partner}</p>
+          <p className="mt-4">{copy.footer.inquiryOnly}</p>
         </div>
       </div>
     </footer>
