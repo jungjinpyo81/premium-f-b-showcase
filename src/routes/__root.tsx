@@ -4,12 +4,14 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 import { Toaster } from "@/components/ui/sonner";
+import { isLocale, LOCALES, type Locale } from "@/lib/content/types";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -75,6 +77,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  validateSearch: (search: Record<string, unknown>): { lang?: Locale | undefined } => ({
+    lang: isLocale(search["lang"]) ? search["lang"] : undefined,
+  }),
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -110,8 +115,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const state = useRouterState();
+  const lang = (state.location.search as { lang?: string })?.lang;
+  const htmlLang = LOCALES.find((l) => l.code === lang)?.htmlLang ?? "ko";
+
   return (
-    <html lang="en">
+    <html lang={htmlLang}>
       <head>
         <HeadContent />
       </head>

@@ -1,22 +1,25 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
+
+import { L } from "@/components/L";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter, SiteNav } from "@/components/SiteNav";
-import { getNews } from "@/lib/news";
+import { getCopy, getNews, useCopy } from "@/lib/content";
 
 export const Route = createFileRoute("/news/$slug")({
-  loader: ({ params }) => {
-    const item = getNews(params.slug);
+  loaderDeps: ({ search }) => ({ lang: search.lang }),
+  loader: ({ params, deps }) => {
+    const item = getNews(getCopy(deps.lang), params.slug);
     if (!item) throw notFound();
-    return { item };
+    return { lang: deps.lang, slug: params.slug };
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, params }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "게시물을 찾을 수 없습니다 | 유럽커넥트" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Not found | Europe Connect" }, { name: "robots", content: "noindex" }],
       };
     }
-    const { item } = loaderData;
-    const title = `${item.title} | 유럽커넥트`;
+    const item = getNews(getCopy(loaderData.lang), loaderData.slug)!;
+    const title = `${item.title} | Europe Connect`;
     return {
       meta: [
         { title },
@@ -24,8 +27,10 @@ export const Route = createFileRoute("/news/$slug")({
         { property: "og:title", content: title },
         { property: "og:description", content: item.summary },
         { property: "og:type", content: "article" },
+        { property: "og:url", content: `/news/${params.slug}` },
         { name: "twitter:card", content: "summary_large_image" },
       ],
+      links: [{ rel: "canonical", href: `/news/${params.slug}` }],
     };
   },
   notFoundComponent: NewsNotFound,
@@ -33,14 +38,15 @@ export const Route = createFileRoute("/news/$slug")({
 });
 
 function NewsNotFound() {
+  const copy = useCopy();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
       <main className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
-        <h1 className="font-display text-4xl">게시물을 찾을 수 없습니다.</h1>
-        <Link to="/news" className="mt-8 inline-block text-sm underline underline-offset-4">
-          목록으로
-        </Link>
+        <h1 className="font-display text-4xl">{copy.pages.newsDetail.notFound}</h1>
+        <L to="/news" className="mt-8 inline-block text-sm underline underline-offset-4">
+          {copy.pages.newsDetail.backToList}
+        </L>
       </main>
       <SiteFooter />
     </div>
@@ -48,18 +54,22 @@ function NewsNotFound() {
 }
 
 function NewsDetail() {
-  const { item } = Route.useLoaderData();
+  const copy = useCopy();
+  const { slug } = Route.useParams();
+  const item = getNews(copy, slug);
+
+  if (!item) return <NewsNotFound />;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
       <main className="mx-auto max-w-3xl px-6 py-24 md:px-10">
-        <Link
+        <L
           to="/news"
           className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground hover:text-foreground"
         >
-          ← News
-        </Link>
+          {copy.pages.newsDetail.back}
+        </L>
         <Reveal immediate>
           <div className="mt-12 flex items-baseline gap-6">
             <span className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
@@ -71,7 +81,7 @@ function NewsDetail() {
         </Reveal>
         <div className="mt-12 space-y-8 border-t border-border pt-12 text-sm leading-8 text-foreground/85">
           {item.body.map((p, i) => (
-            <Reveal key={p} as="div" delay={i * 60}>
+            <Reveal key={p} delay={i * 60}>
               <p>{p}</p>
             </Reveal>
           ))}

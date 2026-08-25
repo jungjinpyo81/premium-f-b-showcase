@@ -1,22 +1,26 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
+
+import { L } from "@/components/L";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter, SiteNav } from "@/components/SiteNav";
-import { getBrand } from "@/lib/brands";
+import { getBrand, getCopy, useCopy, useLocale } from "@/lib/content";
 
 export const Route = createFileRoute("/brands/$slug")({
-  loader: ({ params }) => {
-    const brand = getBrand(params.slug);
+  loaderDeps: ({ search }) => ({ lang: search.lang }),
+  loader: ({ params, deps }) => {
+    const brand = getBrand(getCopy(deps.lang), params.slug);
     if (!brand) throw notFound();
-    return { brand };
+    return { lang: deps.lang, slug: params.slug };
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, params }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "브랜드를 찾을 수 없습니다 | 유럽커넥트" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Not found | Europe Connect" }, { name: "robots", content: "noindex" }],
       };
     }
-    const { brand } = loaderData;
-    const title = `${brand.name} (${brand.nameEn}) | 유럽커넥트`;
+    const copy = getCopy(loaderData.lang);
+    const brand = getBrand(copy, loaderData.slug)!;
+    const title = `${brand.name} (${brand.nameEn}) | Europe Connect`;
     return {
       meta: [
         { title },
@@ -24,8 +28,10 @@ export const Route = createFileRoute("/brands/$slug")({
         { property: "og:title", content: title },
         { property: "og:description", content: brand.tagline },
         { property: "og:type", content: "article" },
+        { property: "og:url", content: `/brands/${params.slug}` },
         { name: "twitter:card", content: "summary_large_image" },
       ],
+      links: [{ rel: "canonical", href: `/brands/${params.slug}` }],
     };
   },
   notFoundComponent: BrandNotFound,
@@ -33,14 +39,15 @@ export const Route = createFileRoute("/brands/$slug")({
 });
 
 function BrandNotFound() {
+  const copy = useCopy();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
       <main className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
-        <h1 className="font-display text-4xl">브랜드를 찾을 수 없습니다.</h1>
-        <Link to="/brands" className="mt-8 inline-block text-sm underline underline-offset-4">
-          브랜드 목록으로
-        </Link>
+        <h1 className="font-display text-4xl">{copy.pages.brandDetail.notFound}</h1>
+        <L to="/brands" className="mt-8 inline-block text-sm underline underline-offset-4">
+          {copy.pages.brandDetail.backToList}
+        </L>
       </main>
       <SiteFooter />
     </div>
@@ -48,18 +55,23 @@ function BrandNotFound() {
 }
 
 function BrandDetail() {
-  const { brand } = Route.useLoaderData();
+  const copy = useCopy();
+  const locale = useLocale();
+  const { slug } = Route.useParams();
+  const brand = getBrand(copy, slug);
+
+  if (!brand) return <BrandNotFound />;
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground" key={locale}>
       <SiteNav />
       <main className="mx-auto max-w-[1400px] px-6 py-24 md:px-10">
-        <Link
+        <L
           to="/brands"
           className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground hover:text-foreground"
         >
-          ← Brands
-        </Link>
+          {copy.pages.brandDetail.back}
+        </L>
 
         <div className="mt-12 grid gap-16 md:grid-cols-12">
           <Reveal immediate className="md:col-span-5">
@@ -87,13 +99,13 @@ function BrandDetail() {
         </div>
 
         <div className="mt-24 border-t border-border pt-12">
-          <Link
+          <L
             to="/"
             hash="inquiry"
             className="inline-flex h-14 items-center bg-primary px-10 text-[11px] uppercase tracking-[0.3em] text-primary-foreground hover:opacity-90"
           >
-            브랜드 파트너십 문의
-          </Link>
+            {copy.pages.brandDetail.cta}
+          </L>
         </div>
       </main>
       <SiteFooter />
