@@ -40,6 +40,62 @@ const FIGURES = [
   { value: "B2B", label: "폐쇄형 파트너십 구조" },
 ];
 
+function HeroNav() {
+  const [open, setOpen] = useState(false);
+  return (
+    <nav className="flex items-center gap-6 text-[10px] uppercase tracking-[0.22em] text-background/80">
+      <div
+        className="relative"
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
+      >
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className="flex items-center gap-1.5 hover:text-background"
+          aria-expanded={open}
+          aria-haspopup="menu"
+        >
+          Taste Journey
+          <svg
+            width="8"
+            height="5"
+            viewBox="0 0 8 5"
+            fill="currentColor"
+            className={`transition-transform ${open ? "rotate-180" : ""}`}
+            aria-hidden="true"
+          >
+            <path d="M0 0h8L4 5z" />
+          </svg>
+        </button>
+        {open && (
+          <div className="absolute left-0 top-full min-w-[14rem] border border-background/20 bg-background py-2 shadow-sm">
+            {COLLECTIONS.map((c) => (
+              <Link
+                key={c.slug}
+                to="/collections/$slug"
+                params={{ slug: c.slug }}
+                className="block px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground"
+              >
+                {c.title}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+      <Link to="/" hash="services" className="hidden hover:text-background lg:inline">
+        Brand Sourcing
+      </Link>
+      <Link to="/" hash="services" className="hidden hover:text-background lg:inline">
+        Logistics & Customs
+      </Link>
+      <Link to="/news" className="hover:text-background">
+        News
+      </Link>
+    </nav>
+  );
+}
+
 const LOGISTICS_SERVICES = [
   {
     no: "01",
@@ -79,24 +135,10 @@ function Index() {
     <div className="min-h-screen bg-background text-foreground">
       <header className="absolute inset-x-0 top-0 z-20 border-b border-background/20">
         <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 md:px-10">
-          <span className="font-display text-lg tracking-[0.35em] text-background">
+          <Link to="/" className="font-display text-lg tracking-[0.35em] text-background">
             EUROPE CONNECT
-          </span>
-          <nav className="flex items-center gap-6 text-[10px] uppercase tracking-[0.22em] text-background/80">
-            {COLLECTIONS.map((c) => (
-              <Link
-                key={c.slug}
-                to="/collections/$slug"
-                params={{ slug: c.slug }}
-                className="hidden hover:text-background lg:inline"
-              >
-                {c.title}
-              </Link>
-            ))}
-            <Link to="/news" className="hover:text-background">
-              News
-            </Link>
-          </nav>
+          </Link>
+          <HeroNav />
         </div>
       </header>
 
