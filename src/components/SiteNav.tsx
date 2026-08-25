@@ -44,7 +44,11 @@ function TasteJourneyDropdown({ variant = "dark" }: { variant?: "dark" | "light"
       </button>
       {open && (
         <div
-          className={`absolute left-0 top-full z-50 min-w-[14rem] border py-2 shadow-sm ${isLight ? "border-background/20 bg-background" : "border-border bg-background"}`}
+          className={`absolute left-0 top-full z-50 min-w-[14rem] border py-2 shadow-sm ${
+            isLight
+              ? "border-background/20 bg-background"
+              : "border-background/30 bg-foreground/95 backdrop-blur-sm"
+          }`}
         >
           {copy.collections.map((c) => (
             <L
