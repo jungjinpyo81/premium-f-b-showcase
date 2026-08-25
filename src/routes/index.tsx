@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero.jpg";
 import giftImg from "@/assets/gift.jpg";
 import storyImg from "@/assets/story.jpg";
