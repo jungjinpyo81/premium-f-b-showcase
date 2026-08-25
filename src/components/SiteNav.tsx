@@ -44,15 +44,23 @@ function TasteJourneyDropdown({ variant = "dark" }: { variant?: "dark" | "light"
       </button>
       {open && (
         <div
-          className={`absolute left-0 top-full z-50 min-w-[14rem] border py-2 shadow-sm ${isLight ? "border-background/20 bg-background" : "border-border bg-background"}`}
+          className={`absolute left-0 top-full z-50 min-w-[14rem] border py-2 shadow-sm ${
+            isLight
+              ? "border-background/20 bg-background"
+              : "border-background/30 bg-foreground/95 backdrop-blur-sm"
+          }`}
         >
           {copy.collections.map((c) => (
             <L
               key={c.slug}
               to="/collections/$slug"
               params={{ slug: c.slug }}
-              activeProps={{ className: "text-foreground" }}
-              className={`block px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] hover:bg-muted/40 hover:text-foreground ${isLight ? "text-foreground/80" : "text-muted-foreground"}`}
+              activeProps={{ className: isLight ? "text-foreground" : "text-beige" }}
+              className={`block px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] hover:text-foreground ${
+                isLight
+                  ? "text-foreground/80 hover:bg-muted/40"
+                  : "text-beige/70 hover:bg-background/10 hover:text-beige"
+              }`}
               onClick={() => setOpen(false)}
             >
               {c.title}
@@ -90,7 +98,7 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
             isDark ? "text-background/80" : "text-muted-foreground"
           }`}
         >
-          <TasteJourneyDropdown variant={isDark ? "light" : "dark"} />
+          <TasteJourneyDropdown variant={isDark ? "dark" : "light"} />
 
           <L
             to="/"
@@ -125,7 +133,7 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
             {copy.nav.contact}
           </L>
           <span className={`h-3 w-px ${isDark ? "bg-background/30" : "bg-border"}`} />
-          <LocaleSwitcher variant={isDark ? "light" : "dark"} />
+          <LocaleSwitcher variant={isDark ? "dark" : "light"} />
         </nav>
 
         <div className="flex items-center gap-4 lg:hidden">
@@ -187,7 +195,7 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
               </L>
             ))}
           </div>
-          <LocaleSwitcher variant={isDark ? "light" : "dark"} />
+          <LocaleSwitcher variant={isDark ? "dark" : "light"} />
         </div>
       </div>
     </header>

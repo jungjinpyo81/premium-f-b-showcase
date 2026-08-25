@@ -1,53 +1,92 @@
+import { useEffect, useRef, useState } from "react";
+
 import { Link } from "@tanstack/react-router";
 
 import { LOCALES, useLocale } from "@/lib/content";
 
 export function LocaleSwitcher({ variant = "dark" }: { variant?: "dark" | "light" }) {
   const locale = useLocale();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
   const isLight = variant === "light";
+  const active = LOCALES.find((l) => l.code === locale) ?? LOCALES[0]!;
+
+  useEffect(() => {
+    if (!open) return;
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [open]);
 
   return (
-    <nav
-      className="inline-flex items-center justify-center"
-      aria-label="Language"
-    >
-      <div className="flex items-center">
-        {LOCALES.map((l) => {
-          const active = l.code === locale;
-          return (
+    <div ref={ref} className="relative inline-flex">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-haspopup="listbox"
+        className={`
+          flex items-center gap-1.5 text-[11px] tracking-[0.18em] font-medium
+          transition-colors duration-300 ease-out
+          ${
+            isLight
+              ? "text-background hover:text-background"
+              : "text-beige hover:text-beige"
+          }
+        `}
+      >
+        {active.label}
+        <svg
+          width="7"
+          height="5"
+          viewBox="0 0 7 5"
+          fill="currentColor"
+          className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          aria-hidden="true"
+        >
+          <path d="M0 0h7L3.5 5z" />
+        </svg>
+      </button>
+
+      {open && (
+        <div
+          className={`
+            absolute right-0 top-full z-50 min-w-[4.5rem] border py-1.5 shadow-sm
+            ${
+              isLight
+                ? "border-background/20 bg-background"
+                : "border-background/30 bg-foreground/95 backdrop-blur-sm"
+            }
+          `}
+        >
+          {LOCALES.map((l) => (
             <Link
               key={l.code}
               to="."
               search={(prev: Record<string, unknown>) => ({ ...prev, lang: l.code })}
+              onClick={() => setOpen(false)}
               className={`
-                relative px-1.5 py-1 text-[10px] tracking-[0.16em] font-medium
-                transition-colors duration-300 ease-out
-                sm:px-3 sm:text-[11px] sm:tracking-[0.18em]
+                block px-3 py-2 text-[11px] tracking-[0.18em] transition-colors duration-300
                 ${
-                  active
+                  l.code === locale
                     ? isLight
-                      ? "text-background"
+                      ? "text-foreground"
                       : "text-beige"
                     : isLight
-                      ? "text-background/50 hover:text-background"
-                      : "text-beige/50 hover:text-beige"
+                      ? "text-foreground/60 hover:text-foreground"
+                      : "text-beige/60 hover:text-beige"
                 }
               `}
-              aria-current={active ? "true" : undefined}
             >
-              <span className="relative z-10">{l.label}</span>
-              <span
-                className={`
-                  absolute bottom-0 left-1/2 -translate-x-1/2 h-px
-                  bg-current transition-all duration-300 ease-out
-                  ${active ? "w-3/5 opacity-100" : "w-0 opacity-0"}
-                `}
-                aria-hidden="true"
-              />
+              {l.label}
             </Link>
-          );
-        })}
-      </div>
-    </nav>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
