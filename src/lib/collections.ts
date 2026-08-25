@@ -103,9 +103,9 @@ export const COLLECTIONS: Collection[] = [
     ],
   },
   {
-    slug: "refresh-relax",
-    title: "Refresh & Relax",
-    titleKo: "리프레시 & 릴랙스",
+    slug: "chill-cheers",
+    title: "Chill & Cheers",
+    titleKo: "칠 & 치어스",
     lead: "잔을 채우는 시간의 온도.",
     intro:
       "음료와 커피는 브랜드 경험이 가장 자주 반복되는 카테고리입니다. 호텔·다이닝·오피스 채널의 운영 조건에 맞춰 포맷과 물량 계획을 함께 설계합니다.",
