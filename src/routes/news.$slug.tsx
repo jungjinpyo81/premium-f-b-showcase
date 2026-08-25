@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { Reveal } from "@/components/Reveal";
 import { SiteFooter, SiteNav } from "@/components/SiteNav";
 import { getNews } from "@/lib/news";
 
@@ -59,16 +60,20 @@ function NewsDetail() {
         >
           ← News
         </Link>
-        <div className="mt-12 flex items-baseline gap-6">
-          <span className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-            {item.category}
-          </span>
-          <time className="text-xs text-muted-foreground">{item.date}</time>
-        </div>
-        <h1 className="mt-8 font-display text-4xl leading-tight">{item.title}</h1>
+        <Reveal immediate>
+          <div className="mt-12 flex items-baseline gap-6">
+            <span className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+              {item.category}
+            </span>
+            <time className="text-xs text-muted-foreground">{item.date}</time>
+          </div>
+          <h1 className="mt-8 font-display text-4xl leading-tight">{item.title}</h1>
+        </Reveal>
         <div className="mt-12 space-y-8 border-t border-border pt-12 text-sm leading-8 text-foreground/85">
-          {item.body.map((p) => (
-            <p key={p}>{p}</p>
+          {item.body.map((p, i) => (
+            <Reveal key={p} as="div" delay={i * 60}>
+              <p>{p}</p>
+            </Reveal>
           ))}
         </div>
       </main>

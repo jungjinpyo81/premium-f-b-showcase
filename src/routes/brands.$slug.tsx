@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { Reveal } from "@/components/Reveal";
 import { SiteFooter, SiteNav } from "@/components/SiteNav";
 import { getBrand } from "@/lib/brands";
 
@@ -61,7 +62,7 @@ function BrandDetail() {
         </Link>
 
         <div className="mt-12 grid gap-16 md:grid-cols-12">
-          <div className="md:col-span-5">
+          <Reveal immediate className="md:col-span-5">
             <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
               {brand.origin} · {brand.category}
             </p>
@@ -69,19 +70,19 @@ function BrandDetail() {
             <p className="mt-4 text-xs uppercase tracking-[0.35em] text-muted-foreground">
               {brand.nameEn}
             </p>
-          </div>
-          <div className="md:col-span-7">
+          </Reveal>
+          <Reveal immediate delay={140} className="md:col-span-7">
             <p className="font-display text-2xl leading-relaxed">{brand.tagline}</p>
             <p className="mt-10 text-sm leading-8 text-foreground/85">{brand.intro}</p>
-          </div>
+          </Reveal>
         </div>
 
         <div className="mt-24 grid gap-px bg-border md:grid-cols-3">
-          {brand.highlights.map((h) => (
-            <section key={h.title} className="bg-background px-8 py-12">
+          {brand.highlights.map((h, i) => (
+            <Reveal key={h.title} as="section" delay={i * 90} className="bg-background px-8 py-12">
               <h2 className="font-display text-xl">{h.title}</h2>
               <p className="mt-6 text-sm leading-7 text-muted-foreground">{h.body}</p>
-            </section>
+            </Reveal>
           ))}
         </div>
 

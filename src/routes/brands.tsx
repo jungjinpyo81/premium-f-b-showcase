@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Reveal } from "@/components/Reveal";
 import { SiteFooter, SiteNav } from "@/components/SiteNav";
 import { BRANDS } from "@/lib/brands";
 
@@ -28,20 +29,24 @@ function Brands() {
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
       <main className="mx-auto max-w-[1400px] px-6 py-24 md:px-10">
-        <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">Brands</p>
-        <h1 className="mt-8 max-w-2xl font-display text-4xl leading-tight md:text-5xl">
-          유럽 현지에서 직접 검증한
-          <br />
-          브랜드 포트폴리오
-        </h1>
-        <p className="mt-10 max-w-xl text-sm leading-8 text-muted-foreground">
-          제조가 아닌 큐레이션이 우리의 역할입니다. 한국 시장의 채널 구조와 소비 맥락에 맞는
-          브랜드만을 선별해 소개합니다.
-        </p>
+        <Reveal immediate>
+          <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">Brands</p>
+          <h1 className="mt-8 max-w-2xl font-display text-4xl leading-tight md:text-5xl">
+            유럽 현지에서 직접 검증한
+            <br />
+            브랜드 포트폴리오
+          </h1>
+        </Reveal>
+        <Reveal immediate delay={140}>
+          <p className="mt-10 max-w-xl text-sm leading-8 text-muted-foreground">
+            제조가 아닌 큐레이션이 우리의 역할입니다. 한국 시장의 채널 구조와 소비 맥락에 맞는
+            브랜드만을 선별해 소개합니다.
+          </p>
+        </Reveal>
 
         <div className="mt-20 grid gap-px border border-border bg-border md:grid-cols-2">
-          {BRANDS.map((b) => (
-            <article key={b.slug} className="bg-background px-8 py-14">
+          {BRANDS.map((b, i) => (
+            <Reveal key={b.slug} as="article" delay={i * 90} className="bg-background px-8 py-14">
               <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
                 {b.origin} · {b.category}
               </p>
@@ -57,7 +62,7 @@ function Brands() {
               >
                 브랜드 보기
               </Link>
-            </article>
+            </Reveal>
           ))}
         </div>
       </main>
