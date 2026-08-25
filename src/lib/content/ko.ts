@@ -214,7 +214,7 @@ export const ko: SiteCopy = {
     {
       slug: "european-pantry",
       title: "European Pantry",
-      titleLocal: "미식가의 주방(조미료)",
+      titleLocal: "미식가의 주방",
       lead: "주방의 격을 바꾸는 한 스푼.",
       intro:
         "산지와 숙성, 인증 체계까지 확인한 고급 식자재만을 소개합니다. 파인다이닝과 프리미엄 델리 채널에서 셰프의 제안으로 이어질 수 있는 라인업으로 구성합니다.",
@@ -247,7 +247,7 @@ export const ko: SiteCopy = {
     {
       slug: "natures-bites",
       title: "Nature's Bites",
-      titleLocal: "건강한 한 입(스낵)",
+      titleLocal: "자연 한 입",
       lead: "덜어낼수록 분명해지는 맛.",
       intro:
         "원물의 상태와 가공 방식이 그대로 드러나는 카테고리입니다. 첨가를 최소화한 스낵을 중심으로, 프리미엄 그로서리와 오피스 스낵 채널에 동시에 대응합니다.",
