@@ -77,7 +77,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="fixed inset-x-0 top-0 z-20 border-b border-background/20">
+      <header className="absolute inset-x-0 top-0 z-20 border-b border-background/20">
         <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 md:px-10">
           <span className="font-display text-lg tracking-[0.35em] text-background">
             EUROPE CONNECT
