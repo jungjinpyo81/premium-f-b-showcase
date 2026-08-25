@@ -26,7 +26,7 @@ export const ko: SiteCopy = {
     },
   },
   nav: {
-    tasteJourney: "Taste Journey",
+    tasteJourney: "맛의 여정 ",
     sourcing: "브랜드 소싱",
     logistics: "물류 · 통관",
     brands: "브랜드",
