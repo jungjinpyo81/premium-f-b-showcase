@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Reveal } from "@/components/Reveal";
 import { SiteFooter, SiteNav } from "@/components/SiteNav";
 import { NEWS } from "@/lib/news";
 
@@ -28,16 +29,20 @@ function News() {
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
       <main className="mx-auto max-w-[1400px] px-6 py-24 md:px-10">
-        <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">News</p>
-        <h1 className="mt-8 font-display text-4xl leading-tight md:text-5xl">공지 · 뉴스</h1>
-        <p className="mt-10 max-w-xl text-sm leading-8 text-muted-foreground">
-          브랜드 파트너십 체결, 수입·통관 기준 변경, 채널 운영 관련 안내를 이곳에서 확인하실 수
-          있습니다.
-        </p>
+        <Reveal immediate>
+          <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">News</p>
+          <h1 className="mt-8 font-display text-4xl leading-tight md:text-5xl">공지 · 뉴스</h1>
+        </Reveal>
+        <Reveal immediate delay={140}>
+          <p className="mt-10 max-w-xl text-sm leading-8 text-muted-foreground">
+            브랜드 파트너십 체결, 수입·통관 기준 변경, 채널 운영 관련 안내를 이곳에서 확인하실 수
+            있습니다.
+          </p>
+        </Reveal>
 
         <div className="mt-20 border-t border-border">
-          {NEWS.map((n) => (
-            <article key={n.slug} className="border-b border-border py-12">
+          {NEWS.map((n, i) => (
+            <Reveal key={n.slug} as="article" delay={i * 80} className="border-b border-border py-12">
               <Link
                 to="/news/$slug"
                 params={{ slug: n.slug }}
@@ -58,7 +63,7 @@ function News() {
                   </p>
                 </div>
               </Link>
-            </article>
+            </Reveal>
           ))}
         </div>
       </main>
