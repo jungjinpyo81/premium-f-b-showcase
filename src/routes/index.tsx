@@ -7,7 +7,7 @@ import logisticsImg from "@/assets/logistics.jpg";
 import { InquiryForm } from "@/components/InquiryForm";
 import { L } from "@/components/L";
 import { Reveal } from "@/components/Reveal";
-import { SiteFooter } from "@/components/SiteNav";
+import { SiteFooter, SiteNav } from "@/components/SiteNav";
 import { getCopy, useCopy } from "@/lib/content";
 
 export const Route = createFileRoute("/")({
