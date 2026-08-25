@@ -214,7 +214,7 @@ export const ko: SiteCopy = {
     {
       slug: "european-pantry",
       title: "European Pantry",
-      titleLocal: "유러피안 팬트리",
+      titleLocal: "미식가의 주방(조미료)",
       lead: "주방의 격을 바꾸는 한 스푼.",
       intro:
         "산지와 숙성, 인증 체계까지 확인한 고급 식자재만을 소개합니다. 파인다이닝과 프리미엄 델리 채널에서 셰프의 제안으로 이어질 수 있는 라인업으로 구성합니다.",
@@ -231,7 +231,7 @@ export const ko: SiteCopy = {
     {
       slug: "plant-based-life",
       title: "Plant-Based Life",
-      titleLocal: "식물성 라이프",
+      titleLocal: "지속가능한 식탁",
       lead: "대체가 아니라 선택으로.",
       intro:
         "식물성 대체 유제품 카테고리는 이제 대안이 아닌 일상의 선택지입니다. 맛과 텍스처의 완성도, 그리고 국내 채널에서 반복 구매가 가능한 가격 구조를 함께 검토합니다.",
@@ -247,7 +247,7 @@ export const ko: SiteCopy = {
     {
       slug: "natures-bites",
       title: "Nature's Bites",
-      titleLocal: "네이처스 바이트",
+      titleLocal: "건강한 한 입(스낵)",
       lead: "덜어낼수록 분명해지는 맛.",
       intro:
         "원물의 상태와 가공 방식이 그대로 드러나는 카테고리입니다. 첨가를 최소화한 스낵을 중심으로, 프리미엄 그로서리와 오피스 스낵 채널에 동시에 대응합니다.",
@@ -269,7 +269,7 @@ export const ko: SiteCopy = {
     {
       slug: "chill-cheers",
       title: "Chill & Cheers",
-      titleLocal: "칠 & 치어스",
+      titleLocal: "\n",
       lead: "잔을 채우는 시간의 온도.",
       intro:
         "음료와 커피는 브랜드 경험이 가장 자주 반복되는 카테고리입니다. 호텔·다이닝·오피스 채널의 운영 조건에 맞춰 포맷과 물량 계획을 함께 설계합니다.",
