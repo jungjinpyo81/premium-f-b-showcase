@@ -164,33 +164,41 @@ function Index() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.72)_50%,oklch(0.12_0_0/0.3)_100%)]" />
         <div className="relative mx-auto flex min-h-[94vh] max-w-[1400px] items-end px-6 pb-24 pt-40 md:px-10">
           <div className="max-w-3xl">
-            <p className="text-[11px] uppercase tracking-[0.45em] text-background/70">
-              Europe Connect · F&amp;B Sourcing &amp; Logistics Consulting
-            </p>
-            <h1 className="mt-10 font-display text-3xl leading-[1.15] text-background md:text-5xl">
-              글로벌 프리미엄 F&B브랜드와
-              <br />
-              한국 시장을 잇는 브릿지
-            </h1>
-            <p className="mt-10 max-w-xl text-sm leading-8 text-background/75">
-              17년 이상의 소싱·통관·물류 실무 위에서, 브랜드가 한국 시장에 안착하기까지의 모든
-              <br />
-              과정을 하나의 팀이 통합 관리합니다.
-            </p>
-            <div className="mt-12 flex flex-wrap items-center gap-4">
-              <a
-                href="#inquiry"
-                className="inline-flex h-14 items-center justify-center bg-background px-10 text-[11px] uppercase tracking-[0.3em] text-foreground transition-opacity hover:opacity-90"
-              >
-                파트너십 문의
-              </a>
-              <a
-                href="#role"
-                className="inline-flex h-14 items-center justify-center border border-background/40 px-10 text-[11px] uppercase tracking-[0.3em] text-background transition-colors hover:border-background"
-              >
-                우리의 역할
-              </a>
-            </div>
+            <Reveal immediate>
+              <p className="text-[11px] uppercase tracking-[0.45em] text-background/70">
+                Europe Connect · F&amp;B Sourcing &amp; Logistics Consulting
+              </p>
+            </Reveal>
+            <Reveal immediate delay={120}>
+              <h1 className="mt-10 font-display text-3xl leading-[1.15] text-background md:text-5xl">
+                글로벌 프리미엄 F&B브랜드와
+                <br />
+                한국 시장을 잇는 브릿지
+              </h1>
+            </Reveal>
+            <Reveal immediate delay={240}>
+              <p className="mt-10 max-w-xl text-sm leading-8 text-background/75">
+                17년 이상의 소싱·통관·물류 실무 위에서, 브랜드가 한국 시장에 안착하기까지의 모든
+                <br />
+                과정을 하나의 팀이 통합 관리합니다.
+              </p>
+            </Reveal>
+            <Reveal immediate delay={360}>
+              <div className="mt-12 flex flex-wrap items-center gap-4">
+                <a
+                  href="#inquiry"
+                  className="inline-flex h-14 items-center justify-center bg-background px-10 text-[11px] uppercase tracking-[0.3em] text-foreground transition-opacity hover:opacity-90"
+                >
+                  파트너십 문의
+                </a>
+                <a
+                  href="#role"
+                  className="inline-flex h-14 items-center justify-center border border-background/40 px-10 text-[11px] uppercase tracking-[0.3em] text-background transition-colors hover:border-background"
+                >
+                  우리의 역할
+                </a>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
