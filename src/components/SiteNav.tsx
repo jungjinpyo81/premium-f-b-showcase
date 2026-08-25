@@ -70,10 +70,10 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
 
   return (
     <header
-      className={`sticky top-0 z-30 ${
+      className={`${
         isDark
-          ? "border-b border-background/20 bg-background/10 backdrop-blur-sm"
-          : "border-b border-border bg-background/95 backdrop-blur"
+          ? "absolute inset-x-0 top-0 z-30 border-b border-background/20 bg-background/10 backdrop-blur-sm"
+          : "sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 md:px-10">
