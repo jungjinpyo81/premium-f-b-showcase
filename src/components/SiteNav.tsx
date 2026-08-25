@@ -64,57 +64,79 @@ function TasteJourneyDropdown({ variant = "dark" }: { variant?: "dark" | "light"
   );
 }
 
-export function SiteNav() {
+export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
   const copy = useCopy();
+  const isDark = variant === "dark";
 
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur">
+    <header
+      className={`sticky top-0 z-30 ${
+        isDark
+          ? "border-b border-background/20 bg-background/10 backdrop-blur-sm"
+          : "border-b border-border bg-background/95 backdrop-blur"
+      }`}
+    >
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 md:px-10">
-        <L to="/" className="font-display text-lg tracking-[0.35em]">
+        <L
+          to="/"
+          className={`font-display text-lg tracking-[0.35em] ${isDark ? "text-background" : "text-foreground"}`}
+        >
           EUROPE CONNECT
         </L>
 
         {/* Desktop */}
-        <nav className="hidden items-center gap-7 text-[10px] uppercase tracking-[0.22em] text-muted-foreground lg:flex">
-          <TasteJourneyDropdown variant="dark" />
+        <nav
+          className={`hidden items-center gap-7 text-[10px] uppercase tracking-[0.22em] lg:flex ${
+            isDark ? "text-background/80" : "text-muted-foreground"
+          }`}
+        >
+          <TasteJourneyDropdown variant={isDark ? "light" : "dark"} />
 
           <L
             to="/"
             hash="services"
-            activeProps={{ className: "text-foreground" }}
-            className="hover:text-foreground"
+            activeProps={{ className: isDark ? "text-background" : "text-foreground" }}
+            className={isDark ? "hover:text-background" : "hover:text-foreground"}
           >
             {copy.nav.sourcing}
           </L>
           <L
             to="/"
             hash="services"
-            activeProps={{ className: "text-foreground" }}
-            className="hover:text-foreground"
+            activeProps={{ className: isDark ? "text-background" : "text-foreground" }}
+            className={isDark ? "hover:text-background" : "hover:text-foreground"}
           >
             {copy.nav.logistics}
           </L>
 
-          <span className="h-3 w-px bg-border" />
+          <span className={`h-3 w-px ${isDark ? "bg-background/30" : "bg-border"}`} />
           <L
             to="/news"
-            activeProps={{ className: "text-foreground" }}
-            className="hover:text-foreground"
+            activeProps={{ className: isDark ? "text-background" : "text-foreground" }}
+            className={isDark ? "hover:text-background" : "hover:text-foreground"}
           >
             {copy.nav.news}
           </L>
-          <L to="/" hash="inquiry" className="hover:text-foreground">
+          <L
+            to="/"
+            hash="inquiry"
+            className={isDark ? "hover:text-background" : "hover:text-foreground"}
+          >
             {copy.nav.contact}
           </L>
-          <span className="h-3 w-px bg-border" />
-          <LocaleSwitcher />
+          <span className={`h-3 w-px ${isDark ? "bg-background/30" : "bg-border"}`} />
+          <LocaleSwitcher variant={isDark ? "light" : "dark"} />
         </nav>
 
         <div className="flex items-center gap-4 lg:hidden">
           <L
             to="/"
             hash="inquiry"
-            className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground hover:text-foreground"
+            className={`text-[10px] uppercase tracking-[0.25em] ${
+              isDark
+                ? "text-background/70 hover:text-background"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
           >
             {copy.nav.contact}
           </L>
@@ -122,16 +144,35 @@ export function SiteNav() {
       </div>
 
       {/* Mobile */}
-      <div className="border-t border-border lg:hidden">
+      <div
+        className={`lg:hidden ${
+          isDark ? "border-t border-background/20" : "border-t border-border"
+        }`}
+      >
         <div className="mx-auto flex max-w-[1400px] flex-col items-center gap-3 px-6 py-3">
-          <div className="flex w-full justify-center gap-5 overflow-x-auto text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-            <L to="/" hash="services" className="whitespace-nowrap hover:text-foreground">
+          <div
+            className={`flex w-full justify-center gap-5 overflow-x-auto text-[10px] uppercase tracking-[0.2em] ${
+              isDark ? "text-background/70" : "text-muted-foreground"
+            }`}
+          >
+            <L
+              to="/"
+              hash="services"
+              className={`whitespace-nowrap ${isDark ? "hover:text-background" : "hover:text-foreground"}`}
+            >
               {copy.nav.sourcing}
             </L>
-            <L to="/" hash="services" className="whitespace-nowrap hover:text-foreground">
+            <L
+              to="/"
+              hash="services"
+              className={`whitespace-nowrap ${isDark ? "hover:text-background" : "hover:text-foreground"}`}
+            >
               {copy.nav.logistics}
             </L>
-            <L to="/news" className="whitespace-nowrap hover:text-foreground">
+            <L
+              to="/news"
+              className={`whitespace-nowrap ${isDark ? "hover:text-background" : "hover:text-foreground"}`}
+            >
               {copy.nav.news}
             </L>
             {copy.collections.map((c) => (
@@ -139,14 +180,14 @@ export function SiteNav() {
                 key={c.slug}
                 to="/collections/$slug"
                 params={{ slug: c.slug }}
-                activeProps={{ className: "text-foreground" }}
-                className="whitespace-nowrap hover:text-foreground"
+                activeProps={{ className: isDark ? "text-background" : "text-foreground" }}
+                className={`whitespace-nowrap ${isDark ? "hover:text-background" : "hover:text-foreground"}`}
               >
                 {c.title}
               </L>
             ))}
           </div>
-          <LocaleSwitcher />
+          <LocaleSwitcher variant={isDark ? "light" : "dark"} />
         </div>
       </div>
     </header>
