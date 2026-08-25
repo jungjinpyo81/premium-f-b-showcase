@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as BrandsSlugRouteImport } from './routes/brands.$slug'
+import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
 import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const BrandsSlugRoute = BrandsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BrandsRoute,
 } as any)
+const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
+  id: '/collections/$slug',
+  path: '/collections/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NewsSlugRoute = NewsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/brands': typeof BrandsRouteWithChildren
   '/news': typeof NewsRouteWithChildren
   '/brands/$slug': typeof BrandsSlugRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/brands': typeof BrandsRouteWithChildren
   '/news': typeof NewsRouteWithChildren
   '/brands/$slug': typeof BrandsSlugRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
 }
 export interface FileRoutesById {
@@ -61,20 +69,41 @@ export interface FileRoutesById {
   '/brands': typeof BrandsRouteWithChildren
   '/news': typeof NewsRouteWithChildren
   '/brands/$slug': typeof BrandsSlugRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/brands' | '/news' | '/brands/$slug' | '/news/$slug'
+  fullPaths:
+    | '/'
+    | '/brands'
+    | '/news'
+    | '/brands/$slug'
+    | '/collections/$slug'
+    | '/news/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/brands' | '/news' | '/brands/$slug' | '/news/$slug'
-  id: '__root__' | '/' | '/brands' | '/news' | '/brands/$slug' | '/news/$slug'
+  to:
+    | '/'
+    | '/brands'
+    | '/news'
+    | '/brands/$slug'
+    | '/collections/$slug'
+    | '/news/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/brands'
+    | '/news'
+    | '/brands/$slug'
+    | '/collections/$slug'
+    | '/news/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BrandsRoute: typeof BrandsRouteWithChildren
   NewsRoute: typeof NewsRouteWithChildren
+  CollectionsSlugRoute: typeof CollectionsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -106,6 +135,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/brands/$slug'
       preLoaderRoute: typeof BrandsSlugRouteImport
       parentRoute: typeof BrandsRoute
+    }
+    '/collections/$slug': {
+      id: '/collections/$slug'
+      path: '/collections/$slug'
+      fullPath: '/collections/$slug'
+      preLoaderRoute: typeof CollectionsSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/news/$slug': {
       id: '/news/$slug'
@@ -142,6 +178,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BrandsRoute: BrandsRouteWithChildren,
   NewsRoute: NewsRouteWithChildren,
+  CollectionsSlugRoute: CollectionsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

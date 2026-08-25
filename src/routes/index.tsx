@@ -1,10 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import heroImg from "@/assets/hero.jpg";
+import giftImg from "@/assets/gift.jpg";
 import storyImg from "@/assets/story.jpg";
 import logisticsImg from "@/assets/logistics.jpg";
 
 import { InquiryForm } from "@/components/InquiryForm";
+import { Reveal } from "@/components/Reveal";
+import { SiteFooter } from "@/components/SiteNav";
+import { COLLECTIONS } from "@/lib/collections";
 import { defaultContent, loadContent, type SiteContent } from "@/lib/site-content";
 
 export const Route = createFileRoute("/")({
@@ -73,21 +77,22 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="fixed inset-x-0 top-0 z-20 border-b border-background/20">
+      <header className="absolute inset-x-0 top-0 z-20 border-b border-background/20">
         <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 md:px-10">
           <span className="font-display text-lg tracking-[0.35em] text-background">
             EUROPE CONNECT
           </span>
-          <nav className="flex items-center gap-8 text-[11px] uppercase tracking-[0.25em] text-background/80">
-            <a href="#role" className="hidden hover:text-background md:inline">
-              Our Role
-            </a>
-            <a href="#services" className="hidden hover:text-background md:inline">
-              Services
-            </a>
-            <Link to="/brands" className="hover:text-background">
-              Brands
-            </Link>
+          <nav className="flex items-center gap-6 text-[10px] uppercase tracking-[0.22em] text-background/80">
+            {COLLECTIONS.map((c) => (
+              <Link
+                key={c.slug}
+                to="/collections/$slug"
+                params={{ slug: c.slug }}
+                className="hidden hover:text-background lg:inline"
+              >
+                {c.title}
+              </Link>
+            ))}
             <Link to="/news" className="hover:text-background">
               News
             </Link>
@@ -152,7 +157,7 @@ function Index() {
 
       {/* Our role — editorial column */}
       <section id="role" className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
-        <div className="grid gap-16 md:grid-cols-12">
+        <Reveal className="grid gap-16 md:grid-cols-12">
           <div className="md:col-span-5">
             <img
               src={storyImg}
@@ -175,7 +180,7 @@ function Index() {
               dangerouslySetInnerHTML={{ __html: content.brandStory }}
             />
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* Services — sourcing first */}
@@ -248,6 +253,100 @@ function Index() {
         </div>
       </section>
 
+      {/* Collections — lifestyle curation */}
+      <section id="collections" className="border-b border-border">
+        <div className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
+          <Reveal>
+            <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
+              Collections
+            </p>
+            <h2 className="mt-8 max-w-2xl font-display text-4xl leading-tight md:text-5xl">
+              카테고리가 아니라
+              <br />
+              하루의 장면으로 나눕니다.
+            </h2>
+          </Reveal>
+          <div className="mt-20 border-t border-border">
+            {COLLECTIONS.map((c, i) => (
+              <Reveal key={c.slug} delay={i * 70}>
+                <Link
+                  to="/collections/$slug"
+                  params={{ slug: c.slug }}
+                  className="group grid gap-4 border-b border-border py-10 md:grid-cols-12 md:items-baseline"
+                >
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground md:col-span-1">
+                    {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="font-display text-3xl transition-opacity group-hover:opacity-60 md:col-span-4 md:text-4xl">
+                    {c.title}
+                  </h3>
+                  <p className="text-sm leading-7 text-muted-foreground md:col-span-5">{c.lead}</p>
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground md:col-span-2 md:text-right">
+                    {c.titleKo}
+                  </p>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Gift & B2B partnership */}
+      <section id="gift" className="border-b border-border">
+        <div className="mx-auto grid max-w-[1400px] items-center gap-16 px-6 py-32 md:grid-cols-12 md:px-10">
+          <Reveal className="md:col-span-6">
+            <img
+              src={giftImg}
+              alt="프리미엄 기업 선물용 틴 케이스와 리본 포장 기프트 박스"
+              width={1408}
+              height={1008}
+              loading="lazy"
+              className="w-full object-cover"
+            />
+          </Reveal>
+          <Reveal delay={120} className="md:col-span-6">
+            <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
+              Premium Gift &amp; B2B
+            </p>
+            <h2 className="mt-8 font-display text-4xl leading-tight md:text-5xl">
+              건네는 순간까지
+              <br />
+              브랜드의 일부입니다.
+            </h2>
+            <p className="mt-10 max-w-lg text-sm leading-8 text-muted-foreground">
+              처칠스의 틴 케이스처럼, 다 먹고 난 뒤에도 책상 위에 남는 패키지가 있습니다. 기업 명절
+              선물, 임직원 웰컴 기프트, 호텔·리테일 시즌 프로그램에 맞춰 구성과 물량, 리드타임을
+              함께 설계합니다.
+            </p>
+            <dl className="mt-12 grid gap-px border border-border bg-border sm:grid-cols-2">
+              <div className="bg-background px-6 py-8">
+                <dt className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+                  Corporate Gifting
+                </dt>
+                <dd className="mt-4 text-sm leading-7 text-muted-foreground">
+                  틴 케이스·기프트 박스 중심의 구성 제안과 시즌 물량 계획.
+                </dd>
+              </div>
+              <div className="bg-background px-6 py-8">
+                <dt className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+                  Retail Partnership
+                </dt>
+                <dd className="mt-4 text-sm leading-7 text-muted-foreground">
+                  국내 리테일 유통은 전략적 파트너사인 와이디컴퍼니(YD Company)와의 협업 구조로
+                  운영됩니다.
+                </dd>
+              </div>
+            </dl>
+            <a
+              href="#inquiry"
+              className="mt-12 inline-flex h-14 items-center bg-foreground px-10 text-[11px] uppercase tracking-[0.3em] text-background transition-opacity hover:opacity-90"
+            >
+              B2B 문의하기
+            </a>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Inquiry */}
       <section id="inquiry" className="border-t border-border">
         <div className="mx-auto grid max-w-[1400px] gap-16 px-6 py-32 md:grid-cols-12 md:px-10">
@@ -267,12 +366,7 @@ function Index() {
         </div>
       </section>
 
-      <footer className="border-t border-border">
-        <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-4 px-6 py-10 text-xs text-muted-foreground md:px-10">
-          <span className="font-display tracking-[0.35em] text-foreground">EUROPE CONNECT</span>
-          <span>Europe Connect · B2B Inquiry Only</span>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
