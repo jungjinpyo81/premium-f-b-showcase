@@ -36,6 +36,8 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SiteNav variant="dark" />
+
       {/* Hero */}
       <section className="relative min-h-[94vh] overflow-hidden">
         <img
