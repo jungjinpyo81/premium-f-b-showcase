@@ -55,8 +55,12 @@ function TasteJourneyDropdown({ variant = "dark" }: { variant?: "dark" | "light"
               key={c.slug}
               to="/collections/$slug"
               params={{ slug: c.slug }}
-              activeProps={{ className: "text-foreground" }}
-              className={`block px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] hover:bg-muted/40 hover:text-foreground ${isLight ? "text-foreground/80" : "text-muted-foreground"}`}
+              activeProps={{ className: isLight ? "text-foreground" : "text-beige" }}
+              className={`block px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] hover:text-foreground ${
+                isLight
+                  ? "text-foreground/80 hover:bg-muted/40"
+                  : "text-beige/70 hover:bg-background/10 hover:text-beige"
+              }`}
               onClick={() => setOpen(false)}
             >
               {c.title}
