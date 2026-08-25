@@ -101,7 +101,7 @@ export function SiteFooter() {
   const copy = useCopy();
 
   return (
-    <footer className="border-t border-beige/15 text-beige/60">
+    <footer className="border-t border-beige/15 bg-ink text-beige/60">
       <div className="mx-auto grid max-w-[1500px] gap-10 px-6 py-14 md:grid-cols-3 md:px-10">
         <div>
           <span className="font-display text-base tracking-[0.35em] text-beige">

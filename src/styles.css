@@ -201,3 +201,25 @@
   content: "여기에 내용을 입력하세요";
   color: var(--color-muted-foreground);
 }
+
+/* Full-page scroll snap (homepage only; toggled from the route component). */
+html.snap-page {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scroll-padding-top: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.snap-page {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+}
+
+/* Dark surface: remap semantic tokens so shared components read correctly. */
+#inquiry {
+  --background: var(--ink);
+  --foreground: var(--beige);
+  --muted-foreground: oklch(0.72 0.012 85);
+  --border: oklch(0.34 0.006 70);
+  --input: oklch(0.34 0.006 70);
+}
