@@ -59,7 +59,7 @@ export function LocaleSwitcher({ variant = "dark" }: { variant?: "dark" | "light
             ${
               isLight
                 ? "border-background/20 bg-background"
-                : "border-background/20 bg-background/90 backdrop-blur-sm"
+                : "border-background/30 bg-foreground/95 backdrop-blur-sm"
             }
           `}
         >
