@@ -115,9 +115,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
-  const lang = useRouterState({
-    select: (s) => (s.location.search as { lang?: unknown })?.lang,
-  });
+  const state = useRouterState();
+  const lang = (state.location.search as { lang?: string })?.lang;
   const htmlLang = LOCALES.find((l) => l.code === lang)?.htmlLang ?? "ko";
 
   return (
