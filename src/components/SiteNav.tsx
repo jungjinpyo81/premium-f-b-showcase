@@ -165,7 +165,7 @@ export function SiteFooter() {
             {copy.footer.about}
           </p>
           <div className="mt-6">
-            <LocaleSwitcher />
+            <LocaleSwitcher variant="light" />
           </div>
         </div>
         <div className="text-xs leading-7 text-muted-foreground">
