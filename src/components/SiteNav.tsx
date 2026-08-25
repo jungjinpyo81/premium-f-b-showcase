@@ -63,7 +63,7 @@ function TasteJourneyDropdown({ variant = "dark" }: { variant?: "dark" | "light"
               }`}
               onClick={() => setOpen(false)}
             >
-              {c.title}
+              {c.titleLocal}
             </L>
           ))}
         </div>
@@ -191,7 +191,7 @@ export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
                 activeProps={{ className: isDark ? "text-background" : "text-foreground" }}
                 className={`whitespace-nowrap ${isDark ? "hover:text-background" : "hover:text-foreground"}`}
               >
-                {c.title}
+                {c.titleLocal}
               </L>
             ))}
           </div>
