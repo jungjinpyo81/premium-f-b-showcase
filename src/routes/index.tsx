@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+
 import heroImg from "@/assets/hero.jpg";
 import giftImg from "@/assets/gift.jpg";
-import storyImg from "@/assets/story.jpg";
-import logisticsImg from "@/assets/logistics.jpg";
+import colSweet from "@/assets/col-sweet.jpg";
+import colPantry from "@/assets/col-pantry.jpg";
+import colPlant from "@/assets/col-plant.jpg";
+import colNature from "@/assets/col-nature.jpg";
+import colChill from "@/assets/col-chill.jpg";
 
 import { InquiryForm } from "@/components/InquiryForm";
 import { L } from "@/components/L";
@@ -31,15 +36,30 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const COLLECTION_IMAGES: Record<string, string> = {
+  "sweet-moments": colSweet,
+  "european-pantry": colPantry,
+  "plant-based-life": colPlant,
+  "natures-bites": colNature,
+  "chill-cheers": colChill,
+};
+
 function Index() {
   const copy = useCopy();
 
+  // Full-page scroll snap is scoped to this page only.
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.add("snap-page");
+    return () => root.classList.remove("snap-page");
+  }, []);
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <SiteNav variant="dark" />
+    <div className="bg-ink text-beige">
+      <SiteNav />
 
       {/* Hero */}
-      <section className="relative min-h-[94vh] overflow-hidden">
+      <section className="relative flex h-screen snap-start items-end overflow-hidden">
         <img
           src={heroImg}
           alt={copy.hero.titleLines.join(" ")}
@@ -47,84 +67,192 @@ function Index() {
           height={1280}
           className="absolute inset-0 size-full object-cover"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.72)_50%,oklch(0.12_0_0/0.3)_100%)]" />
-        <div className="relative mx-auto flex min-h-[94vh] max-w-[1400px] items-end px-6 pb-24 pt-40 md:px-10">
-          <div className="max-w-3xl">
-            <Reveal immediate>
-              <p className="text-[11px] uppercase tracking-[0.45em] text-background/70">
-                {copy.hero.eyebrow}
-              </p>
-            </Reveal>
-            <Reveal immediate delay={120}>
-              <h1 className="mt-10 font-display text-3xl leading-[1.15] text-background md:text-5xl">
-                {copy.hero.titleLines.map((line, i) => (
-                  <span key={line} className="block">
-                    {i > 0 ? line : line}
-                  </span>
-                ))}
-              </h1>
-            </Reveal>
-            <Reveal immediate delay={240}>
-              <p className="mt-10 max-w-xl text-sm leading-8 text-background/75">
-                {copy.hero.leadLines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </p>
-            </Reveal>
-            <Reveal immediate delay={360}>
-              <div className="mt-12 flex flex-wrap items-center gap-4">
-                <a
-                  href="#inquiry"
-                  className="inline-flex h-14 items-center justify-center bg-background px-10 text-[11px] uppercase tracking-[0.3em] text-foreground transition-opacity hover:opacity-90"
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.72)_50%,oklch(0.12_0_0/0.35)_100%)]" />
+        <div className="relative mx-auto w-full max-w-[1500px] px-6 pb-24 md:px-10">
+          <Reveal immediate>
+            <p className="text-[11px] uppercase tracking-[0.45em] text-beige/60">
+              {copy.hero.eyebrow}
+            </p>
+          </Reveal>
+          <Reveal immediate delay={140}>
+            <h1 className="mt-8 max-w-3xl font-display text-3xl leading-[1.2] text-beige md:text-5xl">
+              {copy.hero.titleLines.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </h1>
+          </Reveal>
+          <Reveal immediate delay={280}>
+            <p className="mt-8 max-w-xl text-sm leading-8 text-beige/70">
+              {copy.hero.leadLines.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </p>
+          </Reveal>
+          <Reveal immediate delay={420}>
+            <div className="mt-12 flex flex-wrap items-center gap-4">
+              <L
+                to="/"
+                hash="inquiry"
+                className="inline-flex h-13 items-center border border-beige px-10 py-4 text-[11px] uppercase tracking-[0.3em] text-beige transition-colors hover:bg-beige hover:text-ink"
+              >
+                {copy.hero.ctaPrimary}
+              </L>
+              <L
+                to="/"
+                hash={copy.collections[0]?.slug ?? "inquiry"}
+                className="inline-flex items-center px-2 py-4 text-[11px] uppercase tracking-[0.3em] text-beige/60 transition-colors hover:text-beige"
+              >
+                {copy.nav.tasteJourney}
+              </L>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* One collection per page */}
+      {copy.collections.map((c, index) => (
+        <section
+          key={c.slug}
+          id={c.slug}
+          className="relative flex h-screen snap-start items-center overflow-hidden"
+        >
+          <img
+            src={COLLECTION_IMAGES[c.slug] ?? heroImg}
+            alt={c.titleLocal}
+            width={1600}
+            height={1100}
+            loading="lazy"
+            className="absolute inset-0 size-full object-cover"
+          />
+          <div
+            className={`absolute inset-0 ${
+              index % 2 === 0
+                ? "bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.7)_55%,oklch(0.12_0_0/0.35)_100%)]"
+                : "bg-[linear-gradient(270deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.7)_55%,oklch(0.12_0_0/0.35)_100%)]"
+            }`}
+          />
+          <div className="relative mx-auto w-full max-w-[1500px] px-6 pt-24 md:px-10">
+            <div
+              className={`max-w-2xl ${index % 2 === 0 ? "" : "md:ml-auto md:text-right"}`}
+            >
+              <Reveal>
+                <p className="text-[10px] uppercase tracking-[0.45em] text-beige/50">
+                  {String(index + 1).padStart(2, "0")} — {c.title}
+                </p>
+              </Reveal>
+              <Reveal delay={120}>
+                <h2 className="mt-8 font-display text-4xl leading-tight text-beige md:text-6xl">
+                  {c.titleLocal}
+                </h2>
+              </Reveal>
+              <Reveal delay={220}>
+                <p className="mt-6 font-display text-lg text-beige/75 md:text-xl">{c.lead}</p>
+              </Reveal>
+              <Reveal delay={320}>
+                <p className="mt-8 text-sm leading-8 text-beige/60">{c.intro}</p>
+              </Reveal>
+              <Reveal delay={420}>
+                <ul
+                  className={`mt-10 flex flex-wrap gap-x-8 gap-y-3 text-[11px] uppercase tracking-[0.25em] text-beige/50 ${
+                    index % 2 === 0 ? "" : "md:justify-end"
+                  }`}
                 >
-                  {copy.hero.ctaPrimary}
-                </a>
-                <a
-                  href="#role"
-                  className="inline-flex h-14 items-center justify-center border border-background/40 px-10 text-[11px] uppercase tracking-[0.3em] text-background transition-colors hover:border-background"
+                  {c.brands.map((b) => (
+                    <li key={b.name}>{b.name}</li>
+                  ))}
+                </ul>
+              </Reveal>
+              <Reveal delay={520}>
+                <L
+                  to="/collections/$slug"
+                  params={{ slug: c.slug }}
+                  className="mt-12 inline-flex border-b border-beige/40 pb-1 text-[11px] uppercase tracking-[0.3em] text-beige/70 transition-colors hover:border-beige hover:text-beige"
                 >
-                  {copy.hero.ctaSecondary}
-                </a>
+                  View collection
+                </L>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      {/* Sourcing & logistics — our role */}
+      <section
+        id="services"
+        className="relative flex h-screen snap-start items-center overflow-hidden border-t border-beige/10"
+      >
+        <div className="mx-auto w-full max-w-[1500px] px-6 pt-24 md:px-10">
+          <Reveal>
+            <p className="text-[10px] uppercase tracking-[0.45em] text-beige/50">
+              {copy.role.eyebrow}
+            </p>
+          </Reveal>
+          <Reveal delay={120}>
+            <h2 className="mt-8 max-w-3xl font-display text-3xl leading-tight text-beige md:text-5xl">
+              {copy.role.titleLines.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </h2>
+          </Reveal>
+          <div className="mt-14 grid gap-10 md:grid-cols-3">
+            <Reveal delay={220} className="text-sm leading-8 text-beige/60">
+              {copy.role.paragraphs.map((p) => (
+                <p key={p} className="mb-5">
+                  {p}
+                </p>
+              ))}
+            </Reveal>
+            <Reveal delay={320} className="md:col-span-2">
+              <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
+                {[...copy.services.sourcing.items, ...copy.services.logistics.items]
+                  .slice(0, 4)
+                  .map((s) => (
+                    <article key={s.no}>
+                      <p className="font-display text-xs tracking-[0.3em] text-beige/40">{s.no}</p>
+                      <h3 className="mt-3 font-display text-xl text-beige md:text-2xl">
+                        {s.title}
+                      </h3>
+                      <p className="mt-3 whitespace-pre-line text-sm leading-7 text-beige/55">
+                        {s.body}
+                      </p>
+                    </article>
+                  ))}
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Figures */}
-      <section className="border-b border-border">
-        <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-px bg-border md:grid-cols-4">
-          {copy.figures.map((f, i) => (
-            <Reveal key={f.label} delay={i * 80} className="bg-background px-8 py-12">
-              <p className="font-display text-4xl">{f.value}</p>
-              <p className="mt-3 text-xs leading-5 text-muted-foreground">{f.label}</p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Our role */}
-      <section id="role" className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
-        <div className="grid gap-16 md:grid-cols-12">
-          <Reveal className="md:col-span-5">
-            <img
-              src={storyImg}
-              alt={copy.role.eyebrow}
-              width={1200}
-              height={1504}
-              loading="lazy"
-              className="w-full object-cover"
-            />
-          </Reveal>
-          <div className="md:col-span-7">
-            <Reveal delay={120}>
-              <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
-                {copy.role.eyebrow}
+      {/* Gift & B2B */}
+      <section
+        id="gift"
+        className="relative flex h-screen snap-start items-center overflow-hidden"
+      >
+        <img
+          src={giftImg}
+          alt={copy.gift.eyebrow}
+          width={1408}
+          height={1008}
+          loading="lazy"
+          className="absolute inset-0 size-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.75)_60%,oklch(0.12_0_0/0.4)_100%)]" />
+        <div className="relative mx-auto w-full max-w-[1500px] px-6 pt-24 md:px-10">
+          <div className="max-w-2xl">
+            <Reveal>
+              <p className="text-[10px] uppercase tracking-[0.45em] text-beige/50">
+                {copy.gift.eyebrow}
               </p>
-              <h2 className="mt-8 max-w-xl font-display text-4xl leading-tight md:text-5xl">
-                {copy.role.titleLines.map((line) => (
+            </Reveal>
+            <Reveal delay={120}>
+              <h2 className="mt-8 font-display text-3xl leading-tight text-beige md:text-5xl">
+                {copy.gift.titleLines.map((line) => (
                   <span key={line} className="block">
                     {line}
                   </span>
@@ -132,200 +260,51 @@ function Index() {
               </h2>
             </Reveal>
             <Reveal delay={220}>
-              <div className="mt-12 max-w-2xl space-y-6 text-sm leading-8 text-foreground/85">
-                {copy.role.paragraphs.map((p) => (
-                  <p key={p}>{p}</p>
+              <p className="mt-8 text-sm leading-8 text-beige/60">{copy.gift.lead}</p>
+            </Reveal>
+            <Reveal delay={320}>
+              <dl className="mt-10 grid gap-8 sm:grid-cols-2">
+                {copy.gift.cards.map((card) => (
+                  <div key={card.title}>
+                    <dt className="text-[10px] uppercase tracking-[0.3em] text-beige/50">
+                      {card.title}
+                    </dt>
+                    <dd className="mt-3 text-sm leading-7 text-beige/60">{card.body}</dd>
+                  </div>
                 ))}
-              </div>
+              </dl>
+            </Reveal>
+            <Reveal delay={420}>
+              <L
+                to="/"
+                hash="inquiry"
+                className="mt-12 inline-flex items-center border border-beige px-10 py-4 text-[11px] uppercase tracking-[0.3em] text-beige transition-colors hover:bg-beige hover:text-ink"
+              >
+                {copy.gift.cta}
+              </L>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section id="services" className="border-y border-border">
-        <div className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
-          <Reveal className="flex flex-wrap items-baseline justify-between gap-6">
-            <h2 className="font-display text-4xl md:text-5xl">{copy.services.sourcing.title}</h2>
-            <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-              {copy.services.sourcing.subtitle}
-            </p>
-          </Reveal>
-          <div className="mt-16 grid gap-px bg-border md:grid-cols-2">
-            {copy.services.sourcing.items.map((s, i) => (
-              <Reveal key={s.no} as="article" delay={i * 90} className="bg-background px-8 py-14">
-                <p className="font-display text-sm tracking-[0.3em] text-muted-foreground">
-                  {s.no}
-                </p>
-                <h3 className="mt-8 font-display text-2xl">{s.title}</h3>
-                <p className="mt-6 max-w-xl text-sm leading-7 text-muted-foreground">{s.body}</p>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal className="mt-28 flex flex-wrap items-baseline justify-between gap-6">
-            <h2 className="font-display text-4xl md:text-5xl">{copy.services.logistics.title}</h2>
-            <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-              {copy.services.logistics.subtitle}
-            </p>
-          </Reveal>
-          <div className="mt-16 grid gap-px bg-border md:grid-cols-3">
-            {copy.services.logistics.items.map((s, i) => (
-              <Reveal key={s.no} as="article" delay={i * 90} className="bg-background px-8 py-14">
-                <p className="font-display text-sm tracking-[0.3em] text-muted-foreground">
-                  {s.no}
-                </p>
-                <h3 className="mt-8 font-display text-2xl">{s.title}</h3>
-                <p className="mt-6 whitespace-pre-line text-sm leading-7 text-muted-foreground">
-                  {s.body}
-                </p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Operating framework */}
-      <section className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
-        <div className="grid items-center gap-16 md:grid-cols-12">
-          <Reveal className="md:col-span-6">
-            <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
-              {copy.framework.eyebrow}
-            </p>
-            <h2 className="mt-8 font-display text-4xl leading-tight md:text-5xl">
-              {copy.framework.titleLines.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </h2>
-            <div className="mt-12 space-y-6 text-sm leading-8 text-foreground/85">
-              {copy.framework.paragraphs.map((p) => (
-                <p key={p}>{p}</p>
-              ))}
-            </div>
-          </Reveal>
-          <Reveal delay={120} className="md:col-span-6">
-            <img
-              src={logisticsImg}
-              alt={copy.framework.eyebrow}
-              width={1408}
-              height={1008}
-              loading="lazy"
-              className="w-full object-cover"
-            />
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Collections */}
-      <section id="collections" className="border-b border-border">
-        <div className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
-          <Reveal>
-            <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
-              {copy.collectionsSection.eyebrow}
-            </p>
-            <h2 className="mt-8 max-w-2xl font-display text-4xl leading-tight md:text-5xl">
-              {copy.collectionsSection.titleLines.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </h2>
-          </Reveal>
-          <div className="mt-20 border-t border-border">
-            {copy.collections.map((c, i) => (
-              <Reveal key={c.slug} delay={i * 70}>
-                <L
-                  to="/collections/$slug"
-                  params={{ slug: c.slug }}
-                  className="group grid gap-4 border-b border-border py-10 md:grid-cols-12 md:items-baseline"
-                >
-                  <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground md:col-span-1">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <h3 className="font-display text-3xl transition-opacity group-hover:opacity-60 md:col-span-4 md:text-4xl">
-                    {c.title}
-                  </h3>
-                  <p className="text-sm leading-7 text-muted-foreground md:col-span-5">{c.lead}</p>
-                  <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground md:col-span-2 md:text-right">
-                    {c.titleLocal}
-                  </p>
-                </L>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Gift & B2B */}
-      <section id="gift" className="border-b border-border">
-        <div className="mx-auto grid max-w-[1400px] items-center gap-16 px-6 py-32 md:grid-cols-12 md:px-10">
-          <Reveal className="md:col-span-6">
-            <img
-              src={giftImg}
-              alt={copy.gift.eyebrow}
-              width={1408}
-              height={1008}
-              loading="lazy"
-              className="w-full object-cover"
-            />
-          </Reveal>
-          <Reveal delay={120} className="md:col-span-6">
-            <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
-              {copy.gift.eyebrow}
-            </p>
-            <h2 className="mt-8 font-display text-4xl leading-tight md:text-5xl">
-              {copy.gift.titleLines.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </h2>
-            <p className="mt-10 max-w-lg text-sm leading-8 text-muted-foreground">
-              {copy.gift.lead}
-            </p>
-            <dl className="mt-12 grid gap-px border border-border bg-border sm:grid-cols-2">
-              {copy.gift.cards.map((card) => (
-                <div key={card.title} className="bg-background px-6 py-8">
-                  <dt className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-                    {card.title}
-                  </dt>
-                  <dd className="mt-4 text-sm leading-7 text-muted-foreground">{card.body}</dd>
-                </div>
-              ))}
-            </dl>
-            <a
-              href="#inquiry"
-              className="mt-12 inline-flex h-14 items-center bg-foreground px-10 text-[11px] uppercase tracking-[0.3em] text-background transition-opacity hover:opacity-90"
-            >
-              {copy.gift.cta}
-            </a>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Inquiry */}
-      <section id="inquiry" className="border-t border-border">
-        <div className="mx-auto grid max-w-[1400px] gap-16 px-6 py-32 md:grid-cols-12 md:px-10">
+      {/* Inquiry + footer */}
+      <section id="inquiry" className="min-h-screen snap-start border-t border-beige/10">
+        <div className="mx-auto grid max-w-[1500px] gap-14 px-6 pb-16 pt-28 md:grid-cols-12 md:px-10">
           <Reveal className="md:col-span-5">
-            <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
+            <p className="text-[10px] uppercase tracking-[0.45em] text-beige/50">
               {copy.inquiry.eyebrow}
             </p>
-            <h2 className="mt-8 font-display text-4xl leading-tight md:text-5xl">
+            <h2 className="mt-8 font-display text-3xl leading-tight text-beige md:text-5xl">
               {copy.inquiry.title}
             </h2>
-            <p className="mt-10 max-w-sm text-sm leading-7 text-muted-foreground">
-              {copy.inquiry.lead}
-            </p>
+            <p className="mt-8 max-w-sm text-sm leading-7 text-beige/60">{copy.inquiry.lead}</p>
           </Reveal>
-          <Reveal delay={120} className="md:col-span-7">
+          <Reveal delay={140} className="md:col-span-7">
             <InquiryForm />
           </Reveal>
         </div>
+        <SiteFooter />
       </section>
-
-      <SiteFooter />
     </div>
   );
 }
