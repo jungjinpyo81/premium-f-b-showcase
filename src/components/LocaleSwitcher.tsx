@@ -7,33 +7,47 @@ export function LocaleSwitcher({ variant = "dark" }: { variant?: "dark" | "light
   const isLight = variant === "light";
 
   return (
-    <div
-      className={`flex items-center gap-2 text-[10px] tracking-[0.2em] ${
-        isLight ? "text-background/70" : "text-muted-foreground"
-      }`}
+    <nav
+      className="inline-flex items-center justify-center"
       aria-label="Language"
     >
-      {LOCALES.map((l, i) => (
-        <span key={l.code} className="flex items-center gap-2">
-          {i > 0 && <span className={isLight ? "text-background/30" : "text-border"}>·</span>}
-          <Link
-            to="."
-            search={(prev: Record<string, unknown>) => ({ ...prev, lang: l.code })}
-            className={
-              l.code === locale
-                ? isLight
-                  ? "text-background"
-                  : "text-foreground"
-                : isLight
-                  ? "hover:text-background"
-                  : "hover:text-foreground"
-            }
-            aria-current={l.code === locale ? "true" : undefined}
-          >
-            {l.label}
-          </Link>
-        </span>
-      ))}
-    </div>
+      <div className="flex items-center">
+        {LOCALES.map((l) => {
+          const active = l.code === locale;
+          return (
+            <Link
+              key={l.code}
+              to="."
+              search={(prev: Record<string, unknown>) => ({ ...prev, lang: l.code })}
+              className={`
+                relative px-1.5 py-1 text-[10px] tracking-[0.16em] font-medium
+                transition-colors duration-300 ease-out
+                sm:px-3 sm:text-[11px] sm:tracking-[0.18em]
+                ${
+                  active
+                    ? isLight
+                      ? "text-background"
+                      : "text-beige"
+                    : isLight
+                      ? "text-background/50 hover:text-background"
+                      : "text-beige/50 hover:text-beige"
+                }
+              `}
+              aria-current={active ? "true" : undefined}
+            >
+              <span className="relative z-10">{l.label}</span>
+              <span
+                className={`
+                  absolute bottom-0 left-1/2 -translate-x-1/2 h-px
+                  bg-current transition-all duration-300 ease-out
+                  ${active ? "w-3/5 opacity-100" : "w-0 opacity-0"}
+                `}
+                aria-hidden="true"
+              />
+            </Link>
+          );
+        })}
+      </div>
+    </nav>
   );
 }

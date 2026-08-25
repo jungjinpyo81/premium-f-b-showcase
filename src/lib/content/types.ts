@@ -3,8 +3,8 @@ export type Locale = "ko" | "en" | "ja" | "zh";
 export const LOCALES: { code: Locale; label: string; htmlLang: string }[] = [
   { code: "ko", label: "KO", htmlLang: "ko" },
   { code: "en", label: "EN", htmlLang: "en" },
-  { code: "ja", label: "JA", htmlLang: "ja" },
-  { code: "zh", label: "ZH", htmlLang: "zh-Hans" },
+  { code: "ja", label: "日", htmlLang: "ja" },
+  { code: "zh", label: "中", htmlLang: "zh-Hans" },
 ];
 
 export const DEFAULT_LOCALE: Locale = "ko";
