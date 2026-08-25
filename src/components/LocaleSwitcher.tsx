@@ -20,8 +20,9 @@ export function LocaleSwitcher({ variant = "dark" }: { variant?: "dark" | "light
               to="."
               search={(prev: Record<string, unknown>) => ({ ...prev, lang: l.code })}
               className={`
-                relative px-3 py-1 text-[11px] tracking-[0.18em] font-medium
+                relative px-1.5 py-1 text-[10px] tracking-[0.16em] font-medium
                 transition-colors duration-300 ease-out
+                sm:px-3 sm:text-[11px] sm:tracking-[0.18em]
                 ${
                   active
                     ? isLight
