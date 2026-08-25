@@ -32,7 +32,7 @@ function News() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
-      <main className="mx-auto max-w-[1400px] px-6 py-24 md:px-10">
+      <main className="mx-auto max-w-[1400px] px-6 pb-24 pt-36 md:px-10">
         <Reveal immediate>
           <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
             {copy.pages.news.eyebrow}

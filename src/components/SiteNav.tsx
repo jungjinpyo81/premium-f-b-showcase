@@ -1,201 +1,96 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { L } from "@/components/L";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { useCopy } from "@/lib/content";
 
-function TasteJourneyDropdown({ variant = "dark" }: { variant?: "dark" | "light" }) {
-  const copy = useCopy();
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const isLight = variant === "light";
+/** Highlights the section currently snapped into view. */
+function useActiveSection(slugs: string[]) {
+  const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!open) return;
-    function handleClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
-  }, [open]);
+    if (typeof IntersectionObserver === "undefined") return;
+    const els = slugs
+      .map((s) => document.getElementById(s))
+      .filter((el): el is HTMLElement => Boolean(el));
+    if (els.length === 0) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) setActive(e.target.id);
+        }
+      },
+      { threshold: 0.55 },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [slugs.join("|")]);
+
+  return active;
+}
+
+/**
+ * Persistent global navigation. Fixed to the top of the viewport on every
+ * page; the collection items act as anchors into the full-page snap sections.
+ */
+export function SiteNav() {
+  const copy = useCopy();
+  const active = useActiveSection(copy.collections.map((c) => c.slug));
 
   return (
-    <div ref={ref} className="relative">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className={`flex items-center gap-1.5 ${isLight ? "hover:text-background" : "hover:text-foreground"}`}
-        aria-expanded={open}
-        aria-haspopup="menu"
-      >
-        {copy.nav.tasteJourney}
-        <svg
-          width="8"
-          height="5"
-          viewBox="0 0 8 5"
-          fill="currentColor"
-          className={`transition-transform ${open ? "rotate-180" : ""}`}
-          aria-hidden="true"
-        >
-          <path d="M0 0h8L4 5z" />
-        </svg>
-      </button>
-      {open && (
-        <div
-          className={`absolute left-0 top-full z-50 min-w-[14rem] border py-2 shadow-sm ${
-            isLight
-              ? "border-background/20 bg-background"
-              : "border-background/30 bg-foreground/95 backdrop-blur-sm"
-          }`}
-        >
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-beige/15 bg-ink/80 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-[1500px] items-center justify-between gap-8 px-6 md:px-10">
+        <L to="/" className="font-display text-base tracking-[0.35em] text-beige md:text-lg">
+          EUROPE CONNECT
+        </L>
+
+        <nav className="hidden items-center gap-8 text-[11px] tracking-[0.2em] text-beige/60 lg:flex">
           {copy.collections.map((c) => (
             <L
               key={c.slug}
-              to="/collections/$slug"
-              params={{ slug: c.slug }}
-              activeProps={{ className: isLight ? "text-foreground" : "text-beige" }}
-              className={`block px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] hover:text-foreground ${
-                isLight
-                  ? "text-foreground/80 hover:bg-muted/40"
-                  : "text-beige/70 hover:bg-background/10 hover:text-beige"
+              to="/"
+              hash={c.slug}
+              className={`relative py-2 transition-colors duration-300 hover:text-beige ${
+                active === c.slug ? "text-beige" : ""
               }`}
-              onClick={() => setOpen(false)}
+            >
+              {c.titleLocal}
+              <span
+                className={`absolute inset-x-0 -bottom-0.5 h-px origin-center bg-beige transition-transform duration-300 ${
+                  active === c.slug ? "scale-x-100" : "scale-x-0"
+                }`}
+              />
+            </L>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-6 text-[10px] uppercase tracking-[0.25em] text-beige/60">
+          <L to="/news" className="hidden transition-colors hover:text-beige md:inline">
+            {copy.nav.news}
+          </L>
+          <L to="/" hash="inquiry" className="transition-colors hover:text-beige">
+            {copy.nav.contact}
+          </L>
+          <LocaleSwitcher variant="dark" />
+        </div>
+      </div>
+
+      {/* Mobile anchors */}
+      <div className="border-t border-beige/10 lg:hidden">
+        <div className="mx-auto flex max-w-[1500px] gap-5 overflow-x-auto px-6 py-2.5 text-[11px] tracking-[0.18em] text-beige/60">
+          {copy.collections.map((c) => (
+            <L
+              key={c.slug}
+              to="/"
+              hash={c.slug}
+              className={`whitespace-nowrap transition-colors ${
+                active === c.slug ? "text-beige" : ""
+              }`}
             >
               {c.titleLocal}
             </L>
           ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-export function SiteNav({ variant = "light" }: { variant?: "light" | "dark" }) {
-  const copy = useCopy();
-  const isDark = variant === "dark";
-
-  return (
-    <header
-      className={`${
-        isDark
-          ? "absolute inset-x-0 top-0 z-30 border-b border-background/20 bg-background/10 backdrop-blur-sm"
-          : "sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur"
-      }`}
-    >
-      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 md:px-10">
-        <L
-          to="/"
-          className={`font-display text-lg tracking-[0.35em] ${isDark ? "text-background" : "text-foreground"}`}
-        >
-          EUROPE CONNECT
-        </L>
-
-        {/* Desktop */}
-        <nav
-          className={`hidden items-center gap-7 text-[10px] uppercase tracking-[0.22em] lg:flex ${
-            isDark ? "text-background/80" : "text-muted-foreground"
-          }`}
-        >
-          <TasteJourneyDropdown variant={isDark ? "dark" : "light"} />
-
-          <L
-            to="/"
-            hash="services"
-            activeProps={{ className: isDark ? "text-background" : "text-foreground" }}
-            className={isDark ? "hover:text-background" : "hover:text-foreground"}
-          >
-            {copy.nav.sourcing}
-          </L>
-          <L
-            to="/"
-            hash="services"
-            activeProps={{ className: isDark ? "text-background" : "text-foreground" }}
-            className={isDark ? "hover:text-background" : "hover:text-foreground"}
-          >
-            {copy.nav.logistics}
-          </L>
-
-          <span className={`h-3 w-px ${isDark ? "bg-background/30" : "bg-border"}`} />
-          <L
-            to="/news"
-            activeProps={{ className: isDark ? "text-background" : "text-foreground" }}
-            className={isDark ? "hover:text-background" : "hover:text-foreground"}
-          >
-            {copy.nav.news}
-          </L>
-          <L
-            to="/"
-            hash="inquiry"
-            className={isDark ? "hover:text-background" : "hover:text-foreground"}
-          >
-            {copy.nav.contact}
-          </L>
-          <span className={`h-3 w-px ${isDark ? "bg-background/30" : "bg-border"}`} />
-          <LocaleSwitcher variant={isDark ? "dark" : "light"} />
-        </nav>
-
-        <div className="flex items-center gap-4 lg:hidden">
-          <L
-            to="/"
-            hash="inquiry"
-            className={`text-[10px] uppercase tracking-[0.25em] ${
-              isDark
-                ? "text-background/70 hover:text-background"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {copy.nav.contact}
-          </L>
-        </div>
-      </div>
-
-      {/* Mobile */}
-      <div
-        className={`lg:hidden ${
-          isDark ? "border-t border-background/20" : "border-t border-border"
-        }`}
-      >
-        <div className="mx-auto flex max-w-[1400px] flex-col items-center gap-3 px-6 py-3">
-          <div
-            className={`flex w-full justify-center gap-5 overflow-x-auto text-[10px] uppercase tracking-[0.2em] ${
-              isDark ? "text-background/70" : "text-muted-foreground"
-            }`}
-          >
-            <L
-              to="/"
-              hash="services"
-              className={`whitespace-nowrap ${isDark ? "hover:text-background" : "hover:text-foreground"}`}
-            >
-              {copy.nav.sourcing}
-            </L>
-            <L
-              to="/"
-              hash="services"
-              className={`whitespace-nowrap ${isDark ? "hover:text-background" : "hover:text-foreground"}`}
-            >
-              {copy.nav.logistics}
-            </L>
-            <L
-              to="/news"
-              className={`whitespace-nowrap ${isDark ? "hover:text-background" : "hover:text-foreground"}`}
-            >
-              {copy.nav.news}
-            </L>
-            {copy.collections.map((c) => (
-              <L
-                key={c.slug}
-                to="/collections/$slug"
-                params={{ slug: c.slug }}
-                activeProps={{ className: isDark ? "text-background" : "text-foreground" }}
-                className={`whitespace-nowrap ${isDark ? "hover:text-background" : "hover:text-foreground"}`}
-              >
-                {c.titleLocal}
-              </L>
-            ))}
-          </div>
-          <LocaleSwitcher variant={isDark ? "dark" : "light"} />
         </div>
       </div>
     </header>
@@ -206,21 +101,16 @@ export function SiteFooter() {
   const copy = useCopy();
 
   return (
-    <footer className="border-t border-border">
-      <div className="mx-auto grid max-w-[1400px] gap-10 px-6 py-16 md:grid-cols-3 md:px-10">
+    <footer className="border-t border-beige/15 bg-ink text-beige/60">
+      <div className="mx-auto grid max-w-[1500px] gap-10 px-6 py-14 md:grid-cols-3 md:px-10">
         <div>
-          <span className="font-display text-base tracking-[0.35em] text-foreground">
+          <span className="font-display text-base tracking-[0.35em] text-beige">
             EUROPE CONNECT
           </span>
-          <p className="mt-5 max-w-xs text-xs leading-6 text-muted-foreground">
-            {copy.footer.about}
-          </p>
-          <div className="mt-6">
-            <LocaleSwitcher variant="light" />
-          </div>
+          <p className="mt-5 max-w-xs text-xs leading-6">{copy.footer.about}</p>
         </div>
-        <div className="text-xs leading-7 text-muted-foreground">
-          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-foreground">
+        <div className="text-xs leading-7">
+          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-beige">
             {copy.footer.tasteJourney}
           </p>
           {copy.collections.map((c) => (
@@ -228,24 +118,21 @@ export function SiteFooter() {
               key={c.slug}
               to="/collections/$slug"
               params={{ slug: c.slug }}
-              className="block hover:text-foreground"
+              className="block transition-colors hover:text-beige"
             >
-              {c.title}
+              {c.titleLocal}
             </L>
           ))}
-          <L to="/" hash="services" className="mt-4 block hover:text-foreground">
-            {copy.nav.sourcing}
-          </L>
-          <L to="/" hash="services" className="block hover:text-foreground">
-            {copy.nav.logistics}
-          </L>
         </div>
-        <div className="text-xs leading-7 text-muted-foreground">
-          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-foreground">
+        <div className="text-xs leading-7">
+          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-beige">
             {copy.footer.partnership}
           </p>
           <p>{copy.footer.partner}</p>
           <p className="mt-4">{copy.footer.inquiryOnly}</p>
+          <div className="mt-6">
+            <LocaleSwitcher variant="dark" />
+          </div>
         </div>
       </div>
     </footer>

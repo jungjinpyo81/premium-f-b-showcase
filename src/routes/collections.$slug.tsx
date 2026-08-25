@@ -42,7 +42,7 @@ function CollectionNotFound() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
-      <main className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
+      <main className="mx-auto max-w-[1400px] px-6 pb-32 pt-36 md:px-10">
         <h1 className="font-display text-4xl">{copy.pages.brandDetail.notFound}</h1>
         <L to="/" className="mt-8 inline-block text-sm underline underline-offset-4">
           {copy.pages.brandDetail.backToList}
@@ -65,7 +65,7 @@ function CollectionPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
-      <main className="mx-auto max-w-[1400px] px-6 pb-32 pt-24 md:px-10">
+      <main className="mx-auto max-w-[1400px] px-6 pb-32 pt-36 md:px-10">
         <Reveal immediate>
           <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
             {collection.title}

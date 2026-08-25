@@ -184,7 +184,7 @@ export const ko: SiteCopy = {
     {
       slug: "sweet-moments",
       title: "Sweet Moments",
-      titleLocal: "달콤한 순간",
+      titleLocal: "달콤한 여유",
       lead: "하루의 끝에 놓이는 작은 사치.",
       intro:
         "유럽의 오래된 제과 하우스가 지켜온 배합과 공정을 그대로 옮겨옵니다. 대량 생산이 아닌 소량 배치, 그리고 선물로 건네기에 부족함 없는 패키지 완성도를 기준으로 선별합니다.",
@@ -247,7 +247,7 @@ export const ko: SiteCopy = {
     {
       slug: "natures-bites",
       title: "Nature's Bites",
-      titleLocal: "자연 한 입",
+      titleLocal: "자연의 조각들",
       lead: "덜어낼수록 분명해지는 맛.",
       intro:
         "원물의 상태와 가공 방식이 그대로 드러나는 카테고리입니다. 첨가를 최소화한 스낵을 중심으로, 프리미엄 그로서리와 오피스 스낵 채널에 동시에 대응합니다.",
@@ -269,7 +269,7 @@ export const ko: SiteCopy = {
     {
       slug: "chill-cheers",
       title: "Chill & Cheers",
-      titleLocal: "나를 위한 한 잔",
+      titleLocal: "곁에 두는 한 잔",
       lead: "잔을 채우는 시간의 온도.",
       intro:
         "음료와 커피는 브랜드 경험이 가장 자주 반복되는 카테고리입니다. 호텔·다이닝·오피스 채널의 운영 조건에 맞춰 포맷과 물량 계획을 함께 설계합니다.",
