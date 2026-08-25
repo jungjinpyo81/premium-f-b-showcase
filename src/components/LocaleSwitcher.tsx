@@ -9,7 +9,7 @@ export function LocaleSwitcher({ variant = "dark" }: { variant?: "dark" | "light
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const isLight = variant === "light";
-  const active = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
+  const active = LOCALES.find((l) => l.code === locale) ?? LOCALES[0]!;
 
   useEffect(() => {
     if (!open) return;
