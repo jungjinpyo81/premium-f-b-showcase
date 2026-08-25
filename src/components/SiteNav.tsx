@@ -111,7 +111,7 @@ export function SiteNav() {
         </nav>
 
         <div className="flex items-center gap-6 text-[10px] uppercase tracking-[0.25em] text-beige/60">
-          <L to="/news" className="hidden transition-colors hover:text-beige md:inline">
+          <L to="/news" className="hidden transition-colors hover:text-beige lg:inline">
             {copy.nav.news}
           </L>
           <L to="/" hash="inquiry" className="transition-colors hover:text-beige">
@@ -123,13 +123,29 @@ export function SiteNav() {
 
       {/* Mobile: grouped Taste Journey menu */}
       <div className="border-t border-beige/10 lg:hidden">
-        <div className="mx-auto flex max-w-[1500px] items-center gap-6 px-6 py-2.5 text-[11px] tracking-[0.18em] text-beige/60">
-          <TasteJourneyMenu active={active} />
-          <L to="/brands" className="whitespace-nowrap transition-colors hover:text-beige">
+        <div className="mx-auto flex max-w-[1500px] items-center gap-5 overflow-x-auto px-6 py-2.5 text-[11px] tracking-[0.18em] text-beige/60">
+          <div className="shrink-0">
+            <TasteJourneyMenu active={active} />
+          </div>
+          <L to="/brands" className="shrink-0 whitespace-nowrap transition-colors hover:text-beige">
             {copy.nav.brands}
           </L>
-          <L to="/" hash="services" className="whitespace-nowrap transition-colors hover:text-beige">
+          <L
+            to="/"
+            hash="services"
+            className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
+          >
             {copy.nav.sourcing}
+          </L>
+          <L
+            to="/"
+            hash="gift"
+            className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
+          >
+            {copy.nav.logistics}
+          </L>
+          <L to="/news" className="shrink-0 whitespace-nowrap transition-colors hover:text-beige">
+            {copy.nav.news}
           </L>
         </div>
       </div>
