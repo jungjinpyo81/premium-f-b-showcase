@@ -42,13 +42,22 @@ const FIGURES = [
 
 function HeroNav() {
   const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [open]);
+
   return (
     <nav className="flex items-center gap-6 text-[10px] uppercase tracking-[0.22em] text-background/80">
-      <div
-        className="relative"
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-      >
+      <div ref={ref} className="relative">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -69,13 +78,14 @@ function HeroNav() {
           </svg>
         </button>
         {open && (
-          <div className="absolute left-0 top-full min-w-[14rem] border border-background/20 bg-background py-2 shadow-sm">
+          <div className="absolute left-0 top-full z-50 min-w-[14rem] border border-background/20 bg-background py-2 shadow-sm">
             {COLLECTIONS.map((c) => (
               <Link
                 key={c.slug}
                 to="/collections/$slug"
                 params={{ slug: c.slug }}
                 className="block px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground"
+                onClick={() => setOpen(false)}
               >
                 {c.title}
               </Link>
