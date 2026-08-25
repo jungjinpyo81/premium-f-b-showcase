@@ -206,19 +206,19 @@ function Index() {
       {/* Figures */}
       <section className="border-b border-border">
         <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-px bg-border md:grid-cols-4">
-          {FIGURES.map((f) => (
-            <div key={f.label} className="bg-background px-8 py-12">
+          {FIGURES.map((f, i) => (
+            <Reveal key={f.label} delay={i * 80} className="bg-background px-8 py-12">
               <p className="font-display text-4xl">{f.value}</p>
               <p className="mt-3 text-xs leading-5 text-muted-foreground">{f.label}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
       {/* Our role — editorial column */}
       <section id="role" className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
-        <Reveal className="grid gap-16 md:grid-cols-12">
-          <div className="md:col-span-5">
+        <div className="grid gap-16 md:grid-cols-12">
+          <Reveal className="md:col-span-5">
             <img
               src={storyImg}
               alt="유럽 프리미엄 식자재 정물 사진"
@@ -227,58 +227,66 @@ function Index() {
               loading="lazy"
               className="w-full object-cover"
             />
-          </div>
+          </Reveal>
           <div className="md:col-span-7">
-            <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">Our Role</p>
-            <h2 className="mt-8 max-w-xl font-display text-4xl leading-tight md:text-5xl">
-              우리는 상품과 고객을
-              <br />
-              연결하고{"\u00a0"}
-            </h2>
-            <div
-              className="rich-content mt-12 max-w-2xl text-sm leading-8 text-foreground/85"
-              dangerouslySetInnerHTML={{ __html: content.brandStory }}
-            />
+            <Reveal delay={120}>
+              <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
+                Our Role
+              </p>
+              <h2 className="mt-8 max-w-xl font-display text-4xl leading-tight md:text-5xl">
+                우리는 상품과 고객을
+                <br />
+                연결하고{"\u00a0"}
+              </h2>
+            </Reveal>
+            <Reveal delay={220}>
+              <div
+                className="rich-content mt-12 max-w-2xl text-sm leading-8 text-foreground/85"
+                dangerouslySetInnerHTML={{ __html: content.brandStory }}
+              />
+            </Reveal>
           </div>
-        </Reveal>
+        </div>
       </section>
 
       {/* Services — sourcing first */}
       <section id="services" className="border-y border-border">
         <div className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
-          <div className="flex flex-wrap items-baseline justify-between gap-6">
+          <Reveal className="flex flex-wrap items-baseline justify-between gap-6">
             <h2 className="font-display text-4xl md:text-5xl">Brand Sourcing</h2>
             <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
               브랜드 소싱 · 큐레이션
             </p>
-          </div>
+          </Reveal>
           <div className="mt-16 grid gap-px bg-border md:grid-cols-2">
-            {SOURCING_SERVICES.map((s) => (
-              <article key={s.no} className="bg-background px-8 py-14">
+            {SOURCING_SERVICES.map((s, i) => (
+              <Reveal key={s.no} as="article" delay={i * 90} className="bg-background px-8 py-14">
                 <p className="font-display text-sm tracking-[0.3em] text-muted-foreground">
                   {s.no}
                 </p>
                 <h3 className="mt-8 font-display text-2xl">{s.title}</h3>
                 <p className="mt-6 max-w-xl text-sm leading-7 text-muted-foreground">{s.body}</p>
-              </article>
+              </Reveal>
             ))}
           </div>
 
-          <div className="mt-28 flex flex-wrap items-baseline justify-between gap-6">
+          <Reveal className="mt-28 flex flex-wrap items-baseline justify-between gap-6">
             <h2 className="font-display text-4xl md:text-5xl">Logistics &amp; Customs</h2>
             <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
               물류 · 통관 컨설팅
             </p>
-          </div>
+          </Reveal>
           <div className="mt-16 grid gap-px bg-border md:grid-cols-3">
-            {LOGISTICS_SERVICES.map((s) => (
-              <article key={s.no} className="bg-background px-8 py-14">
+            {LOGISTICS_SERVICES.map((s, i) => (
+              <Reveal key={s.no} as="article" delay={i * 90} className="bg-background px-8 py-14">
                 <p className="font-display text-sm tracking-[0.3em] text-muted-foreground">
                   {s.no}
                 </p>
                 <h3 className="mt-8 font-display text-2xl">{s.title}</h3>
-                <p className="mt-6 text-sm leading-7 text-muted-foreground whitespace-pre-line">{s.body}</p>
-              </article>
+                <p className="mt-6 text-sm leading-7 text-muted-foreground whitespace-pre-line">
+                  {s.body}
+                </p>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -287,7 +295,7 @@ function Index() {
       {/* Logistics detail */}
       <section className="mx-auto max-w-[1400px] px-6 py-32 md:px-10">
         <div className="grid items-center gap-16 md:grid-cols-12">
-          <div className="md:col-span-6">
+          <Reveal className="md:col-span-6">
             <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
               Operating Framework
             </p>
@@ -299,8 +307,8 @@ function Index() {
               className="rich-content mt-12 text-sm leading-8 text-foreground/85"
               dangerouslySetInnerHTML={{ __html: content.logistics }}
             />
-          </div>
-          <div className="md:col-span-6">
+          </Reveal>
+          <Reveal delay={120} className="md:col-span-6">
             <img
               src={logisticsImg}
               alt="정온 콜드체인 물류 센터 통로"
@@ -309,7 +317,7 @@ function Index() {
               loading="lazy"
               className="w-full object-cover"
             />
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -410,7 +418,7 @@ function Index() {
       {/* Inquiry */}
       <section id="inquiry" className="border-t border-border">
         <div className="mx-auto grid max-w-[1400px] gap-16 px-6 py-32 md:grid-cols-12 md:px-10">
-          <div className="md:col-span-5">
+          <Reveal className="md:col-span-5">
             <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">Contact</p>
             <h2 className="mt-8 font-display text-4xl leading-tight md:text-5xl">
               B2B 파트너십 문의.
@@ -419,10 +427,10 @@ function Index() {
               몇 가지 항목만 선택하고 목적을 남겨주시면, 담당 디렉터가 배정되어 영업일 기준 24시간
               내에 회신드립니다.
             </p>
-          </div>
-          <div className="md:col-span-7">
+          </Reveal>
+          <Reveal delay={120} className="md:col-span-7">
             <InquiryForm />
-          </div>
+          </Reveal>
         </div>
       </section>
 
