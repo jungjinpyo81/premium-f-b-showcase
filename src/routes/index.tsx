@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero.jpg";
 import giftImg from "@/assets/gift.jpg";
 import storyImg from "@/assets/story.jpg";
@@ -7,7 +6,6 @@ import logisticsImg from "@/assets/logistics.jpg";
 
 import { InquiryForm } from "@/components/InquiryForm";
 import { L } from "@/components/L";
-import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteNav";
 import { getCopy, useCopy } from "@/lib/content";
@@ -33,88 +31,11 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function HeroNav() {
-  const copy = useCopy();
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    function handleClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
-  }, [open]);
-
-  return (
-    <nav className="flex items-center gap-6 text-[10px] uppercase tracking-[0.22em] text-background/80">
-      <div ref={ref} className="relative">
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="flex items-center gap-1.5 hover:text-background"
-          aria-expanded={open}
-          aria-haspopup="menu"
-        >
-          {copy.nav.tasteJourney}
-          <svg
-            width="8"
-            height="5"
-            viewBox="0 0 8 5"
-            fill="currentColor"
-            className={`transition-transform ${open ? "rotate-180" : ""}`}
-            aria-hidden="true"
-          >
-            <path d="M0 0h8L4 5z" />
-          </svg>
-        </button>
-        {open && (
-          <div className="absolute left-0 top-full z-50 min-w-[14rem] border border-background/20 bg-background py-2 shadow-sm">
-            {copy.collections.map((c) => (
-              <L
-                key={c.slug}
-                to="/collections/$slug"
-                params={{ slug: c.slug }}
-                className="block px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground"
-                onClick={() => setOpen(false)}
-              >
-                {c.title}
-              </L>
-            ))}
-          </div>
-        )}
-      </div>
-      <L to="/" hash="services" className="hidden hover:text-background lg:inline">
-        {copy.nav.sourcing}
-      </L>
-      <L to="/" hash="services" className="hidden hover:text-background lg:inline">
-        {copy.nav.logistics}
-      </L>
-      <L to="/news" className="hover:text-background">
-        {copy.nav.news}
-      </L>
-      <LocaleSwitcher variant="light" />
-    </nav>
-  );
-}
-
 function Index() {
   const copy = useCopy();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="absolute inset-x-0 top-0 z-20 border-b border-background/20">
-        <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 md:px-10">
-          <L to="/" className="font-display text-lg tracking-[0.35em] text-background">
-            EUROPE CONNECT
-          </L>
-          <HeroNav />
-        </div>
-      </header>
-
       {/* Hero */}
       <section className="relative min-h-[94vh] overflow-hidden">
         <img
