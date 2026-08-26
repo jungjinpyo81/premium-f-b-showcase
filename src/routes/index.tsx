@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Globe2,
@@ -70,6 +70,112 @@ const TRADE_ICONS = {
   freight: Ship,
   warehouse: Warehouse,
 } as const;
+
+/** Taste Journey collections shown 3-up as a quiet slider on the home page. */
+function CollectionSlider() {
+  const copy = useCopy();
+  const [page, setPage] = useState(0);
+  const perPage = 3;
+  const pages = Math.max(1, Math.ceil(copy.collections.length / perPage));
+
+  return (
+    <section
+      id="taste-journey"
+      className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
+    >
+      <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
+        <div className="flex items-end justify-between gap-8">
+          <div>
+            <Reveal>
+              <p className="text-[10px] uppercase tracking-[0.45em] text-gold/80">
+                {copy.collectionsSection.eyebrow}
+              </p>
+            </Reveal>
+            <Reveal delay={120}>
+              <h2 className="mt-8 max-w-3xl font-display text-3xl leading-tight text-beige md:text-5xl">
+                {copy.collectionsSection.titleLines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </h2>
+            </Reveal>
+          </div>
+          {pages > 1 ? (
+            <div className="hidden shrink-0 items-center gap-3 md:flex">
+              {[-1, 1].map((dir) => (
+                <button
+                  key={dir}
+                  type="button"
+                  aria-label={dir < 0 ? "Previous" : "Next"}
+                  onClick={() => setPage((p) => (p + dir + pages) % pages)}
+                  className="flex size-11 items-center justify-center border border-beige/25 text-beige/60 transition-colors hover:border-beige hover:text-beige"
+                >
+                  {dir < 0 ? "←" : "→"}
+                </button>
+              ))}
+            </div>
+          ) : null}
+        </div>
+
+        <div className="mt-14 overflow-hidden">
+          <div
+            className="flex transition-transform duration-700 ease-out"
+            style={{ transform: `translateX(-${page * 100}%)` }}
+          >
+            {Array.from({ length: pages }, (_, p) => (
+              <div key={p} className="grid w-full shrink-0 gap-8 md:grid-cols-3">
+                {copy.collections.slice(p * perPage, p * perPage + perPage).map((c) => (
+                  <L
+                    key={c.slug}
+                    to="/collections/$slug"
+                    params={{ slug: c.slug }}
+                    className="group block"
+                  >
+                    <img
+                      src={COLLECTION_IMAGES[c.slug] ?? heroImg}
+                      alt={c.titleLocal}
+                      width={1200}
+                      height={900}
+                      loading="lazy"
+                      className="aspect-[4/5] w-full object-cover grayscale-[0.25] transition-[filter] duration-500 group-hover:grayscale-0"
+                    />
+                    <p className="mt-6 text-[10px] uppercase tracking-[0.35em] text-beige/45">
+                      {c.title}
+                    </p>
+                    <h3 className="mt-3 font-display text-2xl text-beige">{c.titleLocal}</h3>
+                    <p className="mt-3 line-clamp-3 text-sm leading-7 text-beige/55">{c.intro}</p>
+                    <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-beige/40">
+                      {c.brands.slice(0, 3).map((b) => (
+                        <li key={b.name}>{b.name}</li>
+                      ))}
+                    </ul>
+                  </L>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {pages > 1 ? (
+          <div className="mt-10 flex items-center gap-3">
+            {Array.from({ length: pages }, (_, p) => (
+              <button
+                key={p}
+                type="button"
+                aria-label={`Slide ${p + 1}`}
+                onClick={() => setPage(p)}
+                className={`h-px w-12 transition-colors ${
+                  p === page ? "bg-gold" : "bg-beige/25 hover:bg-beige/50"
+                }`}
+              />
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </section>
+  );
+}
 
 function Index() {
   const copy = useCopy();
@@ -151,72 +257,8 @@ function Index() {
         </div>
       </section>
 
-      {/* One collection per page */}
-      {copy.collections.map((c, index) => (
-        <section
-          key={c.slug}
-          id={c.slug}
-          className="relative flex h-screen snap-start items-center overflow-hidden"
-        >
-          <img
-            src={COLLECTION_IMAGES[c.slug] ?? heroImg}
-            alt={c.titleLocal}
-            width={1600}
-            height={1100}
-            loading="lazy"
-            className="absolute inset-0 size-full object-cover"
-          />
-          <div
-            className={`absolute inset-0 ${
-              index % 2 === 0
-                ? "bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.7)_55%,oklch(0.12_0_0/0.35)_100%)]"
-                : "bg-[linear-gradient(270deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.7)_55%,oklch(0.12_0_0/0.35)_100%)]"
-            }`}
-          />
-          <div className="relative mx-auto w-full max-w-[1500px] px-6 pt-24 md:px-10">
-            <div
-              className={`max-w-2xl ${index % 2 === 0 ? "" : "md:ml-auto md:text-right"}`}
-            >
-              <Reveal>
-                <p className="text-[10px] uppercase tracking-[0.45em] text-beige/50">
-                  {String(index + 1).padStart(2, "0")} — {c.title}
-                </p>
-              </Reveal>
-              <Reveal delay={120}>
-                <h2 className="mt-8 font-display text-4xl leading-tight text-beige md:text-6xl">
-                  {c.titleLocal}
-                </h2>
-              </Reveal>
-              <Reveal delay={220}>
-                <p className="mt-6 font-display text-lg text-beige/75 md:text-xl">{c.lead}</p>
-              </Reveal>
-              <Reveal delay={320}>
-                <p className="mt-8 text-sm leading-8 text-beige/60">{c.intro}</p>
-              </Reveal>
-              <Reveal delay={420}>
-                <ul
-                  className={`mt-10 flex flex-wrap gap-x-8 gap-y-3 text-[11px] uppercase tracking-[0.25em] text-beige/50 ${
-                    index % 2 === 0 ? "" : "md:justify-end"
-                  }`}
-                >
-                  {c.brands.map((b) => (
-                    <li key={b.name}>{b.name}</li>
-                  ))}
-                </ul>
-              </Reveal>
-              <Reveal delay={520}>
-                <L
-                  to="/collections/$slug"
-                  params={{ slug: c.slug }}
-                  className="mt-12 inline-flex border-b border-beige/40 pb-1 text-[11px] uppercase tracking-[0.3em] text-beige/70 transition-colors hover:border-beige hover:text-beige"
-                >
-                  View collection
-                </L>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-      ))}
+      {/* Taste Journey — 3-up slider */}
+      <CollectionSlider />
 
       {/* Sourcing & logistics — our role */}
       <section
@@ -366,9 +408,7 @@ function Index() {
             </h2>
           </Reveal>
           <Reveal delay={200}>
-            <p className="mt-6 max-w-xl text-sm leading-7 text-beige/55">
-              {biz.distribution.lead}
-            </p>
+            <p className="mt-6 max-w-xl text-sm leading-7 text-beige/55">{biz.distribution.lead}</p>
           </Reveal>
 
           <div className="mt-14 grid gap-12 md:grid-cols-2">
@@ -430,9 +470,7 @@ function Index() {
               </h2>
             </Reveal>
             <Reveal delay={280}>
-              <p className="mt-8 max-w-lg text-sm leading-8 text-beige/60">
-                {biz.consulting.body}
-              </p>
+              <p className="mt-8 max-w-lg text-sm leading-8 text-beige/60">{biz.consulting.body}</p>
             </Reveal>
             <Reveal delay={340}>
               <p className="mt-4 text-xs leading-6 text-beige/40">{biz.consulting.note}</p>
@@ -451,10 +489,7 @@ function Index() {
       </section>
 
       {/* Gift & B2B */}
-      <section
-        id="gift"
-        className="relative flex h-screen snap-start items-center overflow-hidden"
-      >
+      <section id="gift" className="relative flex h-screen snap-start items-center overflow-hidden">
         <img
           src={giftImg}
           alt={copy.gift.eyebrow}

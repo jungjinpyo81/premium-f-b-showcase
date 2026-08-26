@@ -30,7 +30,6 @@ function useActiveSection(slugs: string[]) {
   return active;
 }
 
-
 /** Grouped "Taste Journey" dropdown holding the five lifestyle collections. */
 function TasteJourneyMenu({ active }: { active: string | null }) {
   const copy = useCopy();
@@ -66,8 +65,8 @@ function TasteJourneyMenu({ active }: { active: string | null }) {
           {copy.collections.map((c) => (
             <L
               key={c.slug}
-              to="/"
-              hash={c.slug}
+              to="/collections/$slug"
+              params={{ slug: c.slug }}
               onClick={() => setOpen(false)}
               className={`block px-5 py-2.5 text-[11px] tracking-[0.2em] transition-colors hover:text-beige ${
                 active === c.slug ? "text-beige" : "text-beige/55"
@@ -100,11 +99,8 @@ export function SiteNav() {
 
         <nav className="hidden items-center gap-7 text-[11px] tracking-[0.2em] text-beige/60 lg:flex">
           <TasteJourneyMenu active={active} />
-          <L to="/" hash="what-we-do" className="transition-colors hover:text-beige">
-            {biz.nav.business}
-          </L>
-          <L to="/brands" className="transition-colors hover:text-beige">
-            {copy.nav.brands}
+          <L to="/" hash="services" className="transition-colors hover:text-beige">
+            {copy.nav.sourcing}
           </L>
           <L to="/" hash="trade" className="transition-colors hover:text-beige">
             {biz.nav.trade}
@@ -134,9 +130,6 @@ export function SiteNav() {
           <div className="shrink-0">
             <TasteJourneyMenu active={active} />
           </div>
-          <L to="/brands" className="shrink-0 whitespace-nowrap transition-colors hover:text-beige">
-            {copy.nav.brands}
-          </L>
           <L
             to="/"
             hash="services"
@@ -170,7 +163,6 @@ export function SiteNav() {
           </L>
         </div>
       </div>
-
     </header>
   );
 }
