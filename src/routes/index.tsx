@@ -96,7 +96,7 @@ function Index() {
           className="absolute inset-0 size-full object-cover"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.72)_50%,oklch(0.12_0_0/0.35)_100%)]" />
-        <div className="relative mx-auto w-full max-w-[1500px] px-6 pb-24 md:px-10">
+        <div className="relative mx-auto w-full max-w-[1500px] px-6 pb-44 md:px-10">
           <Reveal immediate>
             <p className="text-[11px] uppercase tracking-[0.45em] text-beige/60">
               {copy.hero.eyebrow}
@@ -262,6 +262,189 @@ function Index() {
                     </article>
                   ))}
               </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* What we do — four operating pillars */}
+      <section
+        id="what-we-do"
+        className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
+      >
+        <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
+          <Reveal>
+            <p className="text-[10px] uppercase tracking-[0.45em] text-gold/80">
+              {biz.whatWeDo.eyebrow}
+            </p>
+          </Reveal>
+          <Reveal delay={120}>
+            <h2 className="mt-8 max-w-3xl font-display text-3xl leading-tight text-beige md:text-5xl">
+              {biz.whatWeDo.title}
+            </h2>
+          </Reveal>
+          <Reveal delay={200}>
+            <p className="mt-6 max-w-xl text-sm leading-7 text-beige/55">{biz.whatWeDo.lead}</p>
+          </Reveal>
+          <div className="mt-14 grid gap-px bg-beige/15 md:grid-cols-2 lg:grid-cols-4">
+            {biz.whatWeDo.cards.map((card, i) => {
+              const Icon = SERVICE_ICONS[card.key];
+              return (
+                <Reveal key={card.key} delay={260 + i * 90} as="article">
+                  <div className="h-full bg-ink p-8">
+                    <Icon className="size-6 shrink-0 text-gold" strokeWidth={1} aria-hidden />
+                    <h3 className="mt-8 font-display text-xl leading-snug text-beige">
+                      {card.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-7 text-beige/55">{card.body}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Logistics & customs */}
+      <section
+        id="trade"
+        className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
+      >
+        <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
+          <div className="grid gap-14 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <Reveal>
+                <p className="text-[10px] uppercase tracking-[0.45em] text-gold/80">
+                  {biz.trade.eyebrow}
+                </p>
+              </Reveal>
+              <Reveal delay={120}>
+                <h2 className="mt-8 font-display text-3xl leading-tight text-beige md:text-5xl">
+                  {biz.trade.title}
+                </h2>
+              </Reveal>
+              <Reveal delay={200}>
+                <p className="mt-6 text-sm leading-7 text-beige/55">{biz.trade.subtitle}</p>
+              </Reveal>
+            </div>
+            <div className="lg:col-span-8">
+              <dl className="border-t border-beige/15">
+                {biz.trade.rows.map((row, i) => {
+                  const Icon = TRADE_ICONS[row.key];
+                  return (
+                    <Reveal key={row.key} delay={160 + i * 90}>
+                      <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-5 border-b border-beige/15 py-7 sm:grid-cols-[auto_11rem_minmax(0,1fr)]">
+                        <Icon className="size-5 shrink-0 text-gold" strokeWidth={1} aria-hidden />
+                        <dt className="min-w-0 font-display text-lg text-beige">{row.label}</dt>
+                        <dd className="col-span-2 min-w-0 text-sm leading-7 text-beige/55 sm:col-span-1">
+                          {row.body}
+                        </dd>
+                      </div>
+                    </Reveal>
+                  );
+                })}
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Distribution */}
+      <section
+        id="distribution"
+        className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
+      >
+        <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
+          <Reveal>
+            <p className="text-[10px] uppercase tracking-[0.45em] text-gold/80">
+              {biz.distribution.eyebrow}
+            </p>
+          </Reveal>
+          <Reveal delay={120}>
+            <h2 className="mt-8 max-w-3xl font-display text-3xl leading-tight text-beige md:text-5xl">
+              {biz.distribution.title}
+            </h2>
+          </Reveal>
+          <Reveal delay={200}>
+            <p className="mt-6 max-w-xl text-sm leading-7 text-beige/55">
+              {biz.distribution.lead}
+            </p>
+          </Reveal>
+
+          <div className="mt-14 grid gap-12 md:grid-cols-2">
+            {[
+              { img: distOfflineImg, group: biz.distribution.offline },
+              { img: distOnlineImg, group: biz.distribution.online },
+            ].map(({ img, group }, i) => (
+              <Reveal key={group.label} delay={260 + i * 120} as="article">
+                <img
+                  src={img}
+                  alt={group.label}
+                  width={1400}
+                  height={1000}
+                  loading="lazy"
+                  className="aspect-[7/4] w-full object-cover grayscale-[0.35]"
+                />
+                <p className="mt-6 text-[10px] uppercase tracking-[0.35em] text-gold/80">
+                  {group.label}
+                </p>
+                <ul className="mt-5 space-y-5">
+                  {group.items.map((item) => (
+                    <li key={item.title}>
+                      <p className="font-display text-lg text-beige">{item.title}</p>
+                      <p className="mt-1.5 text-sm leading-7 text-beige/55">{item.body}</p>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Consulting */}
+      <section
+        id="consulting"
+        className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
+      >
+        <div className="mx-auto grid w-full max-w-[1500px] items-center gap-14 px-6 py-24 pt-32 md:grid-cols-2 md:px-10">
+          <Reveal>
+            <img
+              src={consultingImg}
+              alt={biz.consulting.title}
+              width={1400}
+              height={1000}
+              loading="lazy"
+              className="aspect-[7/5] w-full object-cover grayscale-[0.3]"
+            />
+          </Reveal>
+          <div>
+            <Reveal delay={120}>
+              <p className="text-[10px] uppercase tracking-[0.45em] text-gold/80">
+                {biz.consulting.eyebrow}
+              </p>
+            </Reveal>
+            <Reveal delay={200}>
+              <h2 className="mt-8 font-display text-3xl leading-tight text-beige md:text-5xl">
+                {biz.consulting.title}
+              </h2>
+            </Reveal>
+            <Reveal delay={280}>
+              <p className="mt-8 max-w-lg text-sm leading-8 text-beige/60">
+                {biz.consulting.body}
+              </p>
+            </Reveal>
+            <Reveal delay={340}>
+              <p className="mt-4 text-xs leading-6 text-beige/40">{biz.consulting.note}</p>
+            </Reveal>
+            <Reveal delay={420}>
+              <L
+                to="/"
+                hash="inquiry"
+                className="mt-12 inline-flex items-center border border-gold/60 px-10 py-4 text-[11px] uppercase tracking-[0.3em] text-gold transition-colors hover:bg-gold hover:text-ink"
+              >
+                {biz.consulting.cta}
+              </L>
             </Reveal>
           </div>
         </div>
