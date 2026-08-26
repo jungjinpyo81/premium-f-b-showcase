@@ -131,9 +131,6 @@ export function SiteNav() {
           <div className="shrink-0">
             <TasteJourneyMenu active={active} />
           </div>
-          <L to="/brands" className="shrink-0 whitespace-nowrap transition-colors hover:text-beige">
-            {copy.nav.brands}
-          </L>
           <L
             to="/"
             hash="services"
