@@ -18,7 +18,7 @@ import distOnlineImg from "@/assets/dist-online.jpg";
 import consultingImg from "@/assets/consulting.jpg";
 import colSweet from "@/assets/col-sweet.jpg";
 import colPantryAsset from "@/assets/balsamico-caprese.jpg.asset.json";
-import colPlant from "@/assets/col-plant.jpg";
+import colPlantAsset from "@/assets/col-plant.jpg.asset.json";
 import colNature from "@/assets/col-nature.jpg";
 import colChill from "@/assets/col-chill.jpg";
 
@@ -53,7 +53,7 @@ export const Route = createFileRoute("/")({
 const COLLECTION_IMAGES: Record<string, string> = {
   "sweet-moments": colSweet,
   "european-pantry": colPantryAsset.url,
-  "plant-based-life": colPlant,
+  "plant-based-life": colPlantAsset.url,
   "natures-bites": colNature,
   "chill-cheers": colChill,
 };
