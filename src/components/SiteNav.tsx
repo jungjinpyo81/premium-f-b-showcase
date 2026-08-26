@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { L } from "@/components/L";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
-import { useCopy } from "@/lib/content";
+import { useBusiness, useCopy } from "@/lib/content";
 
 /** Highlights the section currently snapped into view. */
 function useActiveSection(slugs: string[]) {
@@ -88,6 +88,7 @@ function TasteJourneyMenu({ active }: { active: string | null }) {
  */
 export function SiteNav() {
   const copy = useCopy();
+  const biz = useBusiness();
   const active = useActiveSection(copy.collections.map((c) => c.slug));
 
   return (
@@ -97,16 +98,22 @@ export function SiteNav() {
           EUROPE CONNECT
         </L>
 
-        <nav className="hidden items-center gap-8 text-[11px] tracking-[0.2em] text-beige/60 lg:flex">
+        <nav className="hidden items-center gap-7 text-[11px] tracking-[0.2em] text-beige/60 lg:flex">
           <TasteJourneyMenu active={active} />
+          <L to="/" hash="what-we-do" className="transition-colors hover:text-beige">
+            {biz.nav.business}
+          </L>
           <L to="/brands" className="transition-colors hover:text-beige">
             {copy.nav.brands}
           </L>
-          <L to="/" hash="services" className="transition-colors hover:text-beige">
-            {copy.nav.sourcing}
+          <L to="/" hash="trade" className="transition-colors hover:text-beige">
+            {biz.nav.trade}
           </L>
-          <L to="/" hash="gift" className="transition-colors hover:text-beige">
-            {copy.nav.logistics}
+          <L to="/" hash="distribution" className="transition-colors hover:text-beige">
+            {biz.nav.distribution}
+          </L>
+          <L to="/" hash="consulting" className="transition-colors hover:text-beige">
+            {biz.nav.consulting}
           </L>
         </nav>
 
@@ -139,10 +146,24 @@ export function SiteNav() {
           </L>
           <L
             to="/"
-            hash="gift"
+            hash="trade"
             className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
           >
-            {copy.nav.logistics}
+            {biz.nav.trade}
+          </L>
+          <L
+            to="/"
+            hash="distribution"
+            className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
+          >
+            {biz.nav.distribution}
+          </L>
+          <L
+            to="/"
+            hash="consulting"
+            className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
+          >
+            {biz.nav.consulting}
           </L>
           <L to="/news" className="shrink-0 whitespace-nowrap transition-colors hover:text-beige">
             {copy.nav.news}
@@ -156,10 +177,11 @@ export function SiteNav() {
 
 export function SiteFooter() {
   const copy = useCopy();
+  const biz = useBusiness();
 
   return (
     <footer className="border-t border-beige/15 bg-ink text-beige/60">
-      <div className="mx-auto grid max-w-[1500px] gap-10 px-6 py-14 md:grid-cols-3 md:px-10">
+      <div className="mx-auto grid max-w-[1500px] gap-10 px-6 py-14 md:grid-cols-2 lg:grid-cols-4 md:px-10">
         <div>
           <span className="font-display text-base tracking-[0.35em] text-beige">
             EUROPE CONNECT
@@ -182,11 +204,38 @@ export function SiteFooter() {
           ))}
         </div>
         <div className="text-xs leading-7">
-          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-beige">
-            {copy.footer.partnership}
+          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-gold">
+            {biz.contact.label}
           </p>
-          <p>{copy.footer.partner}</p>
-          <p className="mt-4">{copy.footer.inquiryOnly}</p>
+          <a
+            href={`mailto:${biz.contact.email}`}
+            className="block break-all transition-colors hover:text-beige"
+          >
+            {biz.contact.email}
+          </a>
+          <a
+            href={`tel:${biz.contact.phone.replace(/-/g, "")}`}
+            className="block transition-colors hover:text-beige"
+          >
+            {biz.contact.phone}
+          </a>
+          <p className="mt-2 text-beige/45">{biz.contact.hours}</p>
+          <p className="mt-6 text-beige/45">{copy.footer.partner}</p>
+          <p className="mt-2 text-beige/45">{copy.footer.inquiryOnly}</p>
+        </div>
+        <div className="text-xs leading-7">
+          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-gold">
+            {biz.contact.locationLabel}
+          </p>
+          <p>{biz.contact.address}</p>
+          <a
+            href={`https://map.kakao.com/link/search/${encodeURIComponent(biz.contact.address)}`}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-4 flex h-28 items-center justify-center border border-beige/20 bg-beige/[0.04] text-[10px] uppercase tracking-[0.3em] text-beige/50 transition-colors hover:border-gold/50 hover:text-gold"
+          >
+            {biz.contact.mapNote}
+          </a>
           <div className="mt-6">
             <LocaleSwitcher variant="dark" />
           </div>
