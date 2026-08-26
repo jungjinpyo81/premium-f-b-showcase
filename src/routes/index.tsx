@@ -141,8 +141,6 @@ function Index() {
         </div>
       </section>
 
-      {/* Taste Journey — 3-up slider */}
-      <CollectionSlider />
 
       {/* Our role — intro film */}
       <section
