@@ -97,16 +97,22 @@ export function SiteNav() {
           EUROPE CONNECT
         </L>
 
-        <nav className="hidden items-center gap-8 text-[11px] tracking-[0.2em] text-beige/60 lg:flex">
+        <nav className="hidden items-center gap-7 text-[11px] tracking-[0.2em] text-beige/60 lg:flex">
           <TasteJourneyMenu active={active} />
+          <L to="/" hash="what-we-do" className="transition-colors hover:text-beige">
+            {biz.nav.business}
+          </L>
           <L to="/brands" className="transition-colors hover:text-beige">
             {copy.nav.brands}
           </L>
-          <L to="/" hash="services" className="transition-colors hover:text-beige">
-            {copy.nav.sourcing}
+          <L to="/" hash="trade" className="transition-colors hover:text-beige">
+            {biz.nav.trade}
           </L>
-          <L to="/" hash="gift" className="transition-colors hover:text-beige">
-            {copy.nav.logistics}
+          <L to="/" hash="distribution" className="transition-colors hover:text-beige">
+            {biz.nav.distribution}
+          </L>
+          <L to="/" hash="consulting" className="transition-colors hover:text-beige">
+            {biz.nav.consulting}
           </L>
         </nav>
 
