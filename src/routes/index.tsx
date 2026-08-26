@@ -121,10 +121,10 @@ function Index() {
               </L>
               <L
                 to="/"
-                hash={copy.collections[0]?.slug ?? "inquiry"}
+                hash="services"
                 className="inline-flex items-center px-2 py-4 text-[11px] uppercase tracking-[0.3em] text-beige/60 transition-colors hover:text-beige"
               >
-                {copy.nav.tasteJourney}
+                {copy.hero.ctaSecondary}
               </L>
             </div>
           </Reveal>
