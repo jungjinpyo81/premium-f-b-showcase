@@ -1,5 +1,6 @@
 import { useSearch } from "@tanstack/react-router";
 
+import { BUSINESS, type BusinessCopy } from "./business";
 import { ko } from "./ko";
 import { en } from "./en";
 import { ja } from "./ja";
@@ -17,6 +18,10 @@ export function useLocale(): Locale {
 
 export function useCopy(): SiteCopy {
   return CONTENT[useLocale()];
+}
+
+export function useBusiness(): BusinessCopy {
+  return BUSINESS[useLocale()];
 }
 
 export function getCopy(locale: unknown): SiteCopy {
