@@ -151,72 +151,9 @@ function Index() {
         </div>
       </section>
 
-      {/* One collection per page */}
-      {copy.collections.map((c, index) => (
-        <section
-          key={c.slug}
-          id={c.slug}
-          className="relative flex h-screen snap-start items-center overflow-hidden"
-        >
-          <img
-            src={COLLECTION_IMAGES[c.slug] ?? heroImg}
-            alt={c.titleLocal}
-            width={1600}
-            height={1100}
-            loading="lazy"
-            className="absolute inset-0 size-full object-cover"
-          />
-          <div
-            className={`absolute inset-0 ${
-              index % 2 === 0
-                ? "bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.7)_55%,oklch(0.12_0_0/0.35)_100%)]"
-                : "bg-[linear-gradient(270deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.7)_55%,oklch(0.12_0_0/0.35)_100%)]"
-            }`}
-          />
-          <div className="relative mx-auto w-full max-w-[1500px] px-6 pt-24 md:px-10">
-            <div
-              className={`max-w-2xl ${index % 2 === 0 ? "" : "md:ml-auto md:text-right"}`}
-            >
-              <Reveal>
-                <p className="text-[10px] uppercase tracking-[0.45em] text-beige/50">
-                  {String(index + 1).padStart(2, "0")} — {c.title}
-                </p>
-              </Reveal>
-              <Reveal delay={120}>
-                <h2 className="mt-8 font-display text-4xl leading-tight text-beige md:text-6xl">
-                  {c.titleLocal}
-                </h2>
-              </Reveal>
-              <Reveal delay={220}>
-                <p className="mt-6 font-display text-lg text-beige/75 md:text-xl">{c.lead}</p>
-              </Reveal>
-              <Reveal delay={320}>
-                <p className="mt-8 text-sm leading-8 text-beige/60">{c.intro}</p>
-              </Reveal>
-              <Reveal delay={420}>
-                <ul
-                  className={`mt-10 flex flex-wrap gap-x-8 gap-y-3 text-[11px] uppercase tracking-[0.25em] text-beige/50 ${
-                    index % 2 === 0 ? "" : "md:justify-end"
-                  }`}
-                >
-                  {c.brands.map((b) => (
-                    <li key={b.name}>{b.name}</li>
-                  ))}
-                </ul>
-              </Reveal>
-              <Reveal delay={520}>
-                <L
-                  to="/collections/$slug"
-                  params={{ slug: c.slug }}
-                  className="mt-12 inline-flex border-b border-beige/40 pb-1 text-[11px] uppercase tracking-[0.3em] text-beige/70 transition-colors hover:border-beige hover:text-beige"
-                >
-                  View collection
-                </L>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-      ))}
+      {/* Taste Journey — 3-up slider */}
+      <CollectionSlider />
+
 
       {/* Sourcing & logistics — our role */}
       <section
