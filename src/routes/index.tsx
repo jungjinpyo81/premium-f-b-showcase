@@ -139,6 +139,16 @@ function Index() {
             </div>
           </Reveal>
         </div>
+
+        {/* Slogan bar */}
+        <div className="absolute inset-x-0 bottom-0 border-t border-beige/15 bg-ink/70 backdrop-blur-sm">
+          <div className="mx-auto flex max-w-[1500px] flex-col gap-2 px-6 py-5 md:flex-row md:items-baseline md:gap-8 md:px-10">
+            <p className="shrink-0 font-display text-sm tracking-[0.18em] text-gold md:text-base">
+              {biz.slogan.headline}
+            </p>
+            <p className="min-w-0 text-xs leading-6 text-beige/60">{biz.slogan.body}</p>
+          </div>
+        </div>
       </section>
 
       {/* One collection per page */}
