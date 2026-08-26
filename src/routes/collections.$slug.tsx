@@ -10,6 +10,15 @@ import { Reveal } from "@/components/Reveal";
 import { SiteFooter, SiteNav } from "@/components/SiteNav";
 import { getCollection, getCopy, useCopy } from "@/lib/content";
 
+const COLLECTION_IMAGES: Record<string, string> = {
+  "sweet-moments": colSweet,
+  "european-pantry": colPantry,
+  "plant-based-life": colPlant,
+  "natures-bites": colNature,
+  "chill-cheers": colChill,
+};
+
+
 export const Route = createFileRoute("/collections/$slug")({
   loaderDeps: ({ search }) => ({ lang: search.lang }),
   loader: ({ params, deps }) => {
