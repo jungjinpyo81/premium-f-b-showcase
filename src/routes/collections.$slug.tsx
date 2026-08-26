@@ -1,9 +1,23 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 
+import colChill from "@/assets/col-chill.jpg";
+import colNature from "@/assets/col-nature.jpg";
+import colPantry from "@/assets/col-pantry.jpg";
+import colPlant from "@/assets/col-plant.jpg";
+import colSweet from "@/assets/col-sweet.jpg";
 import { L } from "@/components/L";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter, SiteNav } from "@/components/SiteNav";
 import { getCollection, getCopy, useCopy } from "@/lib/content";
+
+const COLLECTION_IMAGES: Record<string, string> = {
+  "sweet-moments": colSweet,
+  "european-pantry": colPantry,
+  "plant-based-life": colPlant,
+  "natures-bites": colNature,
+  "chill-cheers": colChill,
+};
+
 
 export const Route = createFileRoute("/collections/$slug")({
   loaderDeps: ({ search }) => ({ lang: search.lang }),
@@ -62,22 +76,55 @@ function CollectionPage() {
 
   const others = copy.collections.filter((c) => c.slug !== collection.slug);
 
+  const index = copy.collections.findIndex((c) => c.slug === collection.slug);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
-      <main className="mx-auto max-w-[1400px] px-6 pb-32 pt-36 md:px-10">
-        <Reveal immediate>
-          <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
-            {collection.title}
-          </p>
-          <h1 className="mt-10 max-w-3xl font-display text-4xl leading-[1.2] md:text-6xl">
-            {collection.lead}
-          </h1>
-        </Reveal>
 
-        <Reveal immediate delay={120} className="mt-14 max-w-xl">
-          <p className="text-sm leading-8 text-muted-foreground">{collection.intro}</p>
-        </Reveal>
+      {/* Editorial full-bleed hero (restored earlier version) */}
+      <section className="relative flex h-screen items-center overflow-hidden">
+        <img
+          src={COLLECTION_IMAGES[collection.slug]}
+          alt={collection.titleLocal}
+          width={1600}
+          height={1100}
+          className="absolute inset-0 size-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.7)_55%,oklch(0.12_0_0/0.35)_100%)]" />
+        <div className="relative mx-auto w-full max-w-[1500px] px-6 pt-24 md:px-10">
+          <div className="max-w-2xl">
+            <Reveal immediate>
+              <p className="text-[10px] uppercase tracking-[0.45em] text-beige/50">
+                {String(index + 1).padStart(2, "0")} — {collection.title}
+              </p>
+            </Reveal>
+            <Reveal immediate delay={120}>
+              <h1 className="mt-8 font-display text-4xl leading-tight text-beige md:text-6xl">
+                {collection.titleLocal}
+              </h1>
+            </Reveal>
+            <Reveal immediate delay={220}>
+              <p className="mt-6 font-display text-lg text-beige/75 md:text-xl">
+                {collection.lead}
+              </p>
+            </Reveal>
+            <Reveal immediate delay={320}>
+              <p className="mt-8 text-sm leading-8 text-beige/60">{collection.intro}</p>
+            </Reveal>
+            <Reveal immediate delay={420}>
+              <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-[11px] uppercase tracking-[0.25em] text-beige/50">
+                {collection.brands.map((b) => (
+                  <li key={b.name}>{b.name}</li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <main className="mx-auto max-w-[1400px] px-6 pb-32 pt-24 md:px-10">
+
 
         <div className="mt-24 border-t border-border">
           {collection.brands.map((b, i) => (
