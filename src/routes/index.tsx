@@ -265,14 +265,14 @@ function Index() {
         id="services"
         className="relative flex h-screen snap-start items-center overflow-hidden border-t border-beige/10"
       >
-        <div className="mx-auto w-full max-w-[1500px] px-6 pt-24 md:px-10">
+        <div className="mx-auto flex w-full flex-col items-center px-6 pt-20 md:px-10">
           <Reveal>
             <p className="text-center text-[10px] uppercase tracking-[0.45em] text-gold/80">
               {copy.role.eyebrow}
             </p>
           </Reveal>
           <Reveal delay={140}>
-            <div className="mx-auto mt-10 w-full max-w-[62vw] min-w-[280px] md:max-w-[54vw]">
+            <div className="mx-auto mt-8 w-[min(calc(100vw-3rem),calc((100vh-11rem)*2.285714))] md:w-[min(calc(100vw-5rem),calc((100vh-11rem)*2.285714))]">
               <div className="relative w-full overflow-hidden" style={{ aspectRatio: "3840 / 1680" }}>
                 <iframe
                   src="https://player.vimeo.com/video/1171266171?title=0&byline=0&portrait=0&badge=0&autopause=0&controls=0&loop=0&muted=1&autoplay=1&playsinline=1&app_id=58479"
