@@ -45,13 +45,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const COLLECTION_IMAGES: Record<string, string> = {
-  "sweet-moments": colSweet,
-  "european-pantry": colPantryAsset.url,
-  "plant-based-life": colPlantAsset.url,
-  "natures-bites": colNature,
-  "chill-cheers": colChill,
-};
 
 const SERVICE_ICONS = {
   globe: Globe2,
