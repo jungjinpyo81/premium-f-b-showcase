@@ -184,7 +184,7 @@ export const ko: SiteCopy = {
     {
       slug: "sweet-moments",
       title: "Sweet Moments",
-      titleLocal: "달콤한 여유",
+      titleLocal: "달콤한 순간",
       lead: "하루의 끝에 놓이는 작은 사치.",
       intro:
         "유럽의 오래된 제과 하우스가 지켜온 배합과 공정을 그대로 옮겨옵니다. 대량 생산이 아닌 소량 배치, 그리고 선물로 건네기에 부족함 없는 패키지 완성도를 기준으로 선별합니다.",
