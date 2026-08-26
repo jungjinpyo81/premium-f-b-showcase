@@ -146,10 +146,24 @@ export function SiteNav() {
           </L>
           <L
             to="/"
-            hash="gift"
+            hash="trade"
             className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
           >
-            {copy.nav.logistics}
+            {biz.nav.trade}
+          </L>
+          <L
+            to="/"
+            hash="distribution"
+            className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
+          >
+            {biz.nav.distribution}
+          </L>
+          <L
+            to="/"
+            hash="consulting"
+            className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
+          >
+            {biz.nav.consulting}
           </L>
           <L to="/news" className="shrink-0 whitespace-nowrap transition-colors hover:text-beige">
             {copy.nav.news}
@@ -163,10 +177,11 @@ export function SiteNav() {
 
 export function SiteFooter() {
   const copy = useCopy();
+  const biz = useBusiness();
 
   return (
     <footer className="border-t border-beige/15 bg-ink text-beige/60">
-      <div className="mx-auto grid max-w-[1500px] gap-10 px-6 py-14 md:grid-cols-3 md:px-10">
+      <div className="mx-auto grid max-w-[1500px] gap-10 px-6 py-14 md:grid-cols-2 lg:grid-cols-4 md:px-10">
         <div>
           <span className="font-display text-base tracking-[0.35em] text-beige">
             EUROPE CONNECT
