@@ -52,7 +52,7 @@ export const Route = createFileRoute("/")({
 
 const COLLECTION_IMAGES: Record<string, string> = {
   "sweet-moments": colSweet,
-  "european-pantry": colPantry,
+  "european-pantry": colPantryAsset.url,
   "plant-based-life": colPlant,
   "natures-bites": colNature,
   "chill-cheers": colChill,
