@@ -3,7 +3,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import colChill from "@/assets/col-chill.jpg";
 import colNature from "@/assets/col-nature.jpg";
 import colPantry from "@/assets/col-pantry.jpg";
-import colPlant from "@/assets/col-plant.jpg";
+import colPlantAsset from "@/assets/col-plant.jpg.asset.json";
 import colSweet from "@/assets/col-sweet.jpg";
 import { L } from "@/components/L";
 import { Reveal } from "@/components/Reveal";
@@ -13,7 +13,7 @@ import { getCollection, getCopy, useCopy } from "@/lib/content";
 const COLLECTION_IMAGES: Record<string, string> = {
   "sweet-moments": colSweet,
   "european-pantry": colPantry,
-  "plant-based-life": colPlant,
+  "plant-based-life": colPlantAsset.url,
   "natures-bites": colNature,
   "chill-cheers": colChill,
 };
