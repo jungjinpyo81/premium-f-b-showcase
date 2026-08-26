@@ -204,11 +204,38 @@ export function SiteFooter() {
           ))}
         </div>
         <div className="text-xs leading-7">
-          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-beige">
-            {copy.footer.partnership}
+          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-gold">
+            {biz.contact.label}
           </p>
-          <p>{copy.footer.partner}</p>
-          <p className="mt-4">{copy.footer.inquiryOnly}</p>
+          <a
+            href={`mailto:${biz.contact.email}`}
+            className="block break-all transition-colors hover:text-beige"
+          >
+            {biz.contact.email}
+          </a>
+          <a
+            href={`tel:${biz.contact.phone.replace(/-/g, "")}`}
+            className="block transition-colors hover:text-beige"
+          >
+            {biz.contact.phone}
+          </a>
+          <p className="mt-2 text-beige/45">{biz.contact.hours}</p>
+          <p className="mt-6 text-beige/45">{copy.footer.partner}</p>
+          <p className="mt-2 text-beige/45">{copy.footer.inquiryOnly}</p>
+        </div>
+        <div className="text-xs leading-7">
+          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-gold">
+            {biz.contact.locationLabel}
+          </p>
+          <p>{biz.contact.address}</p>
+          <a
+            href={`https://map.kakao.com/link/search/${encodeURIComponent(biz.contact.address)}`}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-4 flex h-28 items-center justify-center border border-beige/20 bg-beige/[0.04] text-[10px] uppercase tracking-[0.3em] text-beige/50 transition-colors hover:border-gold/50 hover:text-gold"
+          >
+            {biz.contact.mapNote}
+          </a>
           <div className="mt-6">
             <LocaleSwitcher variant="dark" />
           </div>
