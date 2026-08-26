@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Globe2,
@@ -16,11 +16,6 @@ import giftImg from "@/assets/gift.jpg";
 import distOfflineImg from "@/assets/dist-offline.jpg";
 import distOnlineImg from "@/assets/dist-online.jpg";
 import consultingImg from "@/assets/consulting.jpg";
-import colSweet from "@/assets/col-sweet.jpg";
-import colPantryAsset from "@/assets/balsamico-caprese.jpg.asset.json";
-import colPlantAsset from "@/assets/col-plant.jpg.asset.json";
-import colNature from "@/assets/col-nature.jpg";
-import colChill from "@/assets/col-chill.jpg";
 
 
 import { InquiryForm } from "@/components/InquiryForm";
@@ -50,13 +45,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const COLLECTION_IMAGES: Record<string, string> = {
-  "sweet-moments": colSweet,
-  "european-pantry": colPantryAsset.url,
-  "plant-based-life": colPlantAsset.url,
-  "natures-bites": colNature,
-  "chill-cheers": colChill,
-};
 
 const SERVICE_ICONS = {
   globe: Globe2,
@@ -72,111 +60,6 @@ const TRADE_ICONS = {
   warehouse: Warehouse,
 } as const;
 
-/** Taste Journey collections shown 3-up as a quiet slider on the home page. */
-function CollectionSlider() {
-  const copy = useCopy();
-  const [page, setPage] = useState(0);
-  const perPage = 3;
-  const pages = Math.max(1, Math.ceil(copy.collections.length / perPage));
-
-  return (
-    <section
-      id="taste-journey"
-      className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
-    >
-      <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
-        <div className="flex items-end justify-between gap-8">
-          <div>
-            <Reveal>
-              <p className="text-[10px] uppercase tracking-[0.45em] text-gold/80">
-                {copy.collectionsSection.eyebrow}
-              </p>
-            </Reveal>
-            <Reveal delay={120}>
-              <h2 className="mt-8 max-w-3xl font-display text-3xl leading-tight text-beige md:text-5xl">
-                {copy.collectionsSection.titleLines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </h2>
-            </Reveal>
-          </div>
-          {pages > 1 ? (
-            <div className="hidden shrink-0 items-center gap-3 md:flex">
-              {[-1, 1].map((dir) => (
-                <button
-                  key={dir}
-                  type="button"
-                  aria-label={dir < 0 ? "Previous" : "Next"}
-                  onClick={() => setPage((p) => (p + dir + pages) % pages)}
-                  className="flex size-11 items-center justify-center border border-beige/25 text-beige/60 transition-colors hover:border-beige hover:text-beige"
-                >
-                  {dir < 0 ? "←" : "→"}
-                </button>
-              ))}
-            </div>
-          ) : null}
-        </div>
-
-        <div className="mt-14 overflow-hidden">
-          <div
-            className="flex transition-transform duration-700 ease-out"
-            style={{ transform: `translateX(-${page * 100}%)` }}
-          >
-            {Array.from({ length: pages }, (_, p) => (
-              <div key={p} className="grid w-full shrink-0 gap-8 md:grid-cols-3">
-                {copy.collections.slice(p * perPage, p * perPage + perPage).map((c) => (
-                  <L
-                    key={c.slug}
-                    to="/collections/$slug"
-                    params={{ slug: c.slug }}
-                    className="group block"
-                  >
-                    <img
-                      src={COLLECTION_IMAGES[c.slug] ?? heroImg}
-                      alt={c.titleLocal}
-                      width={1200}
-                      height={900}
-                      loading="lazy"
-                      className="aspect-[4/5] w-full object-cover grayscale-[0.25] transition-[filter] duration-500 group-hover:grayscale-0"
-                    />
-                    <p className="mt-6 text-[10px] uppercase tracking-[0.35em] text-beige/45">
-                      {c.title}
-                    </p>
-                    <h3 className="mt-3 font-display text-2xl text-beige">{c.titleLocal}</h3>
-                    <p className="mt-3 line-clamp-3 text-sm leading-7 text-beige/55">{c.intro}</p>
-                    <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[10px] uppercase tracking-[0.22em] text-beige/40">
-                      {c.brands.slice(0, 3).map((b) => (
-                        <li key={b.name}>{b.name}</li>
-                      ))}
-                    </ul>
-                  </L>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {pages > 1 ? (
-          <div className="mt-10 flex items-center gap-3">
-            {Array.from({ length: pages }, (_, p) => (
-              <button
-                key={p}
-                type="button"
-                aria-label={`Slide ${p + 1}`}
-                onClick={() => setPage(p)}
-                className={`h-px w-12 transition-colors ${
-                  p === page ? "bg-gold" : "bg-beige/25 hover:bg-beige/50"
-                }`}
-              />
-            ))}
-          </div>
-        ) : null}
-      </div>
-    </section>
-  );
-}
 
 function Index() {
   const copy = useCopy();
@@ -238,10 +121,10 @@ function Index() {
               </L>
               <L
                 to="/"
-                hash={copy.collections[0]?.slug ?? "inquiry"}
+                hash="services"
                 className="inline-flex items-center px-2 py-4 text-[11px] uppercase tracking-[0.3em] text-beige/60 transition-colors hover:text-beige"
               >
-                {copy.nav.tasteJourney}
+                {copy.hero.ctaSecondary}
               </L>
             </div>
           </Reveal>
@@ -258,8 +141,6 @@ function Index() {
         </div>
       </section>
 
-      {/* Taste Journey — 3-up slider */}
-      <CollectionSlider />
 
       {/* Our role — intro film */}
       <section
