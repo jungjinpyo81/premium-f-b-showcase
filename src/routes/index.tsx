@@ -1,8 +1,21 @@
 import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import {
+  Globe2,
+  Truck,
+  Store,
+  LineChart,
+  FileCheck2,
+  ShieldCheck,
+  Ship,
+  Warehouse,
+} from "lucide-react";
 
 import heroImg from "@/assets/hero.jpg";
 import giftImg from "@/assets/gift.jpg";
+import distOfflineImg from "@/assets/dist-offline.jpg";
+import distOnlineImg from "@/assets/dist-online.jpg";
+import consultingImg from "@/assets/consulting.jpg";
 import colSweet from "@/assets/col-sweet.jpg";
 import colPantry from "@/assets/col-pantry.jpg";
 import colPlant from "@/assets/col-plant.jpg";
@@ -13,7 +26,7 @@ import { InquiryForm } from "@/components/InquiryForm";
 import { L } from "@/components/L";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter, SiteNav } from "@/components/SiteNav";
-import { getCopy, useCopy } from "@/lib/content";
+import { getCopy, useBusiness, useCopy } from "@/lib/content";
 
 export const Route = createFileRoute("/")({
   loaderDeps: ({ search }) => ({ lang: search.lang }),
