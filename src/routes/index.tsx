@@ -57,8 +57,23 @@ const COLLECTION_IMAGES: Record<string, string> = {
   "chill-cheers": colChill,
 };
 
+const SERVICE_ICONS = {
+  globe: Globe2,
+  truck: Truck,
+  store: Store,
+  chart: LineChart,
+} as const;
+
+const TRADE_ICONS = {
+  customs: FileCheck2,
+  quarantine: ShieldCheck,
+  freight: Ship,
+  warehouse: Warehouse,
+} as const;
+
 function Index() {
   const copy = useCopy();
+  const biz = useBusiness();
 
   // Full-page scroll snap is scoped to this page only.
   useEffect(() => {
