@@ -34,7 +34,7 @@ export const ko: SiteCopy = {
     contact: "문의",
   },
   hero: {
-    eyebrow: "Europe Connect · F&B Sourcing & Logistics Consulting",
+    eyebrow: "EUROPE CONNECT · F&B SOURCING & LOGISTICS · CONSULTING",
     titleLines: ["글로벌 프리미엄 F&B브랜드와", "한국 시장을 잇는 브릿지"],
     leadLines: [
       "17년 이상의 소싱·통관·물류 실무를 바탕으로,",
