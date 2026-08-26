@@ -30,7 +30,6 @@ function useActiveSection(slugs: string[]) {
   return active;
 }
 
-
 /** Grouped "Taste Journey" dropdown holding the five lifestyle collections. */
 function TasteJourneyMenu({ active }: { active: string | null }) {
   const copy = useCopy();
@@ -164,7 +163,6 @@ export function SiteNav() {
           </L>
         </div>
       </div>
-
     </header>
   );
 }

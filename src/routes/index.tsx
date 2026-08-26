@@ -178,7 +178,6 @@ function CollectionSlider() {
 }
 
 function Index() {
-
   const copy = useCopy();
   const biz = useBusiness();
 
@@ -260,7 +259,6 @@ function Index() {
 
       {/* Taste Journey — 3-up slider */}
       <CollectionSlider />
-
 
       {/* Sourcing & logistics — our role */}
       <section
@@ -410,9 +408,7 @@ function Index() {
             </h2>
           </Reveal>
           <Reveal delay={200}>
-            <p className="mt-6 max-w-xl text-sm leading-7 text-beige/55">
-              {biz.distribution.lead}
-            </p>
+            <p className="mt-6 max-w-xl text-sm leading-7 text-beige/55">{biz.distribution.lead}</p>
           </Reveal>
 
           <div className="mt-14 grid gap-12 md:grid-cols-2">
@@ -474,9 +470,7 @@ function Index() {
               </h2>
             </Reveal>
             <Reveal delay={280}>
-              <p className="mt-8 max-w-lg text-sm leading-8 text-beige/60">
-                {biz.consulting.body}
-              </p>
+              <p className="mt-8 max-w-lg text-sm leading-8 text-beige/60">{biz.consulting.body}</p>
             </Reveal>
             <Reveal delay={340}>
               <p className="mt-4 text-xs leading-6 text-beige/40">{biz.consulting.note}</p>
@@ -495,10 +489,7 @@ function Index() {
       </section>
 
       {/* Gift & B2B */}
-      <section
-        id="gift"
-        className="relative flex h-screen snap-start items-center overflow-hidden"
-      >
+      <section id="gift" className="relative flex h-screen snap-start items-center overflow-hidden">
         <img
           src={giftImg}
           alt={copy.gift.eyebrow}
