@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { L } from "@/components/L";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
-import { useCopy } from "@/lib/content";
+import { useBusiness, useCopy } from "@/lib/content";
 
 /** Highlights the section currently snapped into view. */
 function useActiveSection(slugs: string[]) {
@@ -88,6 +88,7 @@ function TasteJourneyMenu({ active }: { active: string | null }) {
  */
 export function SiteNav() {
   const copy = useCopy();
+  const biz = useBusiness();
   const active = useActiveSection(copy.collections.map((c) => c.slug));
 
   return (
