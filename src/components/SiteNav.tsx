@@ -66,8 +66,8 @@ function TasteJourneyMenu({ active }: { active: string | null }) {
           {copy.collections.map((c) => (
             <L
               key={c.slug}
-              to="/"
-              hash={c.slug}
+              to="/collections/$slug"
+              params={{ slug: c.slug }}
               onClick={() => setOpen(false)}
               className={`block px-5 py-2.5 text-[11px] tracking-[0.2em] transition-colors hover:text-beige ${
                 active === c.slug ? "text-beige" : "text-beige/55"
