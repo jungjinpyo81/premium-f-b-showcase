@@ -16,11 +16,6 @@ import giftImg from "@/assets/gift.jpg";
 import distOfflineImg from "@/assets/dist-offline.jpg";
 import distOnlineImg from "@/assets/dist-online.jpg";
 import consultingImg from "@/assets/consulting.jpg";
-import colSweet from "@/assets/col-sweet.jpg";
-import colPantryAsset from "@/assets/balsamico-caprese.jpg.asset.json";
-import colPlantAsset from "@/assets/col-plant.jpg.asset.json";
-import colNature from "@/assets/col-nature.jpg";
-import colChill from "@/assets/col-chill.jpg";
 
 
 import { InquiryForm } from "@/components/InquiryForm";
