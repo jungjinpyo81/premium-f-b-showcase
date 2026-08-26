@@ -97,8 +97,8 @@ const ko: BusinessCopy = {
   contact: {
     label: "Contact",
     email: "contact@europeconnect.kr",
-    phone: "010-7562-5407",
-    hours: "10:00 ~ 17:00 (점심 12-13, 일요일 휴무)",
+    phone: "010-5683-2373",
+    hours: "10:00 ~ 18:00 (점심 12-13, 일요일 휴무)",
     locationLabel: "Location",
     address: "경기도 고양시 덕양구 청초로 10, 에이동 418호",
     mapNote: "지도 준비 중",
