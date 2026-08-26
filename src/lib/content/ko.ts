@@ -247,7 +247,7 @@ export const ko: SiteCopy = {
     {
       slug: "natures-bites",
       title: "Nature's Bites",
-      titleLocal: "자연의 조각들",
+      titleLocal: "자연 한 잎",
       lead: "덜어낼수록 분명해지는 맛.",
       intro:
         "원물의 상태와 가공 방식이 그대로 드러나는 카테고리입니다. 첨가를 최소화한 스낵을 중심으로, 프리미엄 그로서리와 오피스 스낵 채널에 동시에 대응합니다.",
