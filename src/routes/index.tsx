@@ -260,54 +260,33 @@ function Index() {
       {/* Taste Journey — 3-up slider */}
       <CollectionSlider />
 
-      {/* Sourcing & logistics — our role */}
+      {/* Our role — intro film */}
       <section
         id="services"
         className="relative flex h-screen snap-start items-center overflow-hidden border-t border-beige/10"
       >
         <div className="mx-auto w-full max-w-[1500px] px-6 pt-24 md:px-10">
           <Reveal>
-            <p className="text-[10px] uppercase tracking-[0.45em] text-beige/50">
+            <p className="text-center text-[10px] uppercase tracking-[0.45em] text-gold/80">
               {copy.role.eyebrow}
             </p>
           </Reveal>
-          <Reveal delay={120}>
-            <h2 className="mt-8 max-w-3xl font-display text-3xl leading-tight text-beige md:text-5xl">
-              {copy.role.titleLines.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </h2>
-          </Reveal>
-          <div className="mt-14 grid gap-10 md:grid-cols-3">
-            <Reveal delay={220} className="text-sm leading-8 text-beige/60">
-              {copy.role.paragraphs.map((p) => (
-                <p key={p} className="mb-5">
-                  {p}
-                </p>
-              ))}
-            </Reveal>
-            <Reveal delay={320} className="md:col-span-2">
-              <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
-                {[...copy.services.sourcing.items, ...copy.services.logistics.items]
-                  .slice(0, 4)
-                  .map((s) => (
-                    <article key={s.no}>
-                      <p className="font-display text-xs tracking-[0.3em] text-beige/40">{s.no}</p>
-                      <h3 className="mt-3 font-display text-xl text-beige md:text-2xl">
-                        {s.title}
-                      </h3>
-                      <p className="mt-3 whitespace-pre-line text-sm leading-7 text-beige/55">
-                        {s.body}
-                      </p>
-                    </article>
-                  ))}
+          <Reveal delay={140}>
+            <div className="mx-auto mt-10 w-full max-w-[62vw] min-w-[280px] md:max-w-[54vw]">
+              <div className="relative w-full overflow-hidden" style={{ aspectRatio: "3840 / 1680" }}>
+                <iframe
+                  src="https://player.vimeo.com/video/1171266171?title=0&byline=0&portrait=0&badge=0&autopause=0&controls=0&loop=0&muted=1&autoplay=1&playsinline=1&app_id=58479"
+                  title="홈페이지_인트로"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  className="absolute inset-0 size-full border-0"
+                />
               </div>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
         </div>
       </section>
+
 
       {/* What we do — four operating pillars */}
       <section
