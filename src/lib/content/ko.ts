@@ -40,8 +40,8 @@ export const ko: SiteCopy = {
       "17년 이상의 소싱·물류·통관·유통 실무를 바탕으로,",
       "브랜드가 한국 시장에 안착하기까지의 모든 과정을 통합 관리합니다.",
     ],
-    ctaPrimary: "파트너십 문의",
-    ctaSecondary: "우리의 역할",
+    ctaPrimary: "맛의 여정\n(브랜드)",
+    ctaSecondary: "\n",
   },
   figures: [
     { value: "17+", label: "수입·유통 오퍼레이팅 경력" },
