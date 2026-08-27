@@ -147,7 +147,7 @@ function Index() {
             </p>
           </Reveal>
           <Reveal delay={200}>
-            <div className="mx-auto mt-8" style={{ width: "88%" }}>
+            <div className="mx-auto mt-8 w-[115%] max-w-[1725px]">
               <div className="w-full" style={{ aspectRatio: "3840 / 1680" }}>
                 <iframe
                   src="https://player.vimeo.com/video/1171266171?title=0&byline=0&portrait=0&badge=0&autopause=0&controls=0&loop=1&muted=1&autoplay=1&playsinline=1&app_id=58479"
