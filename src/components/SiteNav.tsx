@@ -72,7 +72,6 @@ function HoverMenuGroup({
         </L>
         <L
           to="/collections"
-          hash="sweet-moments"
           className="flex items-center gap-2 py-2 transition-colors hover:text-beige"
           aria-expanded={open}
         >
