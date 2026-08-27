@@ -31,90 +31,62 @@ function useActiveSection(slugs: string[]) {
   return active;
 }
 
-/** Grouped hover mega-menu; hovering any contained nav item opens it. */
-function HoverMenuGroup({
+function NavDropdown({
+  label,
+  links,
   active,
-  sourcingLabel,
-  bizNav,
-  showBizLinks = false,
 }: {
-  active: string | null;
-  sourcingLabel: string;
-  bizNav: { trade: string; distribution: string; consulting: string };
-  showBizLinks?: boolean;
+  label: React.ReactNode;
+  links: { to: string; hash?: string; label: string }[];
+  active?: string | null;
 }) {
-  const copy = useCopy();
   const [open, setOpen] = useState(false);
-  const groupRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const hash = useRouterState({ select: (s) => s.location.hash });
 
   useEffect(() => {
     if (!open) return;
     const onDown = (e: MouseEvent) => {
-      if (groupRef.current && !groupRef.current.contains(e.target as Node)) setOpen(false);
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     };
     document.addEventListener("mousedown", onDown);
     return () => document.removeEventListener("mousedown", onDown);
   }, [open]);
 
-  const isWhatWeDo = hash === "services" || hash === "what-we-do";
-  const bizClass = (on: boolean) =>
-    `py-2 transition-colors hover:text-beige ${on ? "text-beige" : ""}`;
+  const isActive = links.some((l) => (l.hash && hash === l.hash) || (active && l.hash === active));
 
   return (
     <div
-      ref={groupRef}
+      ref={ref}
       className="relative"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <div className="flex items-center gap-7">
-        <L
-          to="/"
-          hash="services"
-          className={bizClass(isWhatWeDo)}
+      <L
+        to={links[0]?.to ?? "/"}
+        hash={links[0]?.hash}
+        className={`flex items-center gap-2 py-2 transition-colors hover:text-beige ${isActive ? "text-beige" : ""}`}
+      >
+        {label}
+        <span
+          className={`text-[8px] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
         >
-          {sourcingLabel}
-        </L>
-        <L
-          to="/collections"
-          className="flex items-center gap-2 py-2 transition-colors hover:text-beige"
-          aria-expanded={open}
-        >
-          {copy.nav.tasteJourney}
-          <span
-            className={`text-[8px] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-          >
-            {"\n"}
-          </span>
-        </L>
-        {showBizLinks ? (
-          <>
-            <L to="/" hash="trade" className={bizClass(hash === "trade")}>
-              {bizNav.trade}
-            </L>
-            <L to="/" hash="distribution" className={bizClass(hash === "distribution")}>
-              {bizNav.distribution}
-            </L>
-            <L to="/" hash="consulting" className={bizClass(hash === "consulting")}>
-              {bizNav.consulting}
-            </L>
-          </>
-        ) : null}
-      </div>
+          {"\n"}
+        </span>
+      </L>
       {open ? (
         <div className="absolute left-0 top-full z-50 min-w-52 border border-beige/15 bg-ink/95 py-2 backdrop-blur-md">
-          {copy.collections.map((c) => (
+          {links.map((link) => (
             <L
-              key={c.slug}
-              to="/collections"
-              hash={c.slug}
+              key={`${link.to}-${link.hash}`}
+              to={link.to}
+              hash={link.hash}
               onClick={() => setOpen(false)}
               className={`block px-5 py-2.5 text-[11px] tracking-[0.2em] transition-colors hover:text-beige ${
-                active === c.slug ? "text-beige" : "text-beige/55"
+                hash === link.hash ? "text-beige" : "text-beige/55"
               }`}
             >
-              {c.titleLocal}
+              {link.label}
             </L>
           ))}
         </div>
@@ -123,6 +95,9 @@ function HoverMenuGroup({
   );
 }
 
+const bizClass = (on: boolean) =>
+  `py-2 transition-colors hover:text-beige ${on ? "text-beige" : ""}`;
+
 /**
  * Persistent global navigation. Fixed to the top of the viewport on every
  * page; the collection items act as anchors into the full-page snap sections.
@@ -130,6 +105,7 @@ function HoverMenuGroup({
 export function SiteNav() {
   const copy = useCopy();
   const biz = useBusiness();
+  const hash = useRouterState({ select: (s) => s.location.hash });
   const active = useActiveSection(copy.collections.map((c) => c.slug));
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -141,12 +117,31 @@ export function SiteNav() {
         </L>
 
         <nav className="hidden items-center gap-7 text-[11px] tracking-[0.2em] text-beige/60 lg:flex">
-          <HoverMenuGroup
-            active={active}
-            sourcingLabel={copy.nav.sourcing}
-            bizNav={biz.nav}
-            showBizLinks
+          <NavDropdown
+            label={copy.nav.sourcing}
+            links={[
+              { to: "/", hash: "services", label: "브랜드의 한국 진출" },
+              { to: "/", hash: "what-we-do", label: "운영 역량" },
+            ]}
           />
+          <NavDropdown
+            label={copy.nav.tasteJourney}
+            links={copy.collections.map((c) => ({
+              to: "/collections",
+              hash: c.slug,
+              label: c.titleLocal,
+            }))}
+            active={active}
+          />
+          <L to="/" hash="trade" className={bizClass(hash === "trade")}>
+            {biz.nav.trade}
+          </L>
+          <L to="/" hash="distribution" className={bizClass(hash === "distribution")}>
+            {biz.nav.distribution}
+          </L>
+          <L to="/" hash="consulting" className={bizClass(hash === "consulting")}>
+            {biz.nav.consulting}
+          </L>
         </nav>
 
         <div className="flex items-center gap-6 text-[10px] uppercase tracking-[0.25em] text-beige/60">
@@ -190,14 +185,34 @@ export function SiteNav() {
       {mobileOpen ? (
         <div className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-beige/10 bg-ink/95 backdrop-blur-md lg:hidden">
           <nav className="mx-auto flex max-w-[1500px] flex-col gap-1 px-6 py-6 text-[12px] tracking-[0.2em] text-beige/70">
-            <L
-              to="/"
-              hash="services"
-              onClick={() => setMobileOpen(false)}
-              className="py-2.5 transition-colors hover:text-beige"
-            >
-              {copy.nav.sourcing}
-            </L>
+            <div className="py-2.5">
+              <L
+                to="/"
+                hash="services"
+                onClick={() => setMobileOpen(false)}
+                className="transition-colors hover:text-beige"
+              >
+                {copy.nav.sourcing}
+              </L>
+              <div className="mt-2 flex flex-col border-l border-beige/15 pl-4">
+                <L
+                  to="/"
+                  hash="services"
+                  onClick={() => setMobileOpen(false)}
+                  className="py-2 text-[11px] text-beige/50 transition-colors hover:text-beige"
+                >
+                  브랜드의 한국 진출
+                </L>
+                <L
+                  to="/"
+                  hash="what-we-do"
+                  onClick={() => setMobileOpen(false)}
+                  className="py-2 text-[11px] text-beige/50 transition-colors hover:text-beige"
+                >
+                  운영 역량
+                </L>
+              </div>
+            </div>
             <div className="py-2.5">
               <L
                 to="/collections"
