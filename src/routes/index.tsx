@@ -61,34 +61,54 @@ const TRADE_ICONS = {
 } as const;
 
 
+/** GNB hash → exclusively visible section ids (mutually exclusive views). */
+const EXCLUSIVE_VIEWS: Record<string, string[]> = {
+  services: ["services", "what-we-do"],
+  "what-we-do": ["services", "what-we-do"],
+  trade: ["trade"],
+  distribution: ["distribution"],
+  consulting: ["consulting"],
+  inquiry: ["inquiry"],
+};
+
 function Index() {
   const copy = useCopy();
   const biz = useBusiness();
   const hash = useRouterState({ select: (s) => s.location.hash });
 
-  // Full-page scroll snap is scoped to this page only.
+  // Exclusive single-view mode: only the sections mapped to the active hash
+  // are mounted; every other section is unmounted from the DOM.
+  const exclusive = EXCLUSIVE_VIEWS[hash] ?? null;
+  const show = (id: string) => !exclusive || exclusive.includes(id);
+
+  // Full-page scroll snap is scoped to this page and only active in the
+  // default one-page view (exclusive views render a single screen).
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.add("snap-page");
+    if (!exclusive) root.classList.add("snap-page");
     return () => root.classList.remove("snap-page");
-  }, []);
+  }, [exclusive]);
 
-  // GNB hash links map 1:1 to the sections below; scroll to the exact target
-  // even when the hash is unchanged or the page is still hydrating.
+  // In exclusive mode jump straight to the top of the single rendered view;
+  // otherwise smooth-scroll to the anchor inside the full page.
   useEffect(() => {
-    if (!hash) return;
     const t = window.setTimeout(() => {
-      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (exclusive) {
+        window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+      } else if (hash) {
+        document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }, 60);
     return () => window.clearTimeout(t);
-  }, [hash]);
+  }, [hash, exclusive]);
 
 
   return (
     <div className="mobile-alt-dark bg-ink text-beige">
       <SiteNav />
 
-      {/* Hero */}
+      {/* Hero — default one-page view only */}
+      {!exclusive ? (
       <section className="relative flex h-screen snap-start items-center overflow-hidden">
         <img
           src={heroImg}
@@ -146,8 +166,10 @@ function Index() {
           </div>
         </div>
       </section>
+      ) : null}
 
       {/* Our role — intro film */}
+      {show("services") ? (
       <section
         id="services"
         className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
@@ -181,8 +203,10 @@ function Index() {
           </Reveal>
         </div>
       </section>
+      ) : null}
 
       {/* What we do — four operating pillars */}
+      {show("what-we-do") ? (
       <section
         id="what-we-do"
         className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
@@ -211,8 +235,10 @@ function Index() {
           </div>
         </div>
       </section>
+      ) : null}
 
       {/* Logistics & customs */}
+      {show("trade") ? (
       <section
         id="trade"
         className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
@@ -255,8 +281,10 @@ function Index() {
           </div>
         </div>
       </section>
+      ) : null}
 
       {/* Distribution */}
+      {show("distribution") ? (
       <section
         id="distribution"
         className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
@@ -306,8 +334,10 @@ function Index() {
           </div>
         </div>
       </section>
+      ) : null}
 
       {/* Consulting */}
+      {show("consulting") ? (
       <section
         id="consulting"
         className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
@@ -352,8 +382,10 @@ function Index() {
           </div>
         </div>
       </section>
+      ) : null}
 
-      {/* Gift & B2B */}
+      {/* Gift & B2B — default one-page view only */}
+      {!exclusive ? (
       <section id="gift" className="relative flex min-h-screen snap-start items-center overflow-hidden md:h-screen">
         <img
           src={giftImg}
@@ -407,8 +439,10 @@ function Index() {
           </div>
         </div>
       </section>
+      ) : null}
 
       {/* Inquiry + footer */}
+      {show("inquiry") ? (
       <section id="inquiry" className="min-h-screen snap-start border-t border-beige/10">
         <div className="mx-auto grid max-w-[1500px] gap-14 px-6 pb-16 pt-28 md:grid-cols-12 md:px-10">
           <Reveal className="md:col-span-5">
@@ -426,6 +460,7 @@ function Index() {
         </div>
         <SiteFooter />
       </section>
+      ) : null}
     </div>
   );
 }
