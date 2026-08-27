@@ -382,8 +382,10 @@ function Index() {
           </div>
         </div>
       </section>
+      ) : null}
 
-      {/* Gift & B2B */}
+      {/* Gift & B2B — default one-page view only */}
+      {!exclusive ? (
       <section id="gift" className="relative flex min-h-screen snap-start items-center overflow-hidden md:h-screen">
         <img
           src={giftImg}
