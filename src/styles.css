@@ -212,8 +212,15 @@
   color: var(--color-muted-foreground);
 }
 
+@media (max-width: 767px) {
+  html.snap-page,
+  html.snap-collections {
+    scroll-snap-type: none;
+  }
+}
+
 /* Full-page scroll snap (homepage only; toggled from the route component). */
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   html.snap-page {
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
@@ -228,7 +235,7 @@
 }
 
 /* Full-page scroll snap (collections / Taste Journey page only). */
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   html.snap-collections {
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
@@ -268,11 +275,11 @@
  * boundaries legible while scrolling freely.
  */
 :root {
-  --ink-raw: oklch(0.12 0 0);
-  --beige-raw: oklch(0.86 0.014 85);
+  --ink-raw: #000000;
+  --beige-raw: #F5F2EB;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   /* Dark page (homepage): every other section flips to a beige band. */
   .mobile-alt-dark > section:nth-of-type(even) {
     --ink: var(--beige-raw);
