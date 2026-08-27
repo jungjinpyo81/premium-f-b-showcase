@@ -41,7 +41,7 @@ export type BusinessCopy = {
 };
 
 const ko: BusinessCopy = {
-  nav: { business: "비즈니스", trade: "국제 물류", distribution: "유통 · 판매", consulting: "컨설팅" },
+  nav: { business: "비즈니스", trade: "물류", distribution: "유통", consulting: "컨설팅" },
   slogan: {
     headline: "Taste · Culture · Value를 잇다.",
     body: "최상급 원료와 타협하지 않는 품질, 지속 가능한 친환경 가치를 담은 프리미엄 브랜드를 엄선하여 선보입니다.",

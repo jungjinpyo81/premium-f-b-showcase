@@ -57,7 +57,7 @@ function TasteJourneyMenu({ active }: { active: string | null }) {
         <span
           className={`text-[8px] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
         >
-          &#9662;
+          {"\n"}
         </span>
       </button>
       {open ? (
