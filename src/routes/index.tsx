@@ -93,7 +93,7 @@ function Index() {
             </p>
           </Reveal>
           <Reveal immediate delay={140}>
-            <h1 className="mt-8 max-w-3xl font-display text-3xl leading-[1.2] text-beige md:text-5xl">
+            <h1 className="mx-auto mt-8 max-w-3xl text-center font-display text-3xl leading-[1.2] text-beige md:text-5xl">
               {copy.hero.titleLines.map((line) => (
                 <span key={line} className="block">
                   {line}
