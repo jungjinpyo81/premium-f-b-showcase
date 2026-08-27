@@ -231,6 +231,15 @@ html.snap-page {
 }
 
 
+/* Dark surface: remap semantic tokens so shared components read correctly. */
+#inquiry {
+  --background: var(--ink);
+  --foreground: var(--beige);
+  --muted-foreground: oklch(0.72 0.012 85);
+  --border: oklch(0.34 0.006 70);
+  --input: oklch(0.34 0.006 70);
+}
+
 /* Hide scrollbars while keeping overflow scroll functional. */
 .scrollbar-hide {
   -ms-overflow-style: none;
