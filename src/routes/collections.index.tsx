@@ -118,7 +118,10 @@ function CollectionsPage() {
                       className="mt-8"
                       interval={2000}
                       images={collection.brands.map((b) => ({
-                        src: SWEET_SLIDES[b.brandSlug ?? ""] ?? colSweet,
+                        src:
+                          SWEET_SLIDES[
+                            b.brandSlug ?? b.name.toLowerCase().replace(/[^a-z]/g, "")
+                          ] ?? colSweet,
                         alt: `${collection.titleLocal} — ${b.nameLocal}`,
                       }))}
                     />
