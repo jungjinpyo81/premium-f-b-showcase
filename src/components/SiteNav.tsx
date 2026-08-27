@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 
 import { L } from "@/components/L";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
@@ -45,6 +46,7 @@ function HoverMenuGroup({
   const copy = useCopy();
   const [open, setOpen] = useState(false);
   const groupRef = useRef<HTMLDivElement>(null);
+  const hash = useRouterState({ select: (s) => s.location.hash });
 
   useEffect(() => {
     if (!open) return;
@@ -54,6 +56,10 @@ function HoverMenuGroup({
     document.addEventListener("mousedown", onDown);
     return () => document.removeEventListener("mousedown", onDown);
   }, [open]);
+
+  const isWhatWeDo = hash === "services" || hash === "what-we-do";
+  const bizClass = (on: boolean) =>
+    `py-2 transition-colors hover:text-beige ${on ? "text-beige" : ""}`;
 
   return (
     <div
@@ -66,7 +72,7 @@ function HoverMenuGroup({
         <L
           to="/"
           hash="services"
-          className="py-2 transition-colors hover:text-beige"
+          className={bizClass(isWhatWeDo)}
         >
           {sourcingLabel}
         </L>
@@ -84,13 +90,13 @@ function HoverMenuGroup({
         </L>
         {showBizLinks ? (
           <>
-            <L to="/" hash="trade" className="py-2 transition-colors hover:text-beige">
+            <L to="/" hash="trade" className={bizClass(hash === "trade")}>
               {bizNav.trade}
             </L>
-            <L to="/" hash="distribution" className="py-2 transition-colors hover:text-beige">
+            <L to="/" hash="distribution" className={bizClass(hash === "distribution")}>
               {bizNav.distribution}
             </L>
-            <L to="/" hash="consulting" className="py-2 transition-colors hover:text-beige">
+            <L to="/" hash="consulting" className={bizClass(hash === "consulting")}>
               {bizNav.consulting}
             </L>
           </>
@@ -305,8 +311,6 @@ export function SiteFooter() {
             {biz.contact.phone}
           </a>
           <p className="mt-2 text-beige/45">{biz.contact.hours}</p>
-          <p className="mt-6 text-beige/45">{copy.footer.partner}</p>
-          <p className="mt-2 text-beige/45">{copy.footer.inquiryOnly}</p>
         </div>
         <div className="text-xs leading-7">
           <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-gold">

@@ -47,7 +47,7 @@ const ko: BusinessCopy = {
     body: "최상급 원료와 타협하지 않는 품질, 지속 가능한 친환경 가치를\n담은 프리미엄 브랜드를 엄선하여 선보입니다.",
   },
   whatWeDo: {
-    eyebrow: "What We Do",
+    eyebrow: "WHAT WE DO",
     title: "브랜드의 한국 진출, \n원스톱 솔루션",
     lead: "소싱부터 물류/통관, 유통, 컨설팅 등 전문 역량을\n바탕으로 통합 관리를 제공합니다.",
     cards: [
@@ -58,7 +58,7 @@ const ko: BusinessCopy = {
     ],
   },
   trade: {
-    eyebrow: "Logistics & Customs",
+    eyebrow: "LOGISTICS & CUSTOMS",
     title: "Global Trade Made Simple",
     subtitle: "보다 쉬운 수출입, 유럽커넥트가 대신 관리해드립니다.",
     rows: [
@@ -69,7 +69,7 @@ const ko: BusinessCopy = {
     ],
   },
   distribution: {
-    eyebrow: "Distribution",
+    eyebrow: "DISTRIBUTION",
     title: "브랜드와 채널, 고객을 연결합니다.",
     lead: "상품에 맞는 최적화 채널을 매칭하여 매출을 극대화 합니다.",
     offline: {
@@ -88,7 +88,7 @@ const ko: BusinessCopy = {
     },
   },
   consulting: {
-    eyebrow: "Consulting",
+    eyebrow: "CONSULTING",
     title: "One-Stop F&B Consulting",
     body: "시장 조사부터 수입 계약, 마케팅 및 유통 전략까지. 복잡한 해외 F&B 수입 절차를 전담 컨설턴트가 1:1 맞춤형으로 기획·실행해드립니다.",
     note: "(현재 세부 서비스 준비 중입니다.)",
@@ -112,7 +112,7 @@ const en: BusinessCopy = {
     body: "We curate premium brands built on uncompromising quality, the finest ingredients and sustainable values.",
   },
   whatWeDo: {
-    eyebrow: "What We Do",
+    eyebrow: "WHAT WE DO",
     title: "One team, from sourcing to shelf",
     lead: "Four operating pillars: sourcing, customs, logistics, distribution and consulting.",
     cards: [
@@ -123,7 +123,7 @@ const en: BusinessCopy = {
     ],
   },
   trade: {
-    eyebrow: "Logistics & Customs",
+    eyebrow: "LOGISTICS & CUSTOMS",
     title: "Global Trade Made Simple",
     subtitle: "Easier import and export — Europe Connect handles it for you.",
     rows: [
@@ -134,7 +134,7 @@ const en: BusinessCopy = {
     ],
   },
   distribution: {
-    eyebrow: "Distribution",
+    eyebrow: "DISTRIBUTION",
     title: "An integrated route from brand to customer",
     lead: "Pricing and operations are designed channel by channel.",
     offline: {
@@ -153,7 +153,7 @@ const en: BusinessCopy = {
     },
   },
   consulting: {
-    eyebrow: "Consulting",
+    eyebrow: "CONSULTING",
     title: "One-Stop F&B Consulting",
     body: "From market research to import contracts, marketing and distribution strategy — a dedicated consultant plans and executes the entire import process with you.",
     note: "(Detailed service tiers are in preparation.)",
@@ -177,7 +177,7 @@ const ja: BusinessCopy = {
     body: "最上級の原料と妥協のない品質、持続可能な価値を備えたプレミアムブランドを厳選してご紹介します。",
   },
   whatWeDo: {
-    eyebrow: "What We Do",
+    eyebrow: "WHAT WE DO",
     title: "ブランドの韓国進出を、一つのチームで",
     lead: "ソーシング、通関、物流、流通、コンサルティングの4つの柱で運営します。",
     cards: [
@@ -188,7 +188,7 @@ const ja: BusinessCopy = {
     ],
   },
   trade: {
-    eyebrow: "Logistics & Customs",
+    eyebrow: "LOGISTICS & CUSTOMS",
     title: "Global Trade Made Simple",
     subtitle: "より簡単な輸出入を、ユーロップコネクトが代行します。",
     rows: [
@@ -199,7 +199,7 @@ const ja: BusinessCopy = {
     ],
   },
   distribution: {
-    eyebrow: "Distribution",
+    eyebrow: "DISTRIBUTION",
     title: "ブランドと顧客をつなぐ統合流通ソリューション",
     lead: "チャネルの性格に合わせて価格構造と運営方法を設計します。",
     offline: {
@@ -218,7 +218,7 @@ const ja: BusinessCopy = {
     },
   },
   consulting: {
-    eyebrow: "Consulting",
+    eyebrow: "CONSULTING",
     title: "One-Stop F&B Consulting",
     body: "市場調査から輸入契約、マーケティング・流通戦略まで。複雑な海外F&B輸入手続きを専任コンサルタントが1:1で企画・実行します。",
     note: "（詳細サービスは準備中です。）",
@@ -242,7 +242,7 @@ const zh: BusinessCopy = {
     body: "我们精选采用顶级原料、坚持品质、并具备可持续价值的高端品牌。",
   },
   whatWeDo: {
-    eyebrow: "What We Do",
+    eyebrow: "WHAT WE DO",
     title: "品牌进入韩国市场，由一个团队完成",
     lead: "以采购、通关、物流、流通与咨询四大支柱运营。",
     cards: [
@@ -253,7 +253,7 @@ const zh: BusinessCopy = {
     ],
   },
   trade: {
-    eyebrow: "Logistics & Customs",
+    eyebrow: "LOGISTICS & CUSTOMS",
     title: "Global Trade Made Simple",
     subtitle: "更简单的进出口，由 Europe Connect 代为管理。",
     rows: [
@@ -264,7 +264,7 @@ const zh: BusinessCopy = {
     ],
   },
   distribution: {
-    eyebrow: "Distribution",
+    eyebrow: "DISTRIBUTION",
     title: "连接品牌与顾客的整合流通方案",
     lead: "依据渠道特性分别设计价格结构与运营方式。",
     offline: {
@@ -283,7 +283,7 @@ const zh: BusinessCopy = {
     },
   },
   consulting: {
-    eyebrow: "Consulting",
+    eyebrow: "CONSULTING",
     title: "One-Stop F&B Consulting",
     body: "从市场调研到进口合同、营销及流通策略，专属顾问以一对一方式规划并执行复杂的海外 F&B 进口流程。",
     note: "（详细服务内容筹备中。）",
