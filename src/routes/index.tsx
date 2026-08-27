@@ -102,7 +102,7 @@ function Index() {
             </h1>
           </Reveal>
           <Reveal immediate delay={420}>
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+            <div className="mt-12 flex flex-wrap items-center gap-4">
               <L
                 to="/collections"
                 hash="sweet-moments"
