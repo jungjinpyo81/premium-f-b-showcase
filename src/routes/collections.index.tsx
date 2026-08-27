@@ -156,9 +156,9 @@ function CollectionsPage() {
               index === 0 ? "pb-12" : "pt-28 pb-12"
             }`}
           >
-            {/* Editorial hero band (top ~22% of the first section) */}
+            {/* Editorial hero band (top ~30% of the first section) */}
             {index === 0 && (
-              <div className="relative flex h-[22%] shrink-0 items-center overflow-hidden">
+              <div className="relative flex h-[30%] shrink-0 items-center overflow-hidden pb-6">
                 <img
                   src={COLLECTION_IMAGES[copy.collections[0]?.slug ?? ""] ?? colSweet}
                   alt={copy.nav.tasteJourney}
