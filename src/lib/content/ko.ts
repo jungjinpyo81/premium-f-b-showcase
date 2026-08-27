@@ -204,9 +204,9 @@ export const ko: SiteCopy = {
         },
         {
           name: "Cocoba",
-          nameLocal: "코코바",
+          nameLocal: "코코바 (겨울 시즌 한정)",
           origin: "United Kingdom",
-          note: "핫초콜릿 스터러와 아티산 바로 구성된 영국식 초콜릿 리추얼.",
+          note: "아이들에게는 달콤한 추억을, 어른들에게는 동심을\n불러일으키는 리얼 핫초콜릿/코코아밤.",
           brandSlug: "cocoba",
         },
       ],
