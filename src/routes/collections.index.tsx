@@ -132,17 +132,20 @@ function CollectionsPage() {
                   </p>
                 </Reveal>
                 <Reveal delay={120}>
-                  {collection.slug === "sweet-moments" ? (
+                  {collection.slug === "sweet-moments" || collection.slug === "chill-cheers" ? (
                     <ImageSlider
                       className="mt-8"
                       interval={2000}
-                      images={collection.brands.map((b) => ({
-                        src:
-                          SWEET_SLIDES[
-                            b.brandSlug ?? b.name.toLowerCase().replace(/[^a-z]/g, "")
-                          ] ?? colSweet,
-                        alt: `${collection.titleLocal} — ${b.nameLocal}`,
-                      }))}
+                      images={collection.brands.map((b) => {
+                        const slides =
+                          collection.slug === "sweet-moments" ? SWEET_SLIDES : CHILL_SLIDES;
+                        const key =
+                          b.brandSlug ?? b.name.toLowerCase().replace(/[^a-z]/g, "-");
+                        return {
+                          src: slides[key] ?? emilioDrinkAsset.url,
+                          alt: `${collection.titleLocal} — ${b.nameLocal}`,
+                        };
+                      })}
                     />
                   ) : (
                     <img
