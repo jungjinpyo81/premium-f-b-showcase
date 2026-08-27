@@ -153,7 +153,7 @@ function CollectionsPage() {
             ref={setRef(index)}
             data-index={index}
             className={`flex min-h-screen w-full snap-start flex-col border-t border-border/60 md:h-screen md:overflow-hidden ${
-              index === 0 ? "pb-12" : "pt-28 pb-12"
+              pb-12
             }`}
           >
             {/* Editorial hero band (top ~30% of every section, PC/tablet) */}
