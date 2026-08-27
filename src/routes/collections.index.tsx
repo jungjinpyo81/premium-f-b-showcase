@@ -21,16 +21,18 @@ const COLLECTION_IMAGES: Record<string, string> = {
   "chill-cheers": colChill,
 };
 
-const FLAG_BY_ORIGIN: Record<string, string> = {
-  france: "🇫🇷",
-  "united kingdom": "🇬🇧",
-  italy: "🇮🇹",
-  poland: "🇵🇱",
-  netherland: "🇳🇱",
-  netherlands: "🇳🇱",
-  indonesia: "🇮🇩",
-  europe: "🇪🇺",
+const FLAG_CODE_BY_ORIGIN: Record<string, string> = {
+  france: "fr",
+  "united kingdom": "gb",
+  italy: "it",
+  poland: "pl",
+  netherland: "nl",
+  netherlands: "nl",
+  indonesia: "id",
+  europe: "eu",
 };
+
+const flagUrl = (code: string) => `https://flagcdn.com/w80/${code}.png`;
 
 const SWEET_SLIDES: Record<string, string> = {
   "maison-mazet": colSweet,
