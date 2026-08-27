@@ -460,6 +460,7 @@ function Index() {
         </div>
         <SiteFooter />
       </section>
+      ) : null}
     </div>
   );
 }
