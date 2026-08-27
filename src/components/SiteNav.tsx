@@ -125,6 +125,7 @@ export function SiteNav() {
   const copy = useCopy();
   const biz = useBusiness();
   const active = useActiveSection(copy.collections.map((c) => c.slug));
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-beige/15 bg-ink/80 backdrop-blur-md">
@@ -146,45 +147,115 @@ export function SiteNav() {
           <L to="/news" className="hidden transition-colors hover:text-beige lg:inline">
             {copy.nav.news}
           </L>
-          <L to="/" hash="inquiry" className="transition-colors hover:text-beige">
+          <L to="/" hash="inquiry" className="hidden transition-colors hover:text-beige sm:inline">
             {copy.nav.contact}
           </L>
           <LocaleSwitcher variant="dark" />
+          {/* Mobile hamburger */}
+          <button
+            type="button"
+            aria-label="Menu"
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((v) => !v)}
+            className="flex h-10 w-10 items-center justify-center text-beige lg:hidden"
+          >
+            <span className="relative block h-3 w-5">
+              <span
+                className={`absolute left-0 top-0 block h-px w-full bg-current transition-transform duration-300 ${
+                  mobileOpen ? "translate-y-[5.5px] rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-1/2 block h-px w-full -translate-y-1/2 bg-current transition-opacity duration-200 ${
+                  mobileOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`absolute bottom-0 left-0 block h-px w-full bg-current transition-transform duration-300 ${
+                  mobileOpen ? "-translate-y-[5.5px] -rotate-45" : ""
+                }`}
+              />
+            </span>
+          </button>
         </div>
       </div>
 
-      {/* Mobile: grouped hover menu */}
-      <div className="border-t border-beige/10 lg:hidden">
-        <div className="mx-auto flex max-w-[1500px] items-center gap-5 overflow-x-auto px-6 py-2.5 text-[11px] tracking-[0.18em] text-beige/60">
-          <div className="shrink-0">
-            <HoverMenuGroup active={active} sourcingLabel={copy.nav.sourcing} bizNav={biz.nav} />
-          </div>
-          <L
-            to="/"
-            hash="trade"
-            className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
-          >
-            {biz.nav.trade}
-          </L>
-          <L
-            to="/"
-            hash="distribution"
-            className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
-          >
-            {biz.nav.distribution}
-          </L>
-          <L
-            to="/"
-            hash="consulting"
-            className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
-          >
-            {biz.nav.consulting}
-          </L>
-          <L to="/news" className="shrink-0 whitespace-nowrap transition-colors hover:text-beige">
-            {copy.nav.news}
-          </L>
+      {/* Mobile dropdown panel */}
+      {mobileOpen ? (
+        <div className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-beige/10 bg-ink/95 backdrop-blur-md lg:hidden">
+          <nav className="mx-auto flex max-w-[1500px] flex-col gap-1 px-6 py-6 text-[12px] tracking-[0.2em] text-beige/70">
+            <L
+              to="/"
+              hash="services"
+              onClick={() => setMobileOpen(false)}
+              className="py-2.5 transition-colors hover:text-beige"
+            >
+              {copy.nav.sourcing}
+            </L>
+            <div className="py-2.5">
+              <L
+                to="/collections"
+                onClick={() => setMobileOpen(false)}
+                className="transition-colors hover:text-beige"
+              >
+                {copy.nav.tasteJourney}
+              </L>
+              <div className="mt-2 flex flex-col border-l border-beige/15 pl-4">
+                {copy.collections.map((c) => (
+                  <L
+                    key={c.slug}
+                    to="/collections"
+                    hash={c.slug}
+                    onClick={() => setMobileOpen(false)}
+                    className="py-2 text-[11px] text-beige/50 transition-colors hover:text-beige"
+                  >
+                    {c.titleLocal}
+                  </L>
+                ))}
+              </div>
+            </div>
+            <L
+              to="/"
+              hash="trade"
+              onClick={() => setMobileOpen(false)}
+              className="py-2.5 transition-colors hover:text-beige"
+            >
+              {biz.nav.trade}
+            </L>
+            <L
+              to="/"
+              hash="distribution"
+              onClick={() => setMobileOpen(false)}
+              className="py-2.5 transition-colors hover:text-beige"
+            >
+              {biz.nav.distribution}
+            </L>
+            <L
+              to="/"
+              hash="consulting"
+              onClick={() => setMobileOpen(false)}
+              className="py-2.5 transition-colors hover:text-beige"
+            >
+              {biz.nav.consulting}
+            </L>
+            <L
+              to="/news"
+              onClick={() => setMobileOpen(false)}
+              className="py-2.5 transition-colors hover:text-beige"
+            >
+              {copy.nav.news}
+            </L>
+            <L
+              to="/"
+              hash="inquiry"
+              onClick={() => setMobileOpen(false)}
+              className="py-2.5 text-gold transition-colors hover:text-beige"
+            >
+              {copy.nav.contact}
+            </L>
+          </nav>
         </div>
-      </div>
+      ) : null}
     </header>
   );
 }
