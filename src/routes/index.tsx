@@ -145,27 +145,31 @@ function Index() {
       {/* Our role — intro film */}
       <section
         id="services"
-        className="relative flex h-screen snap-start items-center overflow-hidden border-t border-beige/10"
+        className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
       >
-        <div className="mx-auto flex w-full flex-col items-center px-6 pt-20 md:px-10">
-          <Reveal>
-            <p className="text-center text-[10px] uppercase tracking-[0.45em] text-gold/80">
-              {copy.role.eyebrow}
-            </p>
-          </Reveal>
-          <Reveal delay={140}>
-            <div className="mx-auto mt-8 w-[min(calc(100vw-3rem),calc((100vh-11rem)*2.285714))] md:w-[min(calc(100vw-5rem),calc((100vh-11rem)*2.285714))]">
-              <div className="relative w-full overflow-hidden" style={{ aspectRatio: "3840 / 1680" }}>
-                <iframe
-                  src="https://player.vimeo.com/video/1171266171?title=0&byline=0&portrait=0&badge=0&autopause=0&controls=0&loop=0&muted=1&autoplay=1&playsinline=1&app_id=58479"
-                  title="홈페이지_인트로"
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  className="absolute inset-0 size-full border-0"
-                />
+        <div className="mx-auto grid w-full max-w-[1500px] gap-14 px-6 py-24 pt-32 md:px-10 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <Reveal>
+              <p className="text-[10px] uppercase tracking-[0.45em] text-gold/80">
+                {copy.role.eyebrow}
+              </p>
+            </Reveal>
+          </div>
+          <div className="lg:col-span-8">
+            <Reveal delay={140}>
+              <div className="w-full">
+                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "3840 / 1680" }}>
+                  <iframe
+                    src="https://player.vimeo.com/video/1171266171?title=0&byline=0&portrait=0&badge=0&autopause=0&controls=0&loop=1&muted=1&autoplay=1&playsinline=1&app_id=58479"
+                    title="홈페이지_인트로"
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    className="absolute inset-0 size-full border-0"
+                  />
+                </div>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
       </section>
 
