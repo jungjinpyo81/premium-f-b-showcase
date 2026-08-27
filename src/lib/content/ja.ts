@@ -177,7 +177,7 @@ export const ja: SiteCopy = {
     collection: {
       other: "Other Collections",
       viewBrand: "ブランドを見る",
-      requestInfo: "資料請求",
+      requestInfo: "ブランドを見る",
     },
   },
   collections: [

@@ -177,7 +177,7 @@ export const ko: SiteCopy = {
     collection: {
       other: "Other Collections",
       viewBrand: "브랜드 보기",
-      requestInfo: "자료 요청",
+      requestInfo: "브랜드 보기",
     },
   },
   collections: [
