@@ -42,12 +42,6 @@ export const Route = createFileRoute("/")({
 });
 
 
-const SERVICE_ICONS = {
-  globe: Globe2,
-  truck: Truck,
-  store: Store,
-  chart: LineChart,
-} as const;
 
 const TRADE_ICONS = {
   customs: FileCheck2,
