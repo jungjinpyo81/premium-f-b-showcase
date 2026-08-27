@@ -334,8 +334,10 @@ function Index() {
           </div>
         </div>
       </section>
+      ) : null}
 
       {/* Consulting */}
+      {show("consulting") ? (
       <section
         id="consulting"
         className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
