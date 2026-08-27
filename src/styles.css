@@ -147,9 +147,14 @@
     border-color: var(--color-border);
   }
 
-  html,
-  body {
+  html {
     overflow-x: hidden;
+  }
+
+  /* clip (not hidden) keeps body from becoming a scroll container, which would
+     capture scroll-snap areas away from the html scroller. */
+  body {
+    overflow-x: clip;
   }
 
   body {
