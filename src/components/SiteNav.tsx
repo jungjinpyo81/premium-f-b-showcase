@@ -158,7 +158,7 @@ export function SiteNav() {
       <div className="border-t border-beige/10 lg:hidden">
         <div className="mx-auto flex max-w-[1500px] items-center gap-5 overflow-x-auto px-6 py-2.5 text-[11px] tracking-[0.18em] text-beige/60">
           <div className="shrink-0">
-            <HoverMenuGroup active={active} sourcingLabel={copy.nav.sourcing} />
+            <HoverMenuGroup active={active} sourcingLabel={copy.nav.sourcing} bizNav={biz.nav} />
           </div>
           <L
             to="/"
