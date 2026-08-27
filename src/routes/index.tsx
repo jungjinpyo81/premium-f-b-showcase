@@ -113,8 +113,8 @@ function Index() {
           <Reveal immediate delay={420}>
             <div className="mt-12 flex flex-wrap items-center gap-4">
               <L
-                to="/"
-                hash="inquiry"
+                to="/collections"
+                hash="sweet-moments"
                 className="inline-flex h-13 items-center border border-beige px-10 py-4 text-[11px] uppercase tracking-[0.3em] text-beige transition-colors hover:bg-beige hover:text-ink"
               >
                 {copy.hero.ctaPrimary}
