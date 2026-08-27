@@ -179,13 +179,13 @@ function CollectionsPage() {
                     </h1>
                   </Reveal>
                   <Reveal immediate delay={240}>
-                    <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-[10px] uppercase tracking-[0.25em] text-beige/55">
+                    <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.25em] text-beige/90">
                       {copy.collections.map((c, i) => (
                         <li key={c.slug}>
                           <button
                             type="button"
                             onClick={() => goTo(i)}
-                            className="uppercase tracking-[0.25em] transition-colors hover:text-beige"
+                            className={`uppercase tracking-[0.25em] transition-colors duration-300 underline-offset-4 hover:text-gold hover:underline ${i === active ? "text-gold" : ""}`}
                           >
                             {c.titleLocal}
                           </button>
