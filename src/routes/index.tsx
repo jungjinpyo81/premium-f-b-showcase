@@ -159,6 +159,14 @@ function Index() {
               </div>
             </div>
           </Reveal>
+          <Reveal delay={280}>
+            <h2 className="mt-10 max-w-3xl font-display text-3xl leading-tight text-beige md:text-4xl">
+              {biz.whatWeDo.title}
+            </h2>
+          </Reveal>
+          <Reveal delay={340}>
+            <p className="mt-5 max-w-xl text-sm leading-7 text-beige/55">{biz.whatWeDo.lead}</p>
+          </Reveal>
         </div>
       </section>
 
