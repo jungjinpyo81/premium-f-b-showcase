@@ -140,15 +140,12 @@ function CollectionsPage() {
         ))}
       </nav>
 
-      <div
-        ref={containerRef}
-        className="h-screen snap-y snap-mandatory overflow-y-scroll scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
+      <div ref={containerRef} className="scroll-smooth">
         {/* Editorial hero */}
         <section
           ref={setRef(0)}
           data-index={0}
-          className="relative flex h-screen w-full snap-start items-center overflow-hidden"
+          className="relative flex h-[46vh] min-h-[320px] w-full items-center overflow-hidden"
         >
           <img
             src={COLLECTION_IMAGES[copy.collections[0]?.slug ?? ""] ?? colSweet}
