@@ -30,13 +30,17 @@ function useActiveSection(slugs: string[]) {
   return active;
 }
 
-/** Grouped hover mega-menu for the first two nav items. */
+/** Grouped hover mega-menu; hovering any contained nav item opens it. */
 function HoverMenuGroup({
   active,
   sourcingLabel,
+  bizNav,
+  showBizLinks = false,
 }: {
   active: string | null;
   sourcingLabel: string;
+  bizNav: { trade: string; distribution: string; consulting: string };
+  showBizLinks?: boolean;
 }) {
   const copy = useCopy();
   const [open, setOpen] = useState(false);
@@ -66,8 +70,9 @@ function HoverMenuGroup({
         >
           {sourcingLabel}
         </L>
-        <button
-          type="button"
+        <L
+          to="/collections"
+          hash="sweet-moments"
           className="flex items-center gap-2 py-2 transition-colors hover:text-beige"
           aria-expanded={open}
         >
@@ -77,7 +82,20 @@ function HoverMenuGroup({
           >
             {"\n"}
           </span>
-        </button>
+        </L>
+        {showBizLinks ? (
+          <>
+            <L to="/" hash="trade" className="py-2 transition-colors hover:text-beige">
+              {bizNav.trade}
+            </L>
+            <L to="/" hash="distribution" className="py-2 transition-colors hover:text-beige">
+              {bizNav.distribution}
+            </L>
+            <L to="/" hash="consulting" className="py-2 transition-colors hover:text-beige">
+              {bizNav.consulting}
+            </L>
+          </>
+        ) : null}
       </div>
       {open ? (
         <div className="absolute left-0 top-full z-50 min-w-52 border border-beige/15 bg-ink/95 py-2 backdrop-blur-md">
@@ -117,16 +135,12 @@ export function SiteNav() {
         </L>
 
         <nav className="hidden items-center gap-7 text-[11px] tracking-[0.2em] text-beige/60 lg:flex">
-          <HoverMenuGroup active={active} sourcingLabel={copy.nav.sourcing} />
-          <L to="/" hash="trade" className="transition-colors hover:text-beige">
-            {biz.nav.trade}
-          </L>
-          <L to="/" hash="distribution" className="transition-colors hover:text-beige">
-            {biz.nav.distribution}
-          </L>
-          <L to="/" hash="consulting" className="transition-colors hover:text-beige">
-            {biz.nav.consulting}
-          </L>
+          <HoverMenuGroup
+            active={active}
+            sourcingLabel={copy.nav.sourcing}
+            bizNav={biz.nav}
+            showBizLinks
+          />
         </nav>
 
         <div className="flex items-center gap-6 text-[10px] uppercase tracking-[0.25em] text-beige/60">
@@ -144,7 +158,7 @@ export function SiteNav() {
       <div className="border-t border-beige/10 lg:hidden">
         <div className="mx-auto flex max-w-[1500px] items-center gap-5 overflow-x-auto px-6 py-2.5 text-[11px] tracking-[0.18em] text-beige/60">
           <div className="shrink-0">
-            <HoverMenuGroup active={active} sourcingLabel={copy.nav.sourcing} />
+            <HoverMenuGroup active={active} sourcingLabel={copy.nav.sourcing} bizNav={biz.nav} />
           </div>
           <L
             to="/"
