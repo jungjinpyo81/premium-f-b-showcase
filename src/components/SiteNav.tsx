@@ -83,15 +83,19 @@ function HoverMenuGroup({
             {"\n"}
           </span>
         </L>
-        <L to="/" hash="trade" className="py-2 transition-colors hover:text-beige">
-          {bizNav.trade}
-        </L>
-        <L to="/" hash="distribution" className="py-2 transition-colors hover:text-beige">
-          {bizNav.distribution}
-        </L>
-        <L to="/" hash="consulting" className="py-2 transition-colors hover:text-beige">
-          {bizNav.consulting}
-        </L>
+        {showBizLinks ? (
+          <>
+            <L to="/" hash="trade" className="py-2 transition-colors hover:text-beige">
+              {bizNav.trade}
+            </L>
+            <L to="/" hash="distribution" className="py-2 transition-colors hover:text-beige">
+              {bizNav.distribution}
+            </L>
+            <L to="/" hash="consulting" className="py-2 transition-colors hover:text-beige">
+              {bizNav.consulting}
+            </L>
+          </>
+        ) : null}
       </div>
       {open ? (
         <div className="absolute left-0 top-full z-50 min-w-52 border border-beige/15 bg-ink/95 py-2 backdrop-blur-md">
