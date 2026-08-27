@@ -261,7 +261,7 @@ export const ko: SiteCopy = {
         {
           name: "Noynuts",
           nameLocal: "노이넛츠",
-          origin: "Europe",
+          origin: "NETHERLAND",
           note: "로스팅 밸런스를 중심으로 설계한 넛츠 포트폴리오.",
         },
       ],
