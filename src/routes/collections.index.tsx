@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import balsamicoPastaAsset from "@/assets/balsamico-pasta.jpg.asset.json";
 import churchillsTinAsset from "@/assets/churchills-tin.jpg.asset.json";
 import cocobaBombesAsset from "@/assets/cocoba-bombes.jpg.asset.json";
 import colChill from "@/assets/col-chill.jpg";
 import colNature from "@/assets/col-nature.jpg";
-import colPantry from "@/assets/col-pantry.jpg";
-import colPlantAsset from "@/assets/col-plant.jpg.asset.json";
 import colSweet from "@/assets/col-sweet.jpg";
+import colPlantAsset from "@/assets/col-plant.jpg.asset.json";
 import { ImageSlider } from "@/components/ImageSlider";
 import { L } from "@/components/L";
 import { Reveal } from "@/components/Reveal";
