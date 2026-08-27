@@ -31,90 +31,62 @@ function useActiveSection(slugs: string[]) {
   return active;
 }
 
-/** Grouped hover mega-menu; hovering any contained nav item opens it. */
-function HoverMenuGroup({
+function NavDropdown({
+  label,
+  links,
   active,
-  sourcingLabel,
-  bizNav,
-  showBizLinks = false,
 }: {
-  active: string | null;
-  sourcingLabel: string;
-  bizNav: { trade: string; distribution: string; consulting: string };
-  showBizLinks?: boolean;
+  label: React.ReactNode;
+  links: { to: string; hash?: string; label: string }[];
+  active?: string | null;
 }) {
-  const copy = useCopy();
   const [open, setOpen] = useState(false);
-  const groupRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const hash = useRouterState({ select: (s) => s.location.hash });
 
   useEffect(() => {
     if (!open) return;
     const onDown = (e: MouseEvent) => {
-      if (groupRef.current && !groupRef.current.contains(e.target as Node)) setOpen(false);
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     };
     document.addEventListener("mousedown", onDown);
     return () => document.removeEventListener("mousedown", onDown);
   }, [open]);
 
-  const isWhatWeDo = hash === "services" || hash === "what-we-do";
-  const bizClass = (on: boolean) =>
-    `py-2 transition-colors hover:text-beige ${on ? "text-beige" : ""}`;
+  const isActive = links.some((l) => (l.hash && hash === l.hash) || (active && l.hash === active));
 
   return (
     <div
-      ref={groupRef}
+      ref={ref}
       className="relative"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <div className="flex items-center gap-7">
-        <L
-          to="/"
-          hash="services"
-          className={bizClass(isWhatWeDo)}
+      <L
+        to={links[0]?.to ?? "/"}
+        hash={links[0]?.hash}
+        className={`flex items-center gap-2 py-2 transition-colors hover:text-beige ${isActive ? "text-beige" : ""}`}
+      >
+        {label}
+        <span
+          className={`text-[8px] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
         >
-          {sourcingLabel}
-        </L>
-        <L
-          to="/collections"
-          className="flex items-center gap-2 py-2 transition-colors hover:text-beige"
-          aria-expanded={open}
-        >
-          {copy.nav.tasteJourney}
-          <span
-            className={`text-[8px] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-          >
-            {"\n"}
-          </span>
-        </L>
-        {showBizLinks ? (
-          <>
-            <L to="/" hash="trade" className={bizClass(hash === "trade")}>
-              {bizNav.trade}
-            </L>
-            <L to="/" hash="distribution" className={bizClass(hash === "distribution")}>
-              {bizNav.distribution}
-            </L>
-            <L to="/" hash="consulting" className={bizClass(hash === "consulting")}>
-              {bizNav.consulting}
-            </L>
-          </>
-        ) : null}
-      </div>
+          {"\n"}
+        </span>
+      </L>
       {open ? (
         <div className="absolute left-0 top-full z-50 min-w-52 border border-beige/15 bg-ink/95 py-2 backdrop-blur-md">
-          {copy.collections.map((c) => (
+          {links.map((link) => (
             <L
-              key={c.slug}
-              to="/collections"
-              hash={c.slug}
+              key={`${link.to}-${link.hash}`}
+              to={link.to}
+              hash={link.hash}
               onClick={() => setOpen(false)}
               className={`block px-5 py-2.5 text-[11px] tracking-[0.2em] transition-colors hover:text-beige ${
-                active === c.slug ? "text-beige" : "text-beige/55"
+                hash === link.hash ? "text-beige" : "text-beige/55"
               }`}
             >
-              {c.titleLocal}
+              {link.label}
             </L>
           ))}
         </div>
@@ -122,6 +94,9 @@ function HoverMenuGroup({
     </div>
   );
 }
+
+const bizClass = (on: boolean) =>
+  `py-2 transition-colors hover:text-beige ${on ? "text-beige" : ""}`;
 
 /**
  * Persistent global navigation. Fixed to the top of the viewport on every
