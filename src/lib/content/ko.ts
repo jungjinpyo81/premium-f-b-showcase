@@ -190,13 +190,6 @@ export const ko: SiteCopy = {
         "유럽의 오래된 제과 하우스가 지켜온 배합과 공정을 그대로 옮겨옵니다. 대량 생산이 아닌 소량 배치, 그리고 선물로 건네기에 부족함 없는 패키지 완성도를 기준으로 선별합니다.",
       brands: [
         {
-          name: "Cocoba",
-          nameLocal: "코코바",
-          origin: "United Kingdom",
-          note: "핫초콜릿 스터러와 아티산 바로 구성된 영국식 초콜릿 리추얼.",
-          brandSlug: "cocoba",
-        },
-        {
           name: "Maison Mazet",
           nameLocal: "메종 마제",
           origin: "France",
@@ -208,6 +201,13 @@ export const ko: SiteCopy = {
           nameLocal: "처칠스",
           origin: "United Kingdom",
           note: "수집하고 싶어지는 틴 케이스에 담긴 영국 전통 캔디.",
+        },
+        {
+          name: "Cocoba",
+          nameLocal: "코코바",
+          origin: "United Kingdom",
+          note: "핫초콜릿 스터러와 아티산 바로 구성된 영국식 초콜릿 리추얼.",
+          brandSlug: "cocoba",
         },
       ],
     },

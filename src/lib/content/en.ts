@@ -190,13 +190,6 @@ export const en: SiteCopy = {
         "We bring over the exact formulations and processes preserved by Europe's storied confectionery houses. Our selection criteria are small-batch production over mass production, and packaging quality worthy of being given as a gift.",
       brands: [
         {
-          name: "Cocoba",
-          nameLocal: "Cocoba",
-          origin: "United Kingdom",
-          note: "A British chocolate ritual built around hot chocolate stirrers and artisan bars.",
-          brandSlug: "cocoba",
-        },
-        {
           name: "Maison Mazet",
           nameLocal: "Maison Mazet",
           origin: "France",
@@ -208,6 +201,13 @@ export const en: SiteCopy = {
           nameLocal: "Churchill's",
           origin: "United Kingdom",
           note: "Traditional British candy in a collectible tin case.",
+        },
+        {
+          name: "Cocoba",
+          nameLocal: "Cocoba",
+          origin: "United Kingdom",
+          note: "A British chocolate ritual built around hot chocolate stirrers and artisan bars.",
+          brandSlug: "cocoba",
         },
       ],
     },
