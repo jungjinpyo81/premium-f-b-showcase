@@ -115,7 +115,7 @@ function CollectionsPage() {
   };
 
   return (
-    <div className="h-screen overflow-hidden bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
 
       {/* Side dot pagination */}
