@@ -77,7 +77,6 @@ export type SiteCopy = {
   hero: {
     eyebrow: string;
     titleLines: string[];
-    leadLines: string[];
     ctaPrimary: string;
     ctaSecondary: string;
   };

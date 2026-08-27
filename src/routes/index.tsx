@@ -101,15 +101,6 @@ function Index() {
               ))}
             </h1>
           </Reveal>
-          <Reveal immediate delay={280}>
-            <p className="mt-8 max-w-xl text-sm leading-8 text-beige/70">
-              {copy.hero.leadLines.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </p>
-          </Reveal>
           <Reveal immediate delay={420}>
             <div className="mt-12 flex flex-wrap items-center gap-4">
               <L

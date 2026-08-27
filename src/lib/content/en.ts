@@ -36,10 +36,6 @@ export const en: SiteCopy = {
   hero: {
     eyebrow: "Europe Connect · F&B Sourcing & Logistics Consulting",
     titleLines: ["The bridge between global premium F&B brands", "and the Korean market"],
-    leadLines: [
-      "Built on 17+ years of hands-on sourcing, customs, and logistics experience, a single team",
-      "manages every step of a brand's entry into the Korean market.",
-    ],
     ctaPrimary: "Partnership Inquiry",
     ctaSecondary: "Our Role",
   },
