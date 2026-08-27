@@ -281,8 +281,10 @@ function Index() {
           </div>
         </div>
       </section>
+      ) : null}
 
       {/* Distribution */}
+      {show("distribution") ? (
       <section
         id="distribution"
         className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
