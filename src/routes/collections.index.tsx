@@ -161,12 +161,12 @@ function CollectionsPage() {
                 <p className="text-[10px] uppercase tracking-[0.45em] text-gold">TASTE JOURNEY</p>
               </Reveal>
               <Reveal immediate delay={120}>
-                <h1 className="mt-8 font-display text-4xl leading-tight text-beige md:text-6xl">
+                <h1 className="mt-5 font-display text-4xl leading-tight text-beige md:text-5xl">
                   {copy.nav.tasteJourney}
                 </h1>
               </Reveal>
               <Reveal immediate delay={240}>
-                <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-[11px] uppercase tracking-[0.25em] text-beige/55">
+                <ul className="mt-7 flex flex-wrap gap-x-8 gap-y-3 text-[11px] uppercase tracking-[0.25em] text-beige/55">
                   {copy.collections.map((c, i) => (
                     <li key={c.slug}>
                       <button
