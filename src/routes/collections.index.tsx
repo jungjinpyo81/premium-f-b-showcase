@@ -89,7 +89,7 @@ function CollectionsPage() {
           }
         }
       },
-      { root, threshold: 0.5 },
+      { threshold: 0.4 },
     );
     sectionRefs.current.forEach((el) => el && io.observe(el));
     return () => io.disconnect();
