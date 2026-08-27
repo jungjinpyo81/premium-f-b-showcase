@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
+  Globe2,
+  Truck,
+  Store,
+  LineChart,
   FileCheck2,
   ShieldCheck,
   Ship,
@@ -42,6 +46,12 @@ export const Route = createFileRoute("/")({
 });
 
 
+const SERVICE_ICONS = {
+  globe: Globe2,
+  truck: Truck,
+  store: Store,
+  chart: LineChart,
+} as const;
 
 const TRADE_ICONS = {
   customs: FileCheck2,
@@ -94,7 +104,8 @@ function Index() {
           <Reveal immediate delay={420}>
             <div className="mt-12 flex flex-wrap items-center gap-4">
               <L
-                to="/what-we-do"
+                to="/"
+                hash="services"
                 className="inline-flex items-center px-2 py-4 text-[11px] uppercase tracking-[0.3em] text-beige/60 transition-colors hover:text-beige"
               >
                 {copy.hero.ctaSecondary}
@@ -124,6 +135,70 @@ function Index() {
         </div>
       </section>
 
+      {/* Our role — intro film */}
+      <section
+        id="services"
+        className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
+      >
+        <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
+          <Reveal delay={120}>
+            <p className="text-[10px] uppercase tracking-[0.45em] text-gold/80">
+              WHAT WE DO
+            </p>
+          </Reveal>
+          <Reveal delay={200}>
+            <div className="mx-auto mt-8" style={{ width: "88%" }}>
+              <div className="w-full" style={{ aspectRatio: "3840 / 1680" }}>
+                <iframe
+                  src="https://player.vimeo.com/video/1171266171?title=0&byline=0&portrait=0&badge=0&autopause=0&controls=0&loop=1&muted=1&autoplay=1&playsinline=1&app_id=58479"
+                  title="홈페이지_인트로"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  className="size-full border-0"
+                />
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* What we do — four operating pillars */}
+      <section
+        id="what-we-do"
+        className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
+      >
+        <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
+          <Reveal>
+            <p className="text-[10px] uppercase tracking-[0.45em] text-gold/80">
+              {biz.whatWeDo.eyebrow}
+            </p>
+          </Reveal>
+          <Reveal delay={120}>
+            <h2 className="mt-8 max-w-3xl font-display text-3xl leading-tight text-beige md:text-5xl">
+              {biz.whatWeDo.title}
+            </h2>
+          </Reveal>
+          <Reveal delay={200}>
+            <p className="mt-6 max-w-xl text-sm leading-7 text-beige/55">{biz.whatWeDo.lead}</p>
+          </Reveal>
+          <div className="mt-14 grid gap-px bg-beige/15 md:grid-cols-2 lg:grid-cols-4">
+            {biz.whatWeDo.cards.map((card, i) => {
+              const Icon = SERVICE_ICONS[card.key];
+              return (
+                <Reveal key={card.key} delay={260 + i * 90} as="article">
+                  <div className="h-full bg-ink p-8">
+                    <Icon className="size-6 shrink-0 text-gold" strokeWidth={1} aria-hidden />
+                    <h3 className="mt-8 font-display text-xl leading-snug text-beige">
+                      {card.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-7 text-beige/55">{card.body}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* Logistics & customs */}
       <section

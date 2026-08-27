@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as NewsRouteImport } from './routes/news'
-import { Route as WhatWeDoRouteImport } from './routes/what-we-do'
 import { Route as BrandsSlugRouteImport } from './routes/brands.$slug'
 import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
 import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
@@ -31,11 +30,6 @@ const BrandsRoute = BrandsRouteImport.update({
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const WhatWeDoRoute = WhatWeDoRouteImport.update({
-  id: '/what-we-do',
-  path: '/what-we-do',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BrandsSlugRoute = BrandsSlugRouteImport.update({
@@ -63,7 +57,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/brands': typeof BrandsRouteWithChildren
   '/news': typeof NewsRouteWithChildren
-  '/what-we-do': typeof WhatWeDoRoute
   '/brands/$slug': typeof BrandsSlugRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
@@ -73,7 +66,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/brands': typeof BrandsRouteWithChildren
   '/news': typeof NewsRouteWithChildren
-  '/what-we-do': typeof WhatWeDoRoute
   '/brands/$slug': typeof BrandsSlugRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
@@ -84,7 +76,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/brands': typeof BrandsRouteWithChildren
   '/news': typeof NewsRouteWithChildren
-  '/what-we-do': typeof WhatWeDoRoute
   '/brands/$slug': typeof BrandsSlugRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
@@ -96,7 +87,6 @@ export interface FileRouteTypes {
     | '/'
     | '/brands'
     | '/news'
-    | '/what-we-do'
     | '/brands/$slug'
     | '/collections/$slug'
     | '/news/$slug'
@@ -106,7 +96,6 @@ export interface FileRouteTypes {
     | '/'
     | '/brands'
     | '/news'
-    | '/what-we-do'
     | '/brands/$slug'
     | '/collections/$slug'
     | '/news/$slug'
@@ -116,7 +105,6 @@ export interface FileRouteTypes {
     | '/'
     | '/brands'
     | '/news'
-    | '/what-we-do'
     | '/brands/$slug'
     | '/collections/$slug'
     | '/news/$slug'
@@ -127,7 +115,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BrandsRoute: typeof BrandsRouteWithChildren
   NewsRoute: typeof NewsRouteWithChildren
-  WhatWeDoRoute: typeof WhatWeDoRoute
   CollectionsSlugRoute: typeof CollectionsSlugRoute
   CollectionsIndexRoute: typeof CollectionsIndexRoute
 }
@@ -153,13 +140,6 @@ declare module '@tanstack/react-router' {
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/what-we-do': {
-      id: '/what-we-do'
-      path: '/what-we-do'
-      fullPath: '/what-we-do'
-      preLoaderRoute: typeof WhatWeDoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/brands/$slug': {
@@ -218,7 +198,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BrandsRoute: BrandsRouteWithChildren,
   NewsRoute: NewsRouteWithChildren,
-  WhatWeDoRoute: WhatWeDoRoute,
   CollectionsSlugRoute: CollectionsSlugRoute,
   CollectionsIndexRoute: CollectionsIndexRoute,
 }

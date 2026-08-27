@@ -64,7 +64,8 @@ function HoverMenuGroup({
     >
       <div className="flex items-center gap-7">
         <L
-          to="/what-we-do"
+          to="/"
+          hash="services"
           className="py-2 transition-colors hover:text-beige"
         >
           {sourcingLabel}
@@ -184,7 +185,8 @@ export function SiteNav() {
         <div className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-beige/10 bg-ink/95 backdrop-blur-md lg:hidden">
           <nav className="mx-auto flex max-w-[1500px] flex-col gap-1 px-6 py-6 text-[12px] tracking-[0.2em] text-beige/70">
             <L
-              to="/what-we-do"
+              to="/"
+              hash="services"
               onClick={() => setMobileOpen(false)}
               className="py-2.5 transition-colors hover:text-beige"
             >
