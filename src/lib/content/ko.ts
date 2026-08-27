@@ -256,7 +256,7 @@ export const ko: SiteCopy = {
           name: "Crispy Natural",
           nameLocal: "크리스피 내추럴",
           origin: "Poland",
-          note: "과일과 채소를 그대로 구워낸 크리스프 스낵.",
+          note: "과일과 채소를 MVD((Microwave Vacuum Drying),\n진공저온건조 기법으로 수분 90%를 제거하여 바삭합니다.\n\n1팩(18g)에는 사과원물 180g 분량이 투입됩니다.",
         },
         {
           name: "Noynuts",
