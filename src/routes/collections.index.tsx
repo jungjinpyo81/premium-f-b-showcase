@@ -12,7 +12,7 @@ import colPlantAsset from "@/assets/col-plant.jpg.asset.json";
 import { ImageSlider } from "@/components/ImageSlider";
 import { L } from "@/components/L";
 import { Reveal } from "@/components/Reveal";
-import { SiteFooter, SiteNav } from "@/components/SiteNav";
+import { SiteNav } from "@/components/SiteNav";
 import { getCopy, useCopy } from "@/lib/content";
 
 const COLLECTION_IMAGES: Record<string, string> = {
@@ -95,6 +95,16 @@ function CollectionsPage() {
     sectionRefs.current.forEach((el) => el && io.observe(el));
     return () => io.disconnect();
   }, [total]);
+
+  // Honour #hash deep links (e.g. /collections#sweet-moments) inside the snap container.
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    const t = window.setTimeout(() => {
+      document.getElementById(hash)?.scrollIntoView({ behavior: "auto", block: "start" });
+    }, 60);
+    return () => window.clearTimeout(t);
+  }, []);
 
   const goTo = useCallback((i: number) => {
     sectionRefs.current[i]?.scrollIntoView({ behavior: "smooth", block: "start" });
