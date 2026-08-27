@@ -162,9 +162,16 @@ function CollectionsPage() {
                     <Reveal key={b.name} delay={i * 70} as="article">
                       <div className="grid gap-4 border-b border-border py-8 md:grid-cols-12">
                         <div className="md:col-span-3">
-                          <span aria-hidden="true" className="text-sm leading-none">
-                            {FLAG_BY_ORIGIN[b.origin.trim().toLowerCase()] ?? ""}
-                          </span>
+                          {FLAG_CODE_BY_ORIGIN[b.origin.trim().toLowerCase()] ? (
+                            <img
+                              src={flagUrl(FLAG_CODE_BY_ORIGIN[b.origin.trim().toLowerCase()])}
+                              alt={b.origin}
+                              width={24}
+                              height={16}
+                              loading="lazy"
+                              className="h-4 w-6 rounded-[1px] object-cover shadow-sm"
+                            />
+                          ) : null}
                           <p className="mt-1.5 text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
                             {b.origin}
                           </p>
