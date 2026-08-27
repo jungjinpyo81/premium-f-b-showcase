@@ -41,6 +41,11 @@ const SWEET_SLIDES: Record<string, string> = {
   cocoba: cocobaBombesAsset.url,
 };
 
+const CHILL_SLIDES: Record<string, string> = {
+  emilio: emilioDrinkAsset.url,
+  "luwak-premium-coffee": luwakCoffeeAsset.url,
+};
+
 export const Route = createFileRoute("/collections/")({
   loaderDeps: ({ search }) => ({ lang: search.lang }),
   loader: ({ deps }) => ({ lang: deps.lang }),
