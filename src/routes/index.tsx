@@ -77,7 +77,7 @@ function Index() {
       <SiteNav />
 
       {/* Hero */}
-      <section className="relative flex h-screen snap-start items-end overflow-hidden">
+      <section className="relative flex h-screen snap-start items-center overflow-hidden">
         <img
           src={heroImg}
           alt={copy.hero.titleLines.join(" ")}
