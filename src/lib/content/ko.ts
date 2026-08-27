@@ -187,7 +187,7 @@ export const ko: SiteCopy = {
       titleLocal: "달콤한 순간",
       lead: "하루의 끝에 놓이는 작은 사치.",
       intro:
-        "유럽의 오래된 제과 하우스가 지켜온 배합과 공정을 그대로 옮겨옵니다. 대량 생산이 아닌 소량 배치, 그리고 선물로 건네기에 부족함 없는 패키지 완성도를 기준으로 선별합니다.",
+        "유럽의 헤리티지, 레시피의 정통성 그리고 완성도 높은\n패키지를 기준으로 브랜드를 선별합니다.",
       brands: [
         {
           name: "Maison Mazet",
@@ -206,7 +206,7 @@ export const ko: SiteCopy = {
           name: "Cocoba",
           nameLocal: "코코바 (겨울 시즌 한정)",
           origin: "United Kingdom",
-          note: "아이들에게는 달콤한 추억을, 어른들에게는 동심을\n불러일으키는 리얼 핫초콜릿/코코아밤.",
+          note: "아이들에게는 달콤한 추억을, 어른들에게는 동심을\n선물하는 리얼 핫초콜릿/코코아밤.",
           brandSlug: "cocoba",
         },
       ],
