@@ -48,8 +48,8 @@ const ko: BusinessCopy = {
   },
   whatWeDo: {
     eyebrow: "What We Do",
-    title: "브랜드의 한국 진출, 원스톱 솔루션",
-    lead: "소싱부터 물류/통관, 유통, 컨설팅까지 네 개의 축으로 운영합니다.",
+    title: "브랜드의 한국 진출,\n원스톱 솔루션",
+    lead: "소싱부터 물류/통관, 유통, 컨설팅 등\n전문 역량을 바탕으로 통합 관리를 제공합니다.",
     cards: [
       { key: "globe", title: "Global Sourcing \n(글로벌 소싱)", body: "현지 네트워크를 통해 브랜드를 직접 검증하고, 한국 시장에 맞는 라인업을 선별합니다." },
       { key: "truck", title: "원스톱 국제 물류 및 특송", body: "항공·해상·내륙 복합운송과 국제 특송등 맞춤 물류를 설계합니다." },
