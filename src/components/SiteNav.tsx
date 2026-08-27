@@ -130,7 +130,7 @@ export function SiteNav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-beige/15 bg-ink/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-[1500px] items-center justify-between gap-8 px-6 md:px-10">
-        <L to="/" className="font-display text-base tracking-[0.35em] text-beige md:text-lg">
+        <L to="/" resetScroll className="font-display text-base tracking-[0.35em] text-beige md:text-lg">
           EUROPE CONNECT
         </L>
 
