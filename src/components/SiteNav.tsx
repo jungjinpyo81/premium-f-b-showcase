@@ -98,10 +98,10 @@ export function SiteNav() {
         </L>
 
         <nav className="hidden items-center gap-7 text-[11px] tracking-[0.2em] text-beige/60 lg:flex">
-          <TasteJourneyMenu active={active} />
           <L to="/" hash="services" className="transition-colors hover:text-beige">
             {copy.nav.sourcing}
           </L>
+          <TasteJourneyMenu active={active} />
           <L to="/" hash="trade" className="transition-colors hover:text-beige">
             {biz.nav.trade}
           </L>
@@ -127,9 +127,6 @@ export function SiteNav() {
       {/* Mobile: grouped Taste Journey menu */}
       <div className="border-t border-beige/10 lg:hidden">
         <div className="mx-auto flex max-w-[1500px] items-center gap-5 overflow-x-auto px-6 py-2.5 text-[11px] tracking-[0.18em] text-beige/60">
-          <div className="shrink-0">
-            <TasteJourneyMenu active={active} />
-          </div>
           <L
             to="/"
             hash="services"
@@ -137,6 +134,9 @@ export function SiteNav() {
           >
             {copy.nav.sourcing}
           </L>
+          <div className="shrink-0">
+            <TasteJourneyMenu active={active} />
+          </div>
           <L
             to="/"
             hash="trade"
