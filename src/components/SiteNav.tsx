@@ -140,18 +140,11 @@ export function SiteNav() {
         </div>
       </div>
 
-      {/* Mobile: grouped Taste Journey menu */}
+      {/* Mobile: grouped hover menu */}
       <div className="border-t border-beige/10 lg:hidden">
         <div className="mx-auto flex max-w-[1500px] items-center gap-5 overflow-x-auto px-6 py-2.5 text-[11px] tracking-[0.18em] text-beige/60">
-          <L
-            to="/"
-            hash="services"
-            className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
-          >
-            {copy.nav.sourcing}
-          </L>
           <div className="shrink-0">
-            <TasteJourneyMenu active={active} />
+            <HoverMenuGroup active={active} sourcingLabel={copy.nav.sourcing} />
           </div>
           <L
             to="/"
