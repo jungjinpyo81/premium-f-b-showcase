@@ -195,11 +195,12 @@ function CollectionsPage() {
             id={collection.slug}
             ref={setRef(index + 1)}
             data-index={index + 1}
-            className="flex min-h-screen w-full snap-start items-start overflow-hidden border-t border-border/60 pt-28 pb-12 lg:h-screen"
+            className="flex h-screen min-h-screen w-full snap-start items-stretch overflow-hidden border-t border-border/60 pt-28 pb-12"
           >
-            <div className="mx-auto flex w-full max-w-[1400px] flex-col justify-center px-6 md:px-10 min-h-[calc(100vh-10rem)]">
+            <div className="mx-auto flex h-full w-full max-w-[1400px] flex-col justify-start px-6 md:px-10">
               <div className="grid h-full items-start gap-10 md:grid-cols-12">
                 <div className="md:col-span-5">
+
 
                   <Reveal repeat amount={0.2}>
                     <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground">
