@@ -250,11 +250,12 @@ function CollectionsPage() {
                       {collection.intro}
                     </p>
                   </Reveal>
-                  <div className="mt-4 border-t border-border">
+                  <div className="mt-0 border-t border-border">
                     {collection.brands.map((b, i) => (
                       <Reveal key={b.name} repeat amount={0.1} delay={i * 70} as="article">
                         <div className="grid gap-4 border-b border-border py-3 md:grid-cols-12">
                           <div className="md:col-span-3">
+
 
                             {(() => {
                               const code = FLAG_CODE_BY_ORIGIN[b.origin.trim().toLowerCase()];
