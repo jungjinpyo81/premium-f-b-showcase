@@ -144,7 +144,7 @@ function Index() {
       {/* Our role — intro film */}
       <section
         id="services"
-        className="relative flex min-h-screen snap-start md:h-screen items-center overflow-hidden border-t border-beige/10"
+        className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
       >
         <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
           <Reveal delay={120}>
@@ -171,7 +171,7 @@ function Index() {
       {/* What we do — four operating pillars */}
       <section
         id="what-we-do"
-        className="relative flex min-h-screen snap-start md:h-screen items-center overflow-hidden border-t border-beige/10"
+        className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
       >
         <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
           <Reveal>
@@ -209,7 +209,7 @@ function Index() {
       {/* Logistics & customs */}
       <section
         id="trade"
-        className="relative flex min-h-screen snap-start md:h-screen items-center overflow-hidden border-t border-beige/10"
+        className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
       >
         <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
           <div className="grid gap-14 lg:grid-cols-12">
@@ -253,7 +253,7 @@ function Index() {
       {/* Distribution */}
       <section
         id="distribution"
-        className="relative flex min-h-screen snap-start md:h-screen items-center overflow-hidden border-t border-beige/10"
+        className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
       >
         <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
           <Reveal>
@@ -304,7 +304,7 @@ function Index() {
       {/* Consulting */}
       <section
         id="consulting"
-        className="relative flex min-h-screen snap-start md:h-screen items-center overflow-hidden border-t border-beige/10"
+        className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
       >
         <div className="mx-auto grid w-full max-w-[1500px] items-center gap-14 px-6 py-24 pt-32 md:grid-cols-2 md:px-10">
           <Reveal>
@@ -348,7 +348,7 @@ function Index() {
       </section>
 
       {/* Gift & B2B */}
-      <section id="gift" className="relative flex min-h-screen snap-start md:h-screen items-center overflow-hidden lg:h-screen">
+      <section id="gift" className="relative flex min-h-screen snap-start items-center overflow-hidden md:h-screen">
         <img
           src={giftImg}
           alt={copy.gift.eyebrow}
@@ -403,7 +403,7 @@ function Index() {
       </section>
 
       {/* Inquiry + footer */}
-      <section id="inquiry" className="min-h-screen snap-start md:h-screen border-t border-beige/10">
+      <section id="inquiry" className="min-h-screen snap-start border-t border-beige/10">
         <div className="mx-auto grid max-w-[1500px] gap-14 px-6 pb-16 pt-28 md:grid-cols-12 md:px-10">
           <Reveal className="md:col-span-5">
             <p className="text-[10px] uppercase tracking-[0.45em] text-beige/50">
