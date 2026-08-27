@@ -79,8 +79,7 @@ function CollectionsPage() {
   const total = copy.collections.length + 1;
 
   useEffect(() => {
-    const root = containerRef.current;
-    if (!root || typeof IntersectionObserver === "undefined") return;
+    if (typeof IntersectionObserver === "undefined") return;
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -90,7 +89,7 @@ function CollectionsPage() {
           }
         }
       },
-      { root, threshold: 0.5 },
+      { threshold: 0.4 },
     );
     sectionRefs.current.forEach((el) => el && io.observe(el));
     return () => io.disconnect();
@@ -115,7 +114,7 @@ function CollectionsPage() {
   };
 
   return (
-    <div className="h-screen overflow-hidden bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
 
       {/* Side dot pagination */}
@@ -141,15 +140,12 @@ function CollectionsPage() {
         ))}
       </nav>
 
-      <div
-        ref={containerRef}
-        className="h-screen snap-y snap-mandatory overflow-y-scroll scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
+      <div ref={containerRef} className="scroll-smooth">
         {/* Editorial hero */}
         <section
           ref={setRef(0)}
           data-index={0}
-          className="relative flex h-screen w-full snap-start items-center overflow-hidden"
+          className="relative flex h-[46vh] min-h-[320px] w-full items-center overflow-hidden"
         >
           <img
             src={COLLECTION_IMAGES[copy.collections[0]?.slug ?? ""] ?? colSweet}
@@ -165,12 +161,12 @@ function CollectionsPage() {
                 <p className="text-[10px] uppercase tracking-[0.45em] text-gold">TASTE JOURNEY</p>
               </Reveal>
               <Reveal immediate delay={120}>
-                <h1 className="mt-8 font-display text-4xl leading-tight text-beige md:text-6xl">
+                <h1 className="mt-5 font-display text-4xl leading-tight text-beige md:text-5xl">
                   {copy.nav.tasteJourney}
                 </h1>
               </Reveal>
               <Reveal immediate delay={240}>
-                <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-[11px] uppercase tracking-[0.25em] text-beige/55">
+                <ul className="mt-7 flex flex-wrap gap-x-8 gap-y-3 text-[11px] uppercase tracking-[0.25em] text-beige/55">
                   {copy.collections.map((c, i) => (
                     <li key={c.slug}>
                       <button
@@ -194,9 +190,9 @@ function CollectionsPage() {
             id={collection.slug}
             ref={setRef(index + 1)}
             data-index={index + 1}
-            className="flex h-screen w-full snap-start items-center overflow-y-auto"
+            className="flex w-full items-center border-t border-border/60"
           >
-            <div className="mx-auto w-full max-w-[1400px] px-6 py-24 pt-28 md:px-10">
+            <div className="mx-auto w-full max-w-[1400px] px-6 py-20 md:px-10">
               <div className="grid gap-10 md:grid-cols-12">
                 <div className="md:col-span-5">
                   <Reveal repeat amount={0.2}>
