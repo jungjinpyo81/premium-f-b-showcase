@@ -65,7 +65,7 @@ const ko: BusinessCopy = {
       { key: "freight", label: "국제 물류 관리", body: "항공/해상/내륙 국제 복합운송, 국제 특송 서비스" },
       { key: "customs", label: "통관", body: "HS코드 분류, 서류 검토, 통관신고까지 정확하고 빠르게 처리" },
       { key: "quarantine", label: "검역", body: "식품/화장품 등 수입신고, 한글표시 사항, 라벨링, 보수작업" },
-      { key: "warehouse", label: "창고, 3PL 물류", body: "온라인 유통(B2C, 홈쇼핑, 쿠팡) 최첨단 항온항습 관리, 고액 화재보험" },
+      { key: "warehouse", label: "창고, 3PL 물류", body: "온라인 유통(B2C, 홈쇼핑, 쿠팡) 연계\n최첨단 항온항습 관리, 고액 화재보험" },
     ],
   },
   distribution: {
