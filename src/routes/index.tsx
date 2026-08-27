@@ -439,8 +439,10 @@ function Index() {
           </div>
         </div>
       </section>
+      ) : null}
 
       {/* Inquiry + footer */}
+      {show("inquiry") ? (
       <section id="inquiry" className="min-h-screen snap-start border-t border-beige/10">
         <div className="mx-auto grid max-w-[1500px] gap-14 px-6 pb-16 pt-28 md:grid-cols-12 md:px-10">
           <Reveal className="md:col-span-5">
