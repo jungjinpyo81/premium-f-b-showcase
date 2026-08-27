@@ -113,14 +113,25 @@ function CollectionsPage() {
                   </p>
                 </Reveal>
                 <Reveal delay={120}>
-                  <img
-                    src={COLLECTION_IMAGES[collection.slug]}
-                    alt={collection.titleLocal}
-                    width={1200}
-                    height={800}
-                    loading="lazy"
-                    className="mt-8 aspect-[4/3] w-full object-cover"
-                  />
+                  {collection.slug === "sweet-moments" ? (
+                    <ImageSlider
+                      className="mt-8"
+                      interval={2000}
+                      images={collection.brands.map((b) => ({
+                        src: SWEET_SLIDES[b.brandSlug ?? ""] ?? colSweet,
+                        alt: `${collection.titleLocal} — ${b.nameLocal}`,
+                      }))}
+                    />
+                  ) : (
+                    <img
+                      src={COLLECTION_IMAGES[collection.slug]}
+                      alt={collection.titleLocal}
+                      width={1200}
+                      height={800}
+                      loading="lazy"
+                      className="mt-8 aspect-[4/3] w-full object-cover"
+                    />
+                  )}
                 </Reveal>
               </div>
 
