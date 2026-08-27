@@ -145,7 +145,7 @@ function CollectionsPage() {
         ))}
       </nav>
 
-      <div ref={containerRef} className="scroll-smooth">
+      <div ref={containerRef} className="mobile-alt-light scroll-smooth">
         {copy.collections.map((collection, index) => (
           <section
             key={collection.slug}
