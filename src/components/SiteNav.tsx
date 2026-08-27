@@ -133,13 +133,13 @@ export function SiteNav() {
             }))}
             active={active}
           />
-          <L to="/" hash="trade" className={bizClass(false)}>
+          <L to="/" hash="trade" className={bizClass(hash === "trade")}>
             {biz.nav.trade}
           </L>
-          <L to="/" hash="distribution" className={bizClass(false)}>
+          <L to="/" hash="distribution" className={bizClass(hash === "distribution")}>
             {biz.nav.distribution}
           </L>
-          <L to="/" hash="consulting" className={bizClass(false)}>
+          <L to="/" hash="consulting" className={bizClass(hash === "consulting")}>
             {biz.nav.consulting}
           </L>
         </nav>
