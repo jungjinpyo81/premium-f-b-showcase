@@ -79,6 +79,11 @@ function CollectionsPage() {
   const total = copy.collections.length + 1;
 
   useEffect(() => {
+    document.documentElement.classList.add("snap-collections");
+    return () => document.documentElement.classList.remove("snap-collections");
+  }, []);
+
+  useEffect(() => {
     if (typeof IntersectionObserver === "undefined") return;
     const io = new IntersectionObserver(
       (entries) => {
@@ -145,7 +150,7 @@ function CollectionsPage() {
         <section
           ref={setRef(0)}
           data-index={0}
-          className="relative flex h-[46vh] min-h-[320px] w-full items-center overflow-hidden"
+          className="relative flex h-screen min-h-0 w-full snap-start items-center overflow-hidden"
         >
           <img
             src={COLLECTION_IMAGES[copy.collections[0]?.slug ?? ""] ?? colSweet}
@@ -155,7 +160,7 @@ function CollectionsPage() {
             className="absolute inset-0 size-full object-cover"
           />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.7)_55%,oklch(0.12_0_0/0.35)_100%)]" />
-          <div className="relative mx-auto w-full max-w-[1500px] px-6 pt-24 md:px-10">
+          <div className="relative mx-auto w-full max-w-[1500px] px-6 md:px-10">
             <div className="max-w-2xl">
               <Reveal immediate>
                 <p className="text-[10px] uppercase tracking-[0.45em] text-gold">TASTE JOURNEY</p>
@@ -190,10 +195,10 @@ function CollectionsPage() {
             id={collection.slug}
             ref={setRef(index + 1)}
             data-index={index + 1}
-            className="flex w-full items-center border-t border-border/60"
+            className="flex min-h-screen w-full snap-start items-start overflow-hidden border-t border-border/60 pt-28 pb-12 lg:h-screen"
           >
-            <div className="mx-auto w-full max-w-[1400px] px-6 py-20 md:px-10">
-              <div className="grid gap-10 md:grid-cols-12">
+            <div className="mx-auto w-full max-w-[1400px] px-6 md:px-10">
+              <div className="grid items-start gap-10 md:grid-cols-12">
                 <div className="md:col-span-5">
                   <Reveal repeat amount={0.2}>
                     <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground">
@@ -209,7 +214,7 @@ function CollectionsPage() {
                   <Reveal repeat amount={0.2} delay={120}>
                     {collection.slug === "sweet-moments" || collection.slug === "chill-cheers" ? (
                       <ImageSlider
-                        className="mt-6"
+                        className="mt-6 max-w-xs"
                         interval={2000}
                         images={collection.brands.map((b) => {
                           const slides =
@@ -233,13 +238,13 @@ function CollectionsPage() {
                         width={1200}
                         height={800}
                         loading="lazy"
-                        className="mt-6 aspect-[4/3] w-full object-cover"
+                        className="mt-6 aspect-video w-full object-cover"
                       />
                     )}
                   </Reveal>
                 </div>
 
-                <div className="md:col-span-7">
+                <div className="md:col-span-7 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto lg:pr-2">
                   <Reveal repeat amount={0.2} delay={80}>
                     <p className="max-w-xl text-sm leading-7 text-muted-foreground">
                       {collection.intro}
@@ -248,7 +253,7 @@ function CollectionsPage() {
                   <div className="mt-6 border-t border-border">
                     {collection.brands.map((b, i) => (
                       <Reveal key={b.name} repeat amount={0.1} delay={i * 70} as="article">
-                        <div className="grid gap-4 border-b border-border py-5 md:grid-cols-12">
+                        <div className="grid gap-4 border-b border-border py-4 md:grid-cols-12">
                           <div className="md:col-span-3">
                             {(() => {
                               const code = FLAG_CODE_BY_ORIGIN[b.origin.trim().toLowerCase()];

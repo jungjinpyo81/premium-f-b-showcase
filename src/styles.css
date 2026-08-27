@@ -215,6 +215,22 @@ html.snap-page {
   }
 }
 
+/* Full-page scroll snap (collections / Taste Journey page only). */
+@media (min-width: 1024px) {
+  html.snap-collections {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    scroll-padding-top: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.snap-collections {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+}
+
+
 /* Dark surface: remap semantic tokens so shared components read correctly. */
 #inquiry {
   --background: var(--ink);
