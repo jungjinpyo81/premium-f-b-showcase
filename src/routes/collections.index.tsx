@@ -21,6 +21,17 @@ const COLLECTION_IMAGES: Record<string, string> = {
   "chill-cheers": colChill,
 };
 
+const FLAG_BY_ORIGIN: Record<string, string> = {
+  france: "🇫🇷",
+  "united kingdom": "🇬🇧",
+  italy: "🇮🇹",
+  poland: "🇵🇱",
+  netherland: "🇳🇱",
+  netherlands: "🇳🇱",
+  indonesia: "🇮🇩",
+  europe: "🇪🇺",
+};
+
 const SWEET_SLIDES: Record<string, string> = {
   "maison-mazet": colSweet,
   churchills: churchillsTinAsset.url,
