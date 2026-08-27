@@ -5,6 +5,7 @@ import churchillsTinAsset from "@/assets/churchills-tin.jpg.asset.json";
 import cocobaBombesAsset from "@/assets/cocoba-bombes.jpg.asset.json";
 import emilioDrinkAsset from "@/assets/emilio-drink.png.asset.json";
 import crispyNaturalBoxAsset from "@/assets/crispy-natural-box.webp.asset.json";
+import luwakCoffeeAsset from "@/assets/luwak-coffee.jpg.asset.json";
 import colSweet from "@/assets/col-sweet.jpg";
 import colPlantAsset from "@/assets/col-plant.jpg.asset.json";
 import { ImageSlider } from "@/components/ImageSlider";
@@ -38,6 +39,11 @@ const SWEET_SLIDES: Record<string, string> = {
   "maison-mazet": colSweet,
   churchills: churchillsTinAsset.url,
   cocoba: cocobaBombesAsset.url,
+};
+
+const CHILL_SLIDES: Record<string, string> = {
+  emilio: emilioDrinkAsset.url,
+  "luwak-premium-coffee": luwakCoffeeAsset.url,
 };
 
 export const Route = createFileRoute("/collections/")({
@@ -126,17 +132,20 @@ function CollectionsPage() {
                   </p>
                 </Reveal>
                 <Reveal delay={120}>
-                  {collection.slug === "sweet-moments" ? (
+                  {collection.slug === "sweet-moments" || collection.slug === "chill-cheers" ? (
                     <ImageSlider
                       className="mt-8"
                       interval={2000}
-                      images={collection.brands.map((b) => ({
-                        src:
-                          SWEET_SLIDES[
-                            b.brandSlug ?? b.name.toLowerCase().replace(/[^a-z]/g, "")
-                          ] ?? colSweet,
-                        alt: `${collection.titleLocal} — ${b.nameLocal}`,
-                      }))}
+                      images={collection.brands.map((b) => {
+                        const slides =
+                          collection.slug === "sweet-moments" ? SWEET_SLIDES : CHILL_SLIDES;
+                        const key =
+                          b.brandSlug ?? b.name.toLowerCase().replace(/[^a-z]/g, "-");
+                        return {
+                          src: slides[key] ?? emilioDrinkAsset.url,
+                          alt: `${collection.titleLocal} — ${b.nameLocal}`,
+                        };
+                      })}
                     />
                   ) : (
                     <img
