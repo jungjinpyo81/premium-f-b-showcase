@@ -116,12 +116,31 @@ export function SiteNav() {
         </L>
 
         <nav className="hidden items-center gap-7 text-[11px] tracking-[0.2em] text-beige/60 lg:flex">
-          <HoverMenuGroup
-            active={active}
-            sourcingLabel={copy.nav.sourcing}
-            bizNav={biz.nav}
-            showBizLinks
+          <NavDropdown
+            label={copy.nav.sourcing}
+            links={[
+              { to: "/", hash: "services", label: "브랜드의 한국 진출" },
+              { to: "/", hash: "what-we-do", label: "운영 역량" },
+            ]}
           />
+          <NavDropdown
+            label={copy.nav.tasteJourney}
+            links={copy.collections.map((c) => ({
+              to: "/collections",
+              hash: c.slug,
+              label: c.titleLocal,
+            }))}
+            active={active}
+          />
+          <L to="/" hash="trade" className={bizClass(false)}>
+            {biz.nav.trade}
+          </L>
+          <L to="/" hash="distribution" className={bizClass(false)}>
+            {biz.nav.distribution}
+          </L>
+          <L to="/" hash="consulting" className={bizClass(false)}>
+            {biz.nav.consulting}
+          </L>
         </nav>
 
         <div className="flex items-center gap-6 text-[10px] uppercase tracking-[0.25em] text-beige/60">
