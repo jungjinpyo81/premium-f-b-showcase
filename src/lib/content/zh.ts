@@ -177,7 +177,7 @@ export const zh: SiteCopy = {
     collection: {
       other: "Other Collections",
       viewBrand: "查看品牌",
-      requestInfo: "索取资料",
+      requestInfo: "查看品牌",
     },
   },
   collections: [

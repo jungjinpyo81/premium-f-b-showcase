@@ -177,7 +177,7 @@ export const en: SiteCopy = {
     collection: {
       other: "Other Collections",
       viewBrand: "View Brand",
-      requestInfo: "Request Information",
+      requestInfo: "View Brand",
     },
   },
   collections: [
