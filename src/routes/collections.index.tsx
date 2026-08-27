@@ -21,16 +21,18 @@ const COLLECTION_IMAGES: Record<string, string> = {
   "chill-cheers": colChill,
 };
 
-const FLAG_BY_ORIGIN: Record<string, string> = {
-  france: "🇫🇷",
-  "united kingdom": "🇬🇧",
-  italy: "🇮🇹",
-  poland: "🇵🇱",
-  netherland: "🇳🇱",
-  netherlands: "🇳🇱",
-  indonesia: "🇮🇩",
-  europe: "🇪🇺",
+const FLAG_CODE_BY_ORIGIN: Record<string, string> = {
+  france: "fr",
+  "united kingdom": "gb",
+  italy: "it",
+  poland: "pl",
+  netherland: "nl",
+  netherlands: "nl",
+  indonesia: "id",
+  europe: "eu",
 };
+
+const flagUrl = (code: string) => `https://flagcdn.com/w80/${code}.png`;
 
 const SWEET_SLIDES: Record<string, string> = {
   "maison-mazet": colSweet,
@@ -159,10 +161,20 @@ function CollectionsPage() {
                   {collection.brands.map((b, i) => (
                     <Reveal key={b.name} delay={i * 70} as="article">
                       <div className="grid gap-4 border-b border-border py-8 md:grid-cols-12">
-                        <div className="md:col-span-3">
-                          <span aria-hidden="true" className="text-sm leading-none">
-                            {FLAG_BY_ORIGIN[b.origin.trim().toLowerCase()] ?? ""}
-                          </span>
+                         <div className="md:col-span-3">
+                           {(() => {
+                             const code = FLAG_CODE_BY_ORIGIN[b.origin.trim().toLowerCase()];
+                             return code ? (
+                               <img
+                                 src={flagUrl(code)}
+                                 alt={b.origin}
+                                 width={24}
+                                 height={16}
+                                 loading="lazy"
+                                 className="h-4 w-6 rounded-[1px] object-cover shadow-sm"
+                               />
+                             ) : null;
+                           })()}
                           <p className="mt-1.5 text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
                             {b.origin}
                           </p>
