@@ -274,33 +274,29 @@
 }
 
 /*
- * Mobile-only alternating section surfaces.
- * Scroll snap is desktop-only (see .snap-page / .snap-collections above), so on
- * small viewports we lean on alternating beige / ink bands to keep section
- * boundaries legible while scrolling freely.
+ * Concept colors: Caviar Black & Oyster Beige.
+ * Odd sections use caviar black; even sections flip to oyster beige.
  */
 :root {
-  --ink-raw: #000000;
-  --beige-raw: #F5F2EB;
+  --ink-raw: #141210; /* caviar black */
+  --beige-raw: #E9E2D4; /* oyster beige */
 }
 
-@media (max-width: 767px) {
-  /* Dark page (homepage): every other section flips to a beige band. */
-  .mobile-alt-dark > section:nth-of-type(even) {
-    --ink: var(--beige-raw);
-    --beige: var(--ink-raw);
-    background-color: var(--beige-raw);
-    color: var(--ink-raw);
-  }
+/* Dark page (homepage): every other section flips to an oyster beige band. */
+.mobile-alt-dark > section:nth-of-type(even) {
+  --ink: var(--beige-raw);
+  --beige: var(--ink-raw);
+  background-color: var(--beige-raw);
+  color: var(--ink-raw);
+}
 
-  /* Light page (Taste Journey): every other section flips to an ink band. */
-  .mobile-alt-light > section:nth-of-type(even) {
-    --background: var(--ink-raw);
-    --foreground: var(--beige-raw);
-    --muted-foreground: oklch(0.72 0.012 85);
-    --border: oklch(0.34 0.006 70);
-    --input: oklch(0.34 0.006 70);
-    background-color: var(--background);
-    color: var(--foreground);
-  }
+/* Light page (Taste Journey): every other section flips to a caviar black band. */
+.mobile-alt-light > section:nth-of-type(even) {
+  --background: var(--ink-raw);
+  --foreground: var(--beige-raw);
+  --muted-foreground: oklch(0.72 0.012 85);
+  --border: oklch(0.34 0.006 70);
+  --input: oklch(0.34 0.006 70);
+  background-color: var(--background);
+  color: var(--foreground);
 }
