@@ -99,9 +99,6 @@ export function SiteNav() {
 
         <nav className="hidden items-center gap-7 text-[11px] tracking-[0.2em] text-beige/60 lg:flex">
           <TasteJourneyMenu active={active} />
-          <L to="/" hash="services" className="transition-colors hover:text-beige">
-            {copy.nav.sourcing}
-          </L>
           <L to="/" hash="trade" className="transition-colors hover:text-beige">
             {biz.nav.trade}
           </L>
@@ -130,13 +127,6 @@ export function SiteNav() {
           <div className="shrink-0">
             <TasteJourneyMenu active={active} />
           </div>
-          <L
-            to="/"
-            hash="services"
-            className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
-          >
-            {copy.nav.sourcing}
-          </L>
           <L
             to="/"
             hash="trade"
