@@ -21,6 +21,17 @@ const COLLECTION_IMAGES: Record<string, string> = {
   "chill-cheers": colChill,
 };
 
+const FLAG_BY_ORIGIN: Record<string, string> = {
+  france: "🇫🇷",
+  "united kingdom": "🇬🇧",
+  italy: "🇮🇹",
+  poland: "🇵🇱",
+  netherland: "🇳🇱",
+  netherlands: "🇳🇱",
+  indonesia: "🇮🇩",
+  europe: "🇪🇺",
+};
+
 const SWEET_SLIDES: Record<string, string> = {
   "maison-mazet": colSweet,
   churchills: churchillsTinAsset.url,
@@ -148,9 +159,14 @@ function CollectionsPage() {
                   {collection.brands.map((b, i) => (
                     <Reveal key={b.name} delay={i * 70} as="article">
                       <div className="grid gap-4 border-b border-border py-8 md:grid-cols-12">
-                        <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground md:col-span-3">
-                          {b.origin}
-                        </p>
+                        <div className="md:col-span-3">
+                          <span aria-hidden="true" className="text-sm leading-none">
+                            {FLAG_BY_ORIGIN[b.origin.trim().toLowerCase()] ?? ""}
+                          </span>
+                          <p className="mt-1.5 text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+                            {b.origin}
+                          </p>
+                        </div>
                         <div className="md:col-span-6">
                           <h3 className="font-display text-2xl">{b.nameLocal}</h3>
                           <p className="mt-2 text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
