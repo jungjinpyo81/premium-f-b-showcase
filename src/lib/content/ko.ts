@@ -186,7 +186,8 @@ export const ko: SiteCopy = {
       title: "Sweet Moments",
       titleLocal: "달콤한 순간",
       lead: "하루의 끝에 놓이는 작은 사치.",
-      intro: "",
+      intro:
+        "유럽의 오래된 제과 하우스가 지켜온 배합과 공정을 그대로 옮겨옵니다. 대량 생산이 아닌 소량 배치, 그리고 선물로 건네기에 부족함 없는 패키지 완성도를 기준으로 선별합니다.",
       brands: [
         {
           name: "Maison Mazet",
@@ -215,7 +216,8 @@ export const ko: SiteCopy = {
       title: "European Pantry",
       titleLocal: "미식가의 주방",
       lead: "주방의 격을 바꾸는 한 스푼.",
-      intro: "산지와 제조과정, 인증까지 확인한 고급 식자재만을 \n소개합니다.",
+      intro:
+        "산지와 숙성, 인증 체계까지 확인한 고급 식자재만을 소개합니다. 파인다이닝과 프리미엄 델리 채널에서 셰프의 제안으로 이어질 수 있는 라인업으로 구성합니다.",
       brands: [
         {
           name: "Terra del Tuono",
