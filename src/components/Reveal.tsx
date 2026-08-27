@@ -8,6 +8,10 @@ type RevealProps = {
   as?: "div" | "section" | "article" | "span" | "li" | "header" | "figure";
   /** Above-the-fold content: fade in right after mount instead of waiting for scroll. */
   immediate?: boolean;
+  /** Re-play the animation every time the element re-enters the viewport. */
+  repeat?: boolean;
+  /** Visibility ratio required to trigger (0-1). */
+  amount?: number;
 };
 
 /** Understated fade + slight rise on scroll. No flashy motion. */
@@ -17,6 +21,8 @@ export function Reveal({
   delay = 0,
   as = "div",
   immediate = false,
+  repeat = false,
+  amount = 0,
 }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
   const [shown, setShown] = useState(false);
@@ -39,16 +45,18 @@ export function Reveal({
         for (const e of entries) {
           if (e.isIntersecting) {
             setShown(true);
-            io.disconnect();
+            if (!repeat) io.disconnect();
+          } else if (repeat) {
+            setShown(false);
           }
         }
       },
       // threshold 0 keeps behaviour consistent for elements taller than the viewport
-      { threshold: 0, rootMargin: "0px 0px -10% 0px" },
+      { threshold: amount, rootMargin: repeat ? "0px" : "0px 0px -10% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [immediate]);
+  }, [immediate, repeat, amount]);
 
   const Tag = as as ElementType;
 
