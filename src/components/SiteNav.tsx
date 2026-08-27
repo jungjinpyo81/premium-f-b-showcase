@@ -30,13 +30,17 @@ function useActiveSection(slugs: string[]) {
   return active;
 }
 
-/** Grouped hover mega-menu for the first two nav items. */
+/** Grouped hover mega-menu; hovering any contained nav item opens it. */
 function HoverMenuGroup({
   active,
   sourcingLabel,
+  bizNav,
+  showBizLinks = false,
 }: {
   active: string | null;
   sourcingLabel: string;
+  bizNav: { trade: string; distribution: string; consulting: string };
+  showBizLinks?: boolean;
 }) {
   const copy = useCopy();
   const [open, setOpen] = useState(false);
@@ -52,7 +56,12 @@ function HoverMenuGroup({
   }, [open]);
 
   return (
-    <div ref={groupRef} className="relative">
+    <div
+      ref={groupRef}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
       <div className="flex items-center gap-7">
         <L
           to="/"
