@@ -64,6 +64,7 @@ const TRADE_ICONS = {
 function Index() {
   const copy = useCopy();
   const biz = useBusiness();
+  const hash = useRouterState({ select: (s) => s.location.hash });
 
   // Full-page scroll snap is scoped to this page only.
   useEffect(() => {
@@ -71,6 +72,17 @@ function Index() {
     root.classList.add("snap-page");
     return () => root.classList.remove("snap-page");
   }, []);
+
+  // GNB hash links map 1:1 to the sections below; scroll to the exact target
+  // even when the hash is unchanged or the page is still hydrating.
+  useEffect(() => {
+    if (!hash) return;
+    const t = window.setTimeout(() => {
+      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+    return () => window.clearTimeout(t);
+  }, [hash]);
+
 
   return (
     <div className="mobile-alt-dark bg-ink text-beige">
