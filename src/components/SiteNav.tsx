@@ -30,36 +30,55 @@ function useActiveSection(slugs: string[]) {
   return active;
 }
 
-/** Grouped "Taste Journey" dropdown holding the five lifestyle collections. */
-function TasteJourneyMenu({ active }: { active: string | null }) {
+/** Grouped hover mega-menu for the first two nav items. */
+function HoverMenuGroup({
+  active,
+  sourcingLabel,
+}: {
+  active: string | null;
+  sourcingLabel: string;
+}) {
   const copy = useCopy();
   const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const groupRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) return;
     const onDown = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+      if (groupRef.current && !groupRef.current.contains(e.target as Node)) setOpen(false);
     };
     document.addEventListener("mousedown", onDown);
     return () => document.removeEventListener("mousedown", onDown);
   }, [open]);
 
   return (
-    <div ref={ref} className="relative">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-2 py-2 transition-colors hover:text-beige"
-        aria-expanded={open}
-      >
-        {copy.nav.tasteJourney}
-        <span
-          className={`text-[8px] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+    <div
+      ref={groupRef}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <div className="flex items-center gap-7">
+        <L
+          to="/"
+          hash="services"
+          className="py-2 transition-colors hover:text-beige"
         >
-          {"\n"}
-        </span>
-      </button>
+          {sourcingLabel}
+        </L>
+        <button
+          type="button"
+          className="flex items-center gap-2 py-2 transition-colors hover:text-beige"
+          aria-expanded={open}
+        >
+          {copy.nav.tasteJourney}
+          <span
+            className={`text-[8px] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          >
+            {"\n"}
+          </span>
+        </button>
+      </div>
       {open ? (
         <div className="absolute left-0 top-full z-50 min-w-52 border border-beige/15 bg-ink/95 py-2 backdrop-blur-md">
           {copy.collections.map((c) => (
