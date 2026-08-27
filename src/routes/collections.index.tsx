@@ -196,8 +196,8 @@ function CollectionsPage() {
                   </Reveal>
                 </div>
               </div>
-            <div className={`mx-auto flex min-h-0 w-full max-w-[1400px] flex-1 flex-col justify-start px-6 md:px-10 md:pt-0 ${index === 0 ? "pt-0" : "pt-24"}`}>
-              <div className="grid h-full items-start gap-10 md:grid-cols-12">
+            <div className="mx-auto flex min-h-0 w-full max-w-[1400px] flex-1 flex-col justify-center px-6 md:px-10 md:pt-0">
+              <div className="grid h-full items-center gap-10 md:grid-cols-12">
                 <div className="md:col-span-5 md:h-full md:overflow-y-auto md:scrollbar-hide">
 
 
