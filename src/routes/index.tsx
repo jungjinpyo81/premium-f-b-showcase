@@ -88,12 +88,12 @@ function Index() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.72)_50%,oklch(0.12_0_0/0.35)_100%)]" />
         <div className="relative mx-auto w-full max-w-[1500px] -translate-y-[8vh] px-6 text-center md:px-10">
           <Reveal immediate>
-            <p className="text-[11px] uppercase tracking-[0.45em] text-gold">
+            <p className="text-left text-[11px] uppercase tracking-[0.45em] text-gold">
               {copy.hero.eyebrow}
             </p>
           </Reveal>
           <Reveal immediate delay={140}>
-            <h1 className="mx-auto mt-8 max-w-3xl text-center font-display text-3xl leading-[1.2] text-beige md:text-5xl">
+            <h1 className="mt-8 max-w-3xl text-left font-display text-3xl leading-[1.2] text-beige md:text-5xl">
               {copy.hero.titleLines.map((line) => (
                 <span key={line} className="block">
                   {line}
