@@ -140,7 +140,11 @@ function CollectionsPage() {
                         const slides =
                           collection.slug === "sweet-moments" ? SWEET_SLIDES : CHILL_SLIDES;
                         const key =
-                          b.brandSlug ?? b.name.toLowerCase().replace(/[^a-z]/g, "-");
+                          b.brandSlug ??
+                          b.name
+                            .toLowerCase()
+                            .replace(/['']/g, "")
+                            .replace(/[^a-z]/g, "-");
                         return {
                           src: slides[key] ?? emilioDrinkAsset.url,
                           alt: `${collection.titleLocal} — ${b.nameLocal}`,
