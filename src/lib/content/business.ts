@@ -70,8 +70,8 @@ const ko: BusinessCopy = {
   },
   distribution: {
     eyebrow: "Distribution",
-    title: "브랜드와 고객을 잇는 통합 유통 솔루션",
-    lead: "채널의 성격에 맞춰 가격 구조와 운영 방식을 다르게 설계합니다.",
+    title: "브랜드와 채널, 고객을 연결합니다.",
+    lead: "상품에 맞는 최적화 채널을 매칭하여 매출을 극대화 합니다.",
     offline: {
       label: "오프라인 유통",
       items: [
