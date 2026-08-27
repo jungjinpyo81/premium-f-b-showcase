@@ -58,7 +58,7 @@ const ko: BusinessCopy = {
     ],
   },
   trade: {
-    eyebrow: "LOGISTICS eyebrow: "Logistics & Customs" CUSTOMS",
+    eyebrow: "LOGISTICS & CUSTOMS",
     title: "Global Trade Made Simple",
     subtitle: "보다 쉬운 수출입, 유럽커넥트가 대신 관리해드립니다.",
     rows: [
@@ -123,7 +123,7 @@ const en: BusinessCopy = {
     ],
   },
   trade: {
-    eyebrow: "LOGISTICS eyebrow: "Logistics & Customs" CUSTOMS",
+    eyebrow: "LOGISTICS & CUSTOMS",
     title: "Global Trade Made Simple",
     subtitle: "Easier import and export — Europe Connect handles it for you.",
     rows: [
@@ -188,7 +188,7 @@ const ja: BusinessCopy = {
     ],
   },
   trade: {
-    eyebrow: "LOGISTICS eyebrow: "Logistics & Customs" CUSTOMS",
+    eyebrow: "LOGISTICS & CUSTOMS",
     title: "Global Trade Made Simple",
     subtitle: "より簡単な輸出入を、ユーロップコネクトが代行します。",
     rows: [
@@ -253,7 +253,7 @@ const zh: BusinessCopy = {
     ],
   },
   trade: {
-    eyebrow: "LOGISTICS eyebrow: "Logistics & Customs" CUSTOMS",
+    eyebrow: "LOGISTICS & CUSTOMS",
     title: "Global Trade Made Simple",
     subtitle: "更简单的进出口，由 Europe Connect 代为管理。",
     rows: [
