@@ -260,3 +260,35 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/*
+ * Mobile-only alternating section surfaces.
+ * Scroll snap is desktop-only (see .snap-page / .snap-collections above), so on
+ * small viewports we lean on alternating beige / ink bands to keep section
+ * boundaries legible while scrolling freely.
+ */
+:root {
+  --ink-raw: oklch(0.12 0 0);
+  --beige-raw: oklch(0.86 0.014 85);
+}
+
+@media (max-width: 1023px) {
+  /* Dark page (homepage): every other section flips to a beige band. */
+  .mobile-alt-dark > section:nth-of-type(even) {
+    --ink: var(--beige-raw);
+    --beige: var(--ink-raw);
+    background-color: var(--beige-raw);
+    color: var(--ink-raw);
+  }
+
+  /* Light page (Taste Journey): every other section flips to an ink band. */
+  .mobile-alt-light > section:nth-of-type(even) {
+    --background: var(--ink-raw);
+    --foreground: var(--beige-raw);
+    --muted-foreground: oklch(0.72 0.012 85);
+    --border: oklch(0.34 0.006 70);
+    --input: oklch(0.34 0.006 70);
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}

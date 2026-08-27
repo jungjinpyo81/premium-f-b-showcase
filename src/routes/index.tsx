@@ -73,7 +73,7 @@ function Index() {
   }, []);
 
   return (
-    <div className="bg-ink text-beige">
+    <div className="mobile-alt-dark bg-ink text-beige">
       <SiteNav />
 
       {/* Hero */}
