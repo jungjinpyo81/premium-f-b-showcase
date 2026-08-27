@@ -28,7 +28,7 @@ export function ImageSlider({ images, interval = 2000, className = "" }: Props) 
 
   return (
     <div className={className}>
-      <div className="relative aspect-[4/3] w-full overflow-hidden">
+      <div className="relative aspect-video w-full overflow-hidden">
         <div
           className="flex h-full transition-transform duration-700 ease-out"
           style={{ transform: `translateX(-${index * 100}%)` }}
