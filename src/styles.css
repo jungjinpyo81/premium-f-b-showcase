@@ -213,10 +213,12 @@
 }
 
 /* Full-page scroll snap (homepage only; toggled from the route component). */
-html.snap-page {
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  scroll-padding-top: 0;
+@media (min-width: 1024px) {
+  html.snap-page {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    scroll-padding-top: 0;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   html.snap-page {
