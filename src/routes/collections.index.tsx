@@ -215,7 +215,7 @@ function CollectionsPage() {
                   <Reveal repeat amount={0.2} delay={120}>
                     {collection.slug === "sweet-moments" || collection.slug === "chill-cheers" ? (
                       <ImageSlider
-                        className="mt-6 max-w-xs"
+                        className="mt-6"
                         interval={2000}
                         images={collection.brands.map((b) => {
                           const slides =
