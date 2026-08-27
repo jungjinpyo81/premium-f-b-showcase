@@ -35,9 +35,9 @@ export const ko: SiteCopy = {
   },
   hero: {
     eyebrow: "EUROPE CONNECT · F&B SOURCING & LOGISTICS · CONSULTING",
-    titleLines: ["글로벌 프리미엄 F&B브랜드와", "한국 시장을 잇는 브릿지"],
+    titleLines: ["글로벌 프리미엄 F&B와", "한국 시장을 잇는 브릿지"],
     leadLines: [
-      "17년 이상의 소싱·통관·물류 실무를 바탕으로,",
+      "17년 이상의 소싱·물류·통관·유통 실무를 바탕으로,",
       "브랜드가 한국 시장에 안착하기까지의 모든 과정을 통합 관리합니다.",
     ],
     ctaPrimary: "파트너십 문의",
