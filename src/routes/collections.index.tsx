@@ -156,11 +156,10 @@ function CollectionsPage() {
               index === 0 ? "pb-12" : "pt-28 pb-12"
             }`}
           >
-            {/* Editorial hero band (top ~30% of the first section) */}
-            {index === 0 && (
-              <div className="relative flex h-56 shrink-0 items-center overflow-hidden pb-6 md:h-[30%]">
+            {/* Editorial hero band (top ~30% of every section, PC/tablet) */}
+            <div className="relative hidden h-56 shrink-0 items-center overflow-hidden pb-6 md:flex md:h-[30%]">
                 <img
-                  src={COLLECTION_IMAGES[copy.collections[0]?.slug ?? ""] ?? colSweet}
+                  src={COLLECTION_IMAGES[collection.slug] ?? colSweet}
                   alt={copy.nav.tasteJourney}
                   width={1600}
                   height={1100}
@@ -195,8 +194,7 @@ function CollectionsPage() {
                   </Reveal>
                 </div>
               </div>
-            )}
-            <div className={`mx-auto flex min-h-0 w-full max-w-[1400px] flex-1 flex-col justify-start px-6 md:px-10 ${index === 0 ? "mt-6" : ""}`}>
+            <div className="mx-auto flex min-h-0 w-full max-w-[1400px] flex-1 flex-col justify-start px-6 md:px-10">
               <div className="grid h-full items-start gap-10 md:grid-cols-12">
                 <div className="md:col-span-5 md:h-full md:overflow-y-auto md:scrollbar-hide">
 
