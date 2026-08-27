@@ -34,11 +34,11 @@ export const ko: SiteCopy = {
     contact: "문의",
   },
   hero: {
-    eyebrow: "EUROPE CONNECT · F&B SOURCING & LOGISTICS · CONSULTING",
+    eyebrow: "EUROPE CONNECT \nF&B SOURCING·LOGISTICS\nCONSULTING",
     titleLines: ["글로벌 프리미엄 F&B와", "한국 시장을 잇는 브릿지"],
     leadLines: [
-      "17년 이상의 소싱·물류·통관·유통 실무를 바탕으로,",
-      "브랜드가 한국 시장에 안착하기까지의 모든 과정을 통합 관리합니다.",
+      "17년 이상의 소싱·물류·통관·유통 전문가가",
+      "브랜드를 한국 시장에 안착하기까지의\n모든 과정을 통합 관리합니다.",
     ],
     ctaPrimary: "맛의 여정\n(브랜드)",
     ctaSecondary: "\n",
