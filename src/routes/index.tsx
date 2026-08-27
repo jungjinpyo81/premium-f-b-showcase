@@ -348,7 +348,7 @@ function Index() {
       </section>
 
       {/* Gift & B2B */}
-      <section id="gift" className="relative flex min-h-screen snap-start items-center overflow-hidden lg:h-screen">
+      <section id="gift" className="relative flex min-h-screen snap-start items-center overflow-hidden md:h-screen">
         <img
           src={giftImg}
           alt={copy.gift.eyebrow}
