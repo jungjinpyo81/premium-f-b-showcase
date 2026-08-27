@@ -76,7 +76,7 @@ function CollectionsPage() {
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
   const [active, setActive] = useState(0);
 
-  const total = copy.collections.length + 1;
+  const total = copy.collections.length;
 
   useEffect(() => {
     document.documentElement.classList.add("snap-collections");
@@ -132,7 +132,7 @@ function CollectionsPage() {
             key={i}
             type="button"
             aria-label={
-              i === 0 ? copy.nav.tasteJourney : (copy.collections[i - 1]?.titleLocal ?? `${i}`)
+              i === 0 ? copy.nav.tasteJourney : (copy.collections[i]?.titleLocal ?? `${i}`)
             }
             aria-current={active === i}
             onClick={() => goTo(i)}
@@ -146,58 +146,57 @@ function CollectionsPage() {
       </nav>
 
       <div ref={containerRef} className="scroll-smooth">
-        {/* Editorial hero */}
-        <section
-          ref={setRef(0)}
-          data-index={0}
-          className="relative flex h-screen min-h-0 w-full snap-start items-center overflow-hidden"
-        >
-          <img
-            src={COLLECTION_IMAGES[copy.collections[0]?.slug ?? ""] ?? colSweet}
-            alt={copy.nav.tasteJourney}
-            width={1600}
-            height={1100}
-            className="absolute inset-0 size-full object-cover"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.7)_55%,oklch(0.12_0_0/0.35)_100%)]" />
-          <div className="relative mx-auto w-full max-w-[1500px] px-6 md:px-10">
-            <div className="max-w-2xl">
-              <Reveal immediate>
-                <p className="text-[10px] uppercase tracking-[0.45em] text-gold">TASTE JOURNEY</p>
-              </Reveal>
-              <Reveal immediate delay={120}>
-                <h1 className="mt-5 font-display text-4xl leading-tight text-beige md:text-5xl">
-                  {copy.nav.tasteJourney}
-                </h1>
-              </Reveal>
-              <Reveal immediate delay={240}>
-                <ul className="mt-7 flex flex-wrap gap-x-8 gap-y-3 text-[11px] uppercase tracking-[0.25em] text-beige/55">
-                  {copy.collections.map((c, i) => (
-                    <li key={c.slug}>
-                      <button
-                        type="button"
-                        onClick={() => goTo(i + 1)}
-                        className="uppercase tracking-[0.25em] transition-colors hover:text-beige"
-                      >
-                        {c.titleLocal}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-
         {copy.collections.map((collection, index) => (
           <section
             key={collection.slug}
             id={collection.slug}
-            ref={setRef(index + 1)}
-            data-index={index + 1}
-            className="flex h-screen min-h-screen w-full snap-start items-stretch overflow-hidden border-t border-border/60 pt-28 pb-12"
+            ref={setRef(index)}
+            data-index={index}
+            className={`flex h-screen min-h-screen w-full snap-start flex-col overflow-hidden border-t border-border/60 ${
+              index === 0 ? "pb-12" : "pt-28 pb-12"
+            }`}
           >
-            <div className="mx-auto flex h-full w-full max-w-[1400px] flex-col justify-start px-6 md:px-10">
+            {/* Editorial hero band (top ~22% of the first section) */}
+            {index === 0 && (
+              <div className="relative flex h-[22%] shrink-0 items-center overflow-hidden">
+                <img
+                  src={COLLECTION_IMAGES[copy.collections[0]?.slug ?? ""] ?? colSweet}
+                  alt={copy.nav.tasteJourney}
+                  width={1600}
+                  height={1100}
+                  className="absolute inset-0 size-full object-cover"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.7)_55%,oklch(0.12_0_0/0.35)_100%)]" />
+                <div className="relative mx-auto w-full max-w-[1400px] px-6 pt-16 md:px-10">
+                  <Reveal immediate>
+                    <p className="text-[10px] uppercase tracking-[0.45em] text-gold">
+                      TASTE JOURNEY
+                    </p>
+                  </Reveal>
+                  <Reveal immediate delay={120}>
+                    <h1 className="mt-2 font-display text-2xl leading-tight text-beige md:text-3xl">
+                      {copy.nav.tasteJourney}
+                    </h1>
+                  </Reveal>
+                  <Reveal immediate delay={240}>
+                    <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-[10px] uppercase tracking-[0.25em] text-beige/55">
+                      {copy.collections.map((c, i) => (
+                        <li key={c.slug}>
+                          <button
+                            type="button"
+                            onClick={() => goTo(i)}
+                            className="uppercase tracking-[0.25em] transition-colors hover:text-beige"
+                          >
+                            {c.titleLocal}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </Reveal>
+                </div>
+              </div>
+            )}
+            <div className="mx-auto flex min-h-0 w-full max-w-[1400px] flex-1 flex-col justify-start px-6 md:px-10">
               <div className="grid h-full items-start gap-10 md:grid-cols-12">
                 <div className="md:col-span-5 h-full overflow-y-auto">
 
