@@ -190,13 +190,6 @@ export const zh: SiteCopy = {
         "我们原样引入欧洲历史悠久的甜点屋所坚守的配方与工艺。选品标准并非大规模量产，而是小批量生产工艺，以及足以作为馈赠礼品的包装完成度。",
       brands: [
         {
-          name: "Cocoba",
-          nameLocal: "可可巴",
-          origin: "United Kingdom",
-          note: "由热巧克力搅拌棒与手工巧克力条构成的英式巧克力仪式感之选。",
-          brandSlug: "cocoba",
-        },
-        {
           name: "Maison Mazet",
           nameLocal: "玛泽之家",
           origin: "France",
@@ -208,6 +201,13 @@ export const zh: SiteCopy = {
           nameLocal: "处切尔斯",
           origin: "United Kingdom",
           note: "盛装于令人爱不释手的铁盒中的英伦传统糖果。",
+        },
+        {
+          name: "Cocoba",
+          nameLocal: "可可巴",
+          origin: "United Kingdom",
+          note: "由热巧克力搅拌棒与手工巧克力条构成的英式巧克力仪式感之选。",
+          brandSlug: "cocoba",
         },
       ],
     },

@@ -190,13 +190,6 @@ export const ja: SiteCopy = {
         "欧州の老舗菓子ハウスが守り続けてきた配合と製法をそのまま取り入れます。大量生産ではなく少量バッチ、そして贈り物として申し分のないパッケージの完成度を基準に選定しています。",
       brands: [
         {
-          name: "Cocoba",
-          nameLocal: "ココバ",
-          origin: "United Kingdom",
-          note: "ホットチョコレートスターラーとアルチザンバーで構成される英国式チョコレートリチュアル。",
-          brandSlug: "cocoba",
-        },
-        {
           name: "Maison Mazet",
           nameLocal: "メゾン・マゼ",
           origin: "France",
@@ -208,6 +201,13 @@ export const ja: SiteCopy = {
           nameLocal: "チャーチルズ",
           origin: "United Kingdom",
           note: "思わず集めたくなるティンケースに詰められた英国伝統のキャンディ。",
+        },
+        {
+          name: "Cocoba",
+          nameLocal: "ココバ",
+          origin: "United Kingdom",
+          note: "ホットチョコレートスターラーとアルチザンバーで構成される英国式チョコレートリチュアル。",
+          brandSlug: "cocoba",
         },
       ],
     },
