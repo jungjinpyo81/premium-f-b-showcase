@@ -152,13 +152,13 @@ function CollectionsPage() {
             id={collection.slug}
             ref={setRef(index)}
             data-index={index}
-            className={`flex h-screen min-h-screen w-full snap-start flex-col overflow-hidden border-t border-border/60 ${
+            className={`flex min-h-screen w-full snap-start flex-col border-t border-border/60 lg:h-screen lg:overflow-hidden ${
               index === 0 ? "pb-12" : "pt-28 pb-12"
             }`}
           >
             {/* Editorial hero band (top ~30% of the first section) */}
             {index === 0 && (
-              <div className="relative flex h-[30%] shrink-0 items-center overflow-hidden pb-6">
+              <div className="relative flex h-56 shrink-0 items-center overflow-hidden pb-6 lg:h-[30%]">
                 <img
                   src={COLLECTION_IMAGES[copy.collections[0]?.slug ?? ""] ?? colSweet}
                   alt={copy.nav.tasteJourney}
@@ -198,7 +198,7 @@ function CollectionsPage() {
             )}
             <div className={`mx-auto flex min-h-0 w-full max-w-[1400px] flex-1 flex-col justify-start px-6 md:px-10 ${index === 0 ? "mt-6" : ""}`}>
               <div className="grid h-full items-start gap-10 md:grid-cols-12">
-                <div className="md:col-span-5 h-full overflow-y-auto scrollbar-hide">
+                <div className="md:col-span-5 lg:h-full lg:overflow-y-auto lg:scrollbar-hide">
 
 
                   <Reveal repeat amount={0.2}>
