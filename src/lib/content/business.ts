@@ -62,9 +62,9 @@ const ko: BusinessCopy = {
     title: "Global Trade Made Simple",
     subtitle: "보다 쉬운 수출입, 유럽커넥트가 대신 관리해드립니다.",
     rows: [
+      { key: "freight", label: "국제 물류 관리", body: "항공/해상/내륙 국제 복합운송, 국제 특송 서비스" },
       { key: "customs", label: "통관", body: "HS코드 분류, 서류 검토, 통관신고까지 정확하고 빠르게 처리" },
       { key: "quarantine", label: "검역", body: "식품/화장품 등 수입신고, 한글표시 사항, 라벨링, 보수작업" },
-      { key: "freight", label: "국제 물류 관리", body: "항공/해상/내륙 국제 복합운송, 국제 특송 서비스" },
       { key: "warehouse", label: "창고, 3PL 물류", body: "온라인 유통(B2C, 홈쇼핑, 쿠팡) 최첨단 항온항습 관리, 고액 화재보험" },
     ],
   },
@@ -127,9 +127,9 @@ const en: BusinessCopy = {
     title: "Global Trade Made Simple",
     subtitle: "Easier import and export — Europe Connect handles it for you.",
     rows: [
+      { key: "freight", label: "Freight management", body: "Air, ocean and inland multimodal transport and international express services." },
       { key: "customs", label: "Customs clearance", body: "HS code classification, document review and declaration, handled accurately and fast." },
       { key: "quarantine", label: "Quarantine", body: "Food and cosmetics import declarations, Korean labelling and re-work." },
-      { key: "freight", label: "Freight management", body: "Air, ocean and inland multimodal transport and international express services." },
       { key: "warehouse", label: "Warehouse & 3PL", body: "Climate-controlled facilities for B2C, home shopping and Coupang, with high-value fire insurance." },
     ],
   },
@@ -192,9 +192,9 @@ const ja: BusinessCopy = {
     title: "Global Trade Made Simple",
     subtitle: "より簡単な輸出入を、ユーロップコネクトが代行します。",
     rows: [
+      { key: "freight", label: "国際物流管理", body: "航空／海上／内陸の国際複合輸送、国際特送サービス。" },
       { key: "customs", label: "通関", body: "HSコード分類、書類確認、通関申告まで正確かつ迅速に処理します。" },
       { key: "quarantine", label: "検疫", body: "食品・化粧品などの輸入申告、韓国語表示、ラベリング、補修作業。" },
-      { key: "freight", label: "国際物流管理", body: "航空／海上／内陸の国際複合輸送、国際特送サービス。" },
       { key: "warehouse", label: "倉庫・3PL物流", body: "オンライン流通（B2C、通販、Coupang）向けの恒温恒湿管理と高額火災保険。" },
     ],
   },
@@ -257,9 +257,9 @@ const zh: BusinessCopy = {
     title: "Global Trade Made Simple",
     subtitle: "更简单的进出口，由 Europe Connect 代为管理。",
     rows: [
+      { key: "freight", label: "国际物流管理", body: "空运／海运／内陆国际多式联运与国际特快服务。" },
       { key: "customs", label: "通关", body: "HS 编码归类、单证审核、报关申报，准确且高效。" },
       { key: "quarantine", label: "检验检疫", body: "食品／化妆品等进口申报、韩文标示、贴标与返工作业。" },
-      { key: "freight", label: "国际物流管理", body: "空运／海运／内陆国际多式联运与国际特快服务。" },
       { key: "warehouse", label: "仓储与 3PL", body: "面向线上流通（B2C、电视购物、Coupang）的恒温恒湿管理与高额火险。" },
     ],
   },
