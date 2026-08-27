@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import balsamicoPastaAsset from "@/assets/balsamico-pasta.jpg.asset.json";
 import churchillsTinAsset from "@/assets/churchills-tin.jpg.asset.json";
 import cocobaBombesAsset from "@/assets/cocoba-bombes.jpg.asset.json";
-import colChill from "@/assets/col-chill.jpg";
+import emilioDrinkAsset from "@/assets/emilio-drink.png.asset.json";
 import crispyNaturalBoxAsset from "@/assets/crispy-natural-box.webp.asset.json";
 import colSweet from "@/assets/col-sweet.jpg";
 import colPlantAsset from "@/assets/col-plant.jpg.asset.json";
