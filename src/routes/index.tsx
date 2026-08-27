@@ -142,46 +142,8 @@ function Index() {
       </section>
 
 
-      {/* Our role — intro film */}
-      <section
-        id="services"
-        className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
-      >
-        <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
-          <Reveal>
-            <p className="text-[10px] uppercase tracking-[0.45em] text-gold/80">
-              {copy.role.eyebrow}
-            </p>
-          </Reveal>
-          <Reveal delay={120}>
-            <h2 className="mt-8 max-w-3xl font-display text-3xl leading-tight text-beige md:text-5xl">
-              {copy.role.titleLines.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </h2>
-          </Reveal>
-          <div className="mt-6 max-w-xl space-y-4 text-sm leading-7 text-beige/55">
-            {copy.role.paragraphs.map((line, i) => (
-              <Reveal key={i} delay={200 + i * 80}>
-                <p>{line}</p>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal delay={360}>
-            <div className="mt-14 w-full" style={{ aspectRatio: "3840 / 1680" }}>
-              <iframe
-                src="https://player.vimeo.com/video/1171266171?title=0&byline=0&portrait=0&badge=0&autopause=0&controls=0&loop=1&muted=1&autoplay=1&playsinline=1&app_id=58479"
-                title="홈페이지_인트로"
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                className="size-full border-0"
-              />
-            </div>
-          </Reveal>
-        </div>
-      </section>
+
+
 
 
 
