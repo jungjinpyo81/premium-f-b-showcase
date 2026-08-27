@@ -143,7 +143,7 @@ function Index() {
         <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
           <Reveal delay={120}>
             <p className="text-[10px] uppercase tracking-[0.45em] text-gold/80">
-              WHAT WE DO
+              {biz.whatWeDo.eyebrow}
             </p>
           </Reveal>
           <Reveal delay={200}>
