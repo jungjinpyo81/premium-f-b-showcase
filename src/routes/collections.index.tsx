@@ -190,9 +190,9 @@ function CollectionsPage() {
             id={collection.slug}
             ref={setRef(index + 1)}
             data-index={index + 1}
-            className="flex h-screen w-full snap-start items-center overflow-y-auto"
+            className="flex w-full items-center border-t border-border/60"
           >
-            <div className="mx-auto w-full max-w-[1400px] px-6 py-24 pt-28 md:px-10">
+            <div className="mx-auto w-full max-w-[1400px] px-6 py-20 md:px-10">
               <div className="grid gap-10 md:grid-cols-12">
                 <div className="md:col-span-5">
                   <Reveal repeat amount={0.2}>
