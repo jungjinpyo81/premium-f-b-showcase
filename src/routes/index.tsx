@@ -86,7 +86,7 @@ function Index() {
           className="absolute inset-0 size-full object-cover"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.72)_50%,oklch(0.12_0_0/0.35)_100%)]" />
-        <div className="relative mx-auto w-full max-w-[1500px] px-6 pb-44 md:px-10">
+        <div className="relative mx-auto w-full max-w-[1500px] px-6 text-center md:px-10">
           <Reveal immediate>
             <p className="text-[11px] uppercase tracking-[0.45em] text-gold">
               {copy.hero.eyebrow}
