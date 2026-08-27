@@ -181,19 +181,11 @@ function Index() {
               {biz.whatWeDo.eyebrow}
             </p>
           </Reveal>
-          <Reveal delay={120}>
-            <h2 className="mt-8 max-w-3xl font-display text-3xl leading-tight text-beige md:text-5xl">
-              {biz.whatWeDo.title}
-            </h2>
-          </Reveal>
-          <Reveal delay={200}>
-            <p className="mt-6 max-w-xl text-sm leading-7 text-beige/55">{biz.whatWeDo.lead}</p>
-          </Reveal>
           <div className="mt-14 grid gap-px bg-beige/15 md:grid-cols-2 lg:grid-cols-4">
             {biz.whatWeDo.cards.map((card, i) => {
               const Icon = SERVICE_ICONS[card.key];
               return (
-                <Reveal key={card.key} delay={260 + i * 90} as="article">
+                <Reveal key={card.key} delay={160 + i * 90} as="article">
                   <div className="h-full bg-ink p-8">
                     <Icon className="size-6 shrink-0 text-gold" strokeWidth={1} aria-hidden />
                     <h3 className="mt-8 font-display text-xl leading-snug text-beige">
