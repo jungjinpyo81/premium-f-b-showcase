@@ -129,13 +129,6 @@ export function SiteNav() {
           </div>
           <L
             to="/"
-            hash="services"
-            className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
-          >
-            {copy.nav.sourcing}
-          </L>
-          <L
-            to="/"
             hash="trade"
             className="shrink-0 whitespace-nowrap transition-colors hover:text-beige"
           >
