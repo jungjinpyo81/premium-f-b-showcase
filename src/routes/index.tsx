@@ -107,7 +107,8 @@ function Index() {
     <div className="mobile-alt-dark bg-ink text-beige">
       <SiteNav />
 
-      {/* Hero */}
+      {/* Hero — default one-page view only */}
+      {!exclusive ? (
       <section className="relative flex h-screen snap-start items-center overflow-hidden">
         <img
           src={heroImg}
@@ -165,8 +166,10 @@ function Index() {
           </div>
         </div>
       </section>
+      ) : null}
 
       {/* Our role — intro film */}
+      {show("services") ? (
       <section
         id="services"
         className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
