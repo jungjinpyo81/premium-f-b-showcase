@@ -61,27 +61,46 @@ const TRADE_ICONS = {
 } as const;
 
 
+/** GNB hash → exclusively visible section ids (mutually exclusive views). */
+const EXCLUSIVE_VIEWS: Record<string, string[]> = {
+  services: ["services", "what-we-do"],
+  "what-we-do": ["services", "what-we-do"],
+  trade: ["trade"],
+  distribution: ["distribution"],
+  consulting: ["consulting"],
+  inquiry: ["inquiry"],
+};
+
 function Index() {
   const copy = useCopy();
   const biz = useBusiness();
   const hash = useRouterState({ select: (s) => s.location.hash });
 
-  // Full-page scroll snap is scoped to this page only.
+  // Exclusive single-view mode: only the sections mapped to the active hash
+  // are mounted; every other section is unmounted from the DOM.
+  const exclusive = EXCLUSIVE_VIEWS[hash] ?? null;
+  const show = (id: string) => !exclusive || exclusive.includes(id);
+
+  // Full-page scroll snap is scoped to this page and only active in the
+  // default one-page view (exclusive views render a single screen).
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.add("snap-page");
+    if (!exclusive) root.classList.add("snap-page");
     return () => root.classList.remove("snap-page");
-  }, []);
+  }, [exclusive]);
 
-  // GNB hash links map 1:1 to the sections below; scroll to the exact target
-  // even when the hash is unchanged or the page is still hydrating.
+  // In exclusive mode jump straight to the top of the single rendered view;
+  // otherwise smooth-scroll to the anchor inside the full page.
   useEffect(() => {
-    if (!hash) return;
     const t = window.setTimeout(() => {
-      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (exclusive) {
+        window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+      } else if (hash) {
+        document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }, 60);
     return () => window.clearTimeout(t);
-  }, [hash]);
+  }, [hash, exclusive]);
 
 
   return (
