@@ -174,13 +174,21 @@ function Index() {
         id="services"
         className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
       >
-        <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
+        <div className="mx-auto flex w-full max-w-[1500px] flex-col px-6 py-24 pt-32 md:px-10">
           <Reveal delay={120}>
             <p className="text-[10px] uppercase tracking-[0.45em] text-gold/80">
               {biz.whatWeDo.eyebrow}
             </p>
           </Reveal>
-          <Reveal delay={200}>
+          <Reveal delay={280} className="md:order-1">
+            <h2 className="mt-4 max-w-3xl font-display text-2xl leading-tight text-beige md:mt-6 md:text-4xl">
+              {biz.whatWeDo.title}
+            </h2>
+          </Reveal>
+          <Reveal delay={340} className="md:order-2">
+            <p className="mt-3 max-w-xl text-sm leading-7 text-beige/55 md:mt-4">{biz.whatWeDo.lead}</p>
+          </Reveal>
+          <Reveal delay={200} className="md:order-3">
             <div className="mx-auto mt-3 w-full md:mt-4 md:w-[91%] md:max-w-[1365px]">
               <div className="w-full" style={{ aspectRatio: "3840 / 1680" }}>
                 <iframe
@@ -192,14 +200,6 @@ function Index() {
                 />
               </div>
             </div>
-          </Reveal>
-          <Reveal delay={280}>
-            <h2 className="mt-4 max-w-3xl font-display text-2xl leading-tight text-beige md:mt-6 md:text-4xl">
-              {biz.whatWeDo.title}
-            </h2>
-          </Reveal>
-          <Reveal delay={340}>
-            <p className="mt-3 max-w-xl text-sm leading-7 text-beige/55 md:mt-4">{biz.whatWeDo.lead}</p>
           </Reveal>
         </div>
       </section>
