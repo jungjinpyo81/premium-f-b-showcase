@@ -79,8 +79,7 @@ function CollectionsPage() {
   const total = copy.collections.length + 1;
 
   useEffect(() => {
-    const root = containerRef.current;
-    if (!root || typeof IntersectionObserver === "undefined") return;
+    if (typeof IntersectionObserver === "undefined") return;
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
