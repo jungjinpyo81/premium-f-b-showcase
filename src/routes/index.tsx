@@ -139,6 +139,8 @@ function Index() {
             <p className="min-w-0 text-xs leading-6 text-beige/60">{biz.slogan.body}</p>
           </div>
         </div>
+      </section>
+
       {/* Our role — intro film */}
       <section
         id="services"
