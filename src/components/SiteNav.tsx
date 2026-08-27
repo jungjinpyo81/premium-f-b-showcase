@@ -117,10 +117,7 @@ export function SiteNav() {
         </L>
 
         <nav className="hidden items-center gap-7 text-[11px] tracking-[0.2em] text-beige/60 lg:flex">
-          <L to="/" hash="services" className="transition-colors hover:text-beige">
-            {copy.nav.sourcing}
-          </L>
-          <TasteJourneyMenu active={active} />
+          <HoverMenuGroup active={active} sourcingLabel={copy.nav.sourcing} />
           <L to="/" hash="trade" className="transition-colors hover:text-beige">
             {biz.nav.trade}
           </L>
