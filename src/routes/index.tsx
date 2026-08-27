@@ -235,8 +235,10 @@ function Index() {
           </div>
         </div>
       </section>
+      ) : null}
 
       {/* Logistics & customs */}
+      {show("trade") ? (
       <section
         id="trade"
         className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
