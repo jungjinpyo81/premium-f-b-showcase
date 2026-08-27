@@ -15,7 +15,7 @@ import { getCopy, useCopy } from "@/lib/content";
 
 const COLLECTION_IMAGES: Record<string, string> = {
   "sweet-moments": colSweet,
-  "european-pantry": colPantry,
+  "european-pantry": balsamicoPastaAsset.url,
   "plant-based-life": colPlantAsset.url,
   "natures-bites": colNature,
   "chill-cheers": colChill,
