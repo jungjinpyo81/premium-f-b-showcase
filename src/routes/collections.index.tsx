@@ -76,7 +76,7 @@ function CollectionsPage() {
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
   const [active, setActive] = useState(0);
 
-  const total = copy.collections.length + 1;
+  const total = copy.collections.length;
 
   useEffect(() => {
     document.documentElement.classList.add("snap-collections");
@@ -132,7 +132,7 @@ function CollectionsPage() {
             key={i}
             type="button"
             aria-label={
-              i === 0 ? copy.nav.tasteJourney : (copy.collections[i - 1]?.titleLocal ?? `${i}`)
+              i === 0 ? copy.nav.tasteJourney : (copy.collections[i]?.titleLocal ?? `${i}`)
             }
             aria-current={active === i}
             onClick={() => goTo(i)}
