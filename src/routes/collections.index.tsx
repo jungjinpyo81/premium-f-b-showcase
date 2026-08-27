@@ -18,7 +18,7 @@ const COLLECTION_IMAGES: Record<string, string> = {
   "european-pantry": balsamicoPastaAsset.url,
   "plant-based-life": colPlantAsset.url,
   "natures-bites": crispyNaturalBoxAsset.url,
-  "chill-cheers": colChill,
+  "chill-cheers": emilioDrinkAsset.url,
 };
 
 const FLAG_CODE_BY_ORIGIN: Record<string, string> = {
