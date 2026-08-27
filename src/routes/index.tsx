@@ -181,7 +181,7 @@ function Index() {
             </p>
           </Reveal>
           <Reveal delay={200}>
-            <div className="mx-auto mt-4 w-full md:mt-6 md:w-[95%] md:max-w-[1425px]">
+            <div className="mx-auto mt-3 w-full md:mt-4 md:w-[91%] md:max-w-[1365px]">
               <div className="w-full" style={{ aspectRatio: "3840 / 1680" }}>
                 <iframe
                   src="https://player.vimeo.com/video/1171266171?title=0&byline=0&portrait=0&badge=0&autopause=0&controls=0&loop=1&muted=1&autoplay=1&playsinline=1&app_id=58479"
@@ -194,12 +194,12 @@ function Index() {
             </div>
           </Reveal>
           <Reveal delay={280}>
-            <h2 className="mt-6 max-w-3xl font-display text-2xl leading-tight text-beige md:mt-8 md:text-4xl">
+            <h2 className="mt-4 max-w-3xl font-display text-2xl leading-tight text-beige md:mt-6 md:text-4xl">
               {biz.whatWeDo.title}
             </h2>
           </Reveal>
           <Reveal delay={340}>
-            <p className="mt-3 max-w-xl text-sm leading-7 text-beige/55 md:mt-5">{biz.whatWeDo.lead}</p>
+            <p className="mt-3 max-w-xl text-sm leading-7 text-beige/55 md:mt-4">{biz.whatWeDo.lead}</p>
           </Reveal>
         </div>
       </section>
