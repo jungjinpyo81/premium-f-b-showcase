@@ -239,3 +239,12 @@ html.snap-page {
   --border: oklch(0.34 0.006 70);
   --input: oklch(0.34 0.006 70);
 }
+
+/* Hide scrollbars while keeping overflow scroll functional. */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
