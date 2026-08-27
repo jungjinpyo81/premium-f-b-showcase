@@ -148,10 +148,12 @@ function Index() {
       >
         <div className="mx-auto w-full max-w-[1500px] px-6 py-24 pt-32 md:px-10">
           <Reveal delay={120}>
-            <div className="relative mx-auto" style={{ width: "88%" }}>
-              <p className="absolute -top-12 left-0 text-[10px] uppercase tracking-[0.45em] text-gold/80">
-                WHAT WE DO
-              </p>
+            <p className="text-[10px] uppercase tracking-[0.45em] text-gold/80">
+              WHAT WE DO
+            </p>
+          </Reveal>
+          <Reveal delay={200}>
+            <div className="mx-auto mt-8" style={{ width: "88%" }}>
               <div className="w-full" style={{ aspectRatio: "3840 / 1680" }}>
                 <iframe
                   src="https://player.vimeo.com/video/1171266171?title=0&byline=0&portrait=0&badge=0&autopause=0&controls=0&loop=1&muted=1&autoplay=1&playsinline=1&app_id=58479"
