@@ -245,7 +245,7 @@ function CollectionsPage() {
                   </Reveal>
                 </div>
 
-                <div className="md:col-span-7 h-full overflow-y-auto scrollbar-hide">
+                <div className="md:col-span-7 lg:h-full lg:overflow-y-auto lg:scrollbar-hide">
                   <Reveal repeat amount={0.2} delay={80}>
                     <p className="max-w-xl text-sm leading-7 text-muted-foreground">
                       {collection.intro}
