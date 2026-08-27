@@ -36,10 +36,6 @@ export const zh: SiteCopy = {
   hero: {
     eyebrow: "Europe Connect · F&B Sourcing & Logistics Consulting",
     titleLines: ["连接全球高端F&B品牌与", "韩国市场的桥梁"],
-    leadLines: [
-      "基于17年以上的采购、通关与物流实务经验，我们以一个团队",
-      "统一管理品牌落地韩国市场的全过程。",
-    ],
     ctaPrimary: "合作咨询",
     ctaSecondary: "我们的角色",
   },
