@@ -152,9 +152,7 @@ function CollectionsPage() {
             id={collection.slug}
             ref={setRef(index)}
             data-index={index}
-            className={`flex min-h-screen w-full snap-start flex-col border-t border-border/60 md:h-screen md:overflow-hidden ${
-              index === 0 ? "pb-12" : "pt-28 pb-12"
-            }`}
+            className="flex min-h-screen w-full snap-start flex-col border-t border-border/60 pb-12 md:h-screen md:overflow-hidden"
           >
             {/* Editorial hero band (top ~30% of every section, PC/tablet) */}
             <div className="relative hidden h-56 shrink-0 items-center overflow-hidden pb-6 md:flex md:h-[30%]">
@@ -194,7 +192,7 @@ function CollectionsPage() {
                   </Reveal>
                 </div>
               </div>
-            <div className="mx-auto flex min-h-0 w-full max-w-[1400px] flex-1 flex-col justify-start px-6 md:px-10">
+            <div className="mx-auto flex min-h-0 w-full max-w-[1400px] flex-1 flex-col justify-start px-6 pt-24 md:px-10 md:pt-0">
               <div className="grid h-full items-start gap-10 md:grid-cols-12">
                 <div className="md:col-span-5 md:h-full md:overflow-y-auto md:scrollbar-hide">
 
