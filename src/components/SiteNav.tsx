@@ -52,12 +52,7 @@ function HoverMenuGroup({
   }, [open]);
 
   return (
-    <div
-      ref={groupRef}
-      className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
+    <div ref={groupRef} className="relative">
       <div className="flex items-center gap-7">
         <L
           to="/"
@@ -66,8 +61,9 @@ function HoverMenuGroup({
         >
           {sourcingLabel}
         </L>
-        <button
-          type="button"
+        <L
+          to="/collections"
+          hash="sweet-moments"
           className="flex items-center gap-2 py-2 transition-colors hover:text-beige"
           aria-expanded={open}
         >
@@ -77,7 +73,16 @@ function HoverMenuGroup({
           >
             {"\n"}
           </span>
-        </button>
+        </L>
+        <L to="/" hash="trade" className="py-2 transition-colors hover:text-beige">
+          {bizNav.trade}
+        </L>
+        <L to="/" hash="distribution" className="py-2 transition-colors hover:text-beige">
+          {bizNav.distribution}
+        </L>
+        <L to="/" hash="consulting" className="py-2 transition-colors hover:text-beige">
+          {bizNav.consulting}
+        </L>
       </div>
       {open ? (
         <div className="absolute left-0 top-full z-50 min-w-52 border border-beige/15 bg-ink/95 py-2 backdrop-blur-md">
