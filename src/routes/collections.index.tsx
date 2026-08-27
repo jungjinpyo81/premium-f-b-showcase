@@ -244,17 +244,18 @@ function CollectionsPage() {
                   </Reveal>
                 </div>
 
-                <div className="md:col-span-7 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto lg:pr-2">
+                <div className="md:col-span-7">
                   <Reveal repeat amount={0.2} delay={80}>
                     <p className="max-w-xl text-sm leading-7 text-muted-foreground">
                       {collection.intro}
                     </p>
                   </Reveal>
-                  <div className="mt-0 border-t border-border">
+                  <div className="mt-6 border-t border-border">
                     {collection.brands.map((b, i) => (
                       <Reveal key={b.name} repeat amount={0.1} delay={i * 70} as="article">
-                        <div className="grid gap-2 border-b border-border py-2 md:grid-cols-12">
+                        <div className="grid gap-4 border-b border-border py-4 md:grid-cols-12">
                           <div className="md:col-span-3">
+
 
 
 
