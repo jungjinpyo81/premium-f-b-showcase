@@ -184,14 +184,34 @@ export function SiteNav() {
       {mobileOpen ? (
         <div className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-beige/10 bg-ink/95 backdrop-blur-md lg:hidden">
           <nav className="mx-auto flex max-w-[1500px] flex-col gap-1 px-6 py-6 text-[12px] tracking-[0.2em] text-beige/70">
-            <L
-              to="/"
-              hash="services"
-              onClick={() => setMobileOpen(false)}
-              className="py-2.5 transition-colors hover:text-beige"
-            >
-              {copy.nav.sourcing}
-            </L>
+            <div className="py-2.5">
+              <L
+                to="/"
+                hash="services"
+                onClick={() => setMobileOpen(false)}
+                className="transition-colors hover:text-beige"
+              >
+                {copy.nav.sourcing}
+              </L>
+              <div className="mt-2 flex flex-col border-l border-beige/15 pl-4">
+                <L
+                  to="/"
+                  hash="services"
+                  onClick={() => setMobileOpen(false)}
+                  className="py-2 text-[11px] text-beige/50 transition-colors hover:text-beige"
+                >
+                  브랜드의 한국 진출
+                </L>
+                <L
+                  to="/"
+                  hash="what-we-do"
+                  onClick={() => setMobileOpen(false)}
+                  className="py-2 text-[11px] text-beige/50 transition-colors hover:text-beige"
+                >
+                  운영 역량
+                </L>
+              </div>
+            </div>
             <div className="py-2.5">
               <L
                 to="/collections"
