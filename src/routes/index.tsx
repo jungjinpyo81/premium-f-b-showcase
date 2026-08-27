@@ -114,7 +114,7 @@ function Index() {
           </Reveal>
         </div>
 
-        <div className="absolute bottom-28 left-6 z-10 md:left-10">
+        <div className="absolute bottom-32 left-6 z-10 md:left-10">
           <L
             to="/collections"
             hash="sweet-moments"
