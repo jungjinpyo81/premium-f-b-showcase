@@ -105,6 +105,7 @@ const bizClass = (on: boolean) =>
 export function SiteNav() {
   const copy = useCopy();
   const biz = useBusiness();
+  const hash = useRouterState({ select: (s) => s.location.hash });
   const active = useActiveSection(copy.collections.map((c) => c.slug));
   const [mobileOpen, setMobileOpen] = useState(false);
 
