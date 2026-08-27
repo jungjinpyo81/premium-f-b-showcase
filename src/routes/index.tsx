@@ -104,13 +104,6 @@ function Index() {
           <Reveal immediate delay={420}>
             <div className="mt-12 flex flex-wrap items-center gap-4">
               <L
-                to="/collections"
-                hash="sweet-moments"
-                className="inline-flex h-13 items-center border border-beige px-10 py-4 text-[11px] uppercase tracking-[0.3em] text-beige transition-colors hover:bg-beige hover:text-ink"
-              >
-                {copy.hero.ctaPrimary}
-              </L>
-              <L
                 to="/"
                 hash="services"
                 className="inline-flex items-center px-2 py-4 text-[11px] uppercase tracking-[0.3em] text-beige/60 transition-colors hover:text-beige"
@@ -119,6 +112,16 @@ function Index() {
               </L>
             </div>
           </Reveal>
+        </div>
+
+        <div className="absolute bottom-28 left-6 z-10 md:left-10">
+          <L
+            to="/collections"
+            hash="sweet-moments"
+            className="inline-flex h-13 items-center border border-beige px-10 py-4 text-[11px] uppercase tracking-[0.3em] text-beige transition-colors hover:bg-beige hover:text-ink"
+          >
+            {copy.hero.ctaPrimary}
+          </L>
         </div>
 
         {/* Slogan bar */}
