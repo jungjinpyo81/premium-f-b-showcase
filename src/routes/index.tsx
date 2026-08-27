@@ -203,8 +203,10 @@ function Index() {
           </Reveal>
         </div>
       </section>
+      ) : null}
 
       {/* What we do — four operating pillars */}
+      {show("what-we-do") ? (
       <section
         id="what-we-do"
         className="relative flex min-h-screen snap-start items-center overflow-hidden border-t border-beige/10"
