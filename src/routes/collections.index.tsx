@@ -199,7 +199,7 @@ function CollectionsPage() {
           >
             <div className="mx-auto flex h-full w-full max-w-[1400px] flex-col justify-start px-6 md:px-10">
               <div className="grid h-full items-start gap-10 md:grid-cols-12">
-                <div className="md:col-span-5">
+                <div className="md:col-span-5 h-full overflow-y-auto">
 
 
                   <Reveal repeat amount={0.2}>
