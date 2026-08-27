@@ -152,9 +152,7 @@ function CollectionsPage() {
             id={collection.slug}
             ref={setRef(index)}
             data-index={index}
-            className={`flex min-h-screen w-full snap-start flex-col border-t border-border/60 md:h-screen md:overflow-hidden ${
-              pb-12
-            }`}
+            className="flex min-h-screen w-full snap-start flex-col border-t border-border/60 pb-12 md:h-screen md:overflow-hidden"
           >
             {/* Editorial hero band (top ~30% of every section, PC/tablet) */}
             <div className="relative hidden h-56 shrink-0 items-center overflow-hidden pb-6 md:flex md:h-[30%]">
