@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import balsamicoPastaAsset from "@/assets/balsamico-pasta.jpg.asset.json";
-import churchillsTinAsset from "@/assets/churchills-tin.jpg.asset.json";
-import cocobaBombesAsset from "@/assets/cocoba-bombes.jpg.asset.json";
-import emilioDrinkAsset from "@/assets/emilio-drink.png.asset.json";
-import crispyNaturalBoxAsset from "@/assets/crispy-natural-box.webp.asset.json";
-import luwakCoffeeAsset from "@/assets/luwak-coffee.jpg.asset.json";
+import balsamicoPastaAsset from "@/assets/balsamico-pasta.jpg";
+import churchillsTinAsset from "@/assets/churchills-tin.jpg";
+import cocobaBombesAsset from "@/assets/cocoba-bombes.jpg";
+import emilioDrinkAsset from "@/assets/emilio-drink.png";
+import crispyNaturalBoxAsset from "@/assets/crispy-natural-box.webp";
+import luwakCoffeeAsset from "@/assets/luwak-coffee.jpg";
 import colSweet from "@/assets/col-sweet.jpg";
-import colPlantAsset from "@/assets/col-plant.jpg.asset.json";
+import colPlantAsset from "@/assets/col-plant.jpg";
 import { ImageSlider } from "@/components/ImageSlider";
 import { L } from "@/components/L";
 import { Reveal } from "@/components/Reveal";
@@ -17,10 +17,10 @@ import { getCopy, useCopy } from "@/lib/content";
 
 const COLLECTION_IMAGES: Record<string, string> = {
   "sweet-moments": colSweet,
-  "european-pantry": balsamicoPastaAsset.url,
-  "plant-based-life": colPlantAsset.url,
-  "natures-bites": crispyNaturalBoxAsset.url,
-  "chill-cheers": emilioDrinkAsset.url,
+  "european-pantry": balsamicoPastaAsset,
+  "plant-based-life": colPlantAsset,
+  "natures-bites": crispyNaturalBoxAsset,
+  "chill-cheers": emilioDrinkAsset,
 };
 
 const FLAG_CODE_BY_ORIGIN: Record<string, string> = {
@@ -38,13 +38,13 @@ const flagUrl = (code: string) => `https://flagcdn.com/w80/${code}.png`;
 
 const SWEET_SLIDES: Record<string, string> = {
   "maison-mazet": colSweet,
-  churchills: churchillsTinAsset.url,
-  cocoba: cocobaBombesAsset.url,
+  churchills: churchillsTinAsset,
+  cocoba: cocobaBombesAsset,
 };
 
 const CHILL_SLIDES: Record<string, string> = {
-  emilio: emilioDrinkAsset.url,
-  "luwak-premium-coffee": luwakCoffeeAsset.url,
+  emilio: emilioDrinkAsset,
+  "luwak-premium-coffee": luwakCoffeeAsset,
 };
 
 export const Route = createFileRoute("/collections/")({
@@ -227,7 +227,7 @@ function CollectionsPage() {
                               .replace(/['\u2018\u2019]/g, "")
                               .replace(/[^a-z]/g, "-");
                           return {
-                            src: slides[key] ?? emilioDrinkAsset.url,
+                            src: slides[key] ?? emilioDrinkAsset,
                             alt: `${collection.titleLocal} — ${b.nameLocal}`,
                           };
                         })}
