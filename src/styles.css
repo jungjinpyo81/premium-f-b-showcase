@@ -265,12 +265,13 @@
 }
 
 /* Hide scrollbars while keeping overflow scroll functional. */
-.scrollbar-hide {
+@utility scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /*
