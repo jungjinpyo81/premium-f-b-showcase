@@ -48,6 +48,7 @@ const CHILL_SLIDES: Record<string, string> = {
 };
 
 export const Route = createFileRoute("/collections/")({
+  staticData: { sitemap: true },
   loaderDeps: ({ search }) => ({ lang: search.lang }),
   loader: ({ deps }) => ({ lang: deps.lang }),
   head: ({ loaderData }) => {

@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as BrandsSlugRouteImport } from './routes/brands.$slug'
 import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
 import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
@@ -36,6 +37,11 @@ const BrandsRoute = BrandsRouteImport.update({
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BrandsSlugRoute = BrandsSlugRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/$': typeof SplatRoute
   '/brands': typeof BrandsRouteWithChildren
   '/news': typeof NewsRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/brands/$slug': typeof BrandsSlugRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/$': typeof SplatRoute
   '/brands': typeof BrandsRouteWithChildren
   '/news': typeof NewsRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/brands/$slug': typeof BrandsSlugRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/brands': typeof BrandsRouteWithChildren
   '/news': typeof NewsRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/brands/$slug': typeof BrandsSlugRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/brands'
     | '/news'
+    | '/sitemap.xml'
     | '/brands/$slug'
     | '/collections/$slug'
     | '/news/$slug'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/brands'
     | '/news'
+    | '/sitemap.xml'
     | '/brands/$slug'
     | '/collections/$slug'
     | '/news/$slug'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/brands'
     | '/news'
+    | '/sitemap.xml'
     | '/brands/$slug'
     | '/collections/$slug'
     | '/news/$slug'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   BrandsRoute: typeof BrandsRouteWithChildren
   NewsRoute: typeof NewsRouteWithChildren
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CollectionsSlugRoute: typeof CollectionsSlugRoute
   CollectionsIndexRoute: typeof CollectionsIndexRoute
 }
@@ -160,6 +173,13 @@ declare module '@tanstack/react-router' {
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/brands/$slug': {
@@ -219,6 +239,7 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   BrandsRoute: BrandsRouteWithChildren,
   NewsRoute: NewsRouteWithChildren,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   CollectionsSlugRoute: CollectionsSlugRoute,
   CollectionsIndexRoute: CollectionsIndexRoute,
 }

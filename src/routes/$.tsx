@@ -1,6 +1,7 @@
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/$")({
+  staticData: { sitemap: false },
   beforeLoad: ({ params }) => {
     const path = (params._splat ?? "").toLowerCase();
 

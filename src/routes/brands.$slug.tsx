@@ -6,6 +6,7 @@ import { SiteFooter, SiteNav } from "@/components/SiteNav";
 import { getBrand, getCopy, useCopy, useLocale } from "@/lib/content";
 
 export const Route = createFileRoute("/brands/$slug")({
+  staticData: { sitemap: true },
   loaderDeps: ({ search }) => ({ lang: search.lang }),
   loader: ({ params, deps }) => {
     const brand = getBrand(getCopy(deps.lang), params.slug);
