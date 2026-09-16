@@ -6,6 +6,7 @@ import { SiteFooter, SiteNav } from "@/components/SiteNav";
 import { getCopy, getNews, useCopy } from "@/lib/content";
 
 export const Route = createFileRoute("/news/$slug")({
+  staticData: { sitemap: true },
   loaderDeps: ({ search }) => ({ lang: search.lang }),
   loader: ({ params, deps }) => {
     const item = getNews(getCopy(deps.lang), params.slug);
