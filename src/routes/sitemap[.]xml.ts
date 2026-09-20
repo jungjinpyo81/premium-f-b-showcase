@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { getRouterInstance } from "@tanstack/react-start";
 import { getCopy } from "@/lib/content";
 import { sitemapPathForLocation, sitemapStaticPaths, sitemapXML, type SitemapEntry } from "@/lib/sitemap";
+import type { AnyRoute } from "@tanstack/react-router";
 
 const BASE_URL = "https://europeconnect.kr";
 
