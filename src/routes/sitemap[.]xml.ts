@@ -17,7 +17,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         const copy = getCopy("ko");
 
         const addDynamic = (routeId: string, to: string, slugs: string[]) => {
-          if (!router.routesById[routeId]) return;
+          if (!(router.routesById as Record<string, AnyRoute | undefined>)[routeId]) return;
           for (const slug of slugs) {
             const location = router.buildLocation({ to, params: { slug }, search: () => ({}), hash: "" });
             const path = sitemapPathForLocation(router, location, routeId);
