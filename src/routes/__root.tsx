@@ -77,6 +77,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  staticData: { sitemap: false },
   validateSearch: (search: Record<string, unknown>): { lang?: Locale | undefined } => ({
     lang: isLocale(search["lang"]) ? search["lang"] : undefined,
   }),

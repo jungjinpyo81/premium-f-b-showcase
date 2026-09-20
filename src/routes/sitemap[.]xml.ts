@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { getRouterInstance } from "@tanstack/react-start";
 import { getCopy } from "@/lib/content";
 import { sitemapPathForLocation, sitemapStaticPaths, sitemapXML, type SitemapEntry } from "@/lib/sitemap";
+import type { AnyRoute } from "@tanstack/react-router";
 
 const BASE_URL = "https://europeconnect.kr";
 
@@ -16,7 +17,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         const copy = getCopy("ko");
 
         const addDynamic = (routeId: string, to: string, slugs: string[]) => {
-          if (!router.routesById[routeId]) return;
+          if (!(router.routesById as unknown as Record<string, AnyRoute | undefined>)[routeId]) return;
           for (const slug of slugs) {
             const location = router.buildLocation({ to, params: { slug }, search: () => ({}), hash: "" });
             const path = sitemapPathForLocation(router, location, routeId);
