@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { createFileRoute, useRouterState } from "@tanstack/react-router";
 import {
   Globe2,
@@ -82,6 +82,34 @@ function Index() {
   const exclusive = EXCLUSIVE_VIEWS[hash] ?? null;
   const show = (id: string) => !exclusive || exclusive.includes(id);
 
+  // Hero parallax: background drifts slower than the scroll and zooms subtly.
+  const heroRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let raf = 0;
+    const handleScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const scrollY = window.scrollY;
+        const heroY = Math.min(scrollY * 0.18, 120);
+        const heroScale = 1 + Math.min(scrollY / 5000, 0.035);
+        hero.style.setProperty("--hero-y", `${heroY}px`);
+        hero.style.setProperty("--hero-scale", `${heroScale}`);
+      });
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
   // Full-page scroll snap is scoped to this page and only active in the
   // default one-page view (exclusive views render a single screen).
   useEffect(() => {
@@ -110,13 +138,13 @@ function Index() {
 
       {/* Hero — default one-page view only */}
       {!exclusive ? (
-      <section className="relative flex h-screen snap-start items-center overflow-hidden">
+      <section ref={heroRef} className="hero relative flex h-screen snap-start items-center overflow-hidden">
         <img
           src={heroImg}
           alt={copy.hero.titleLines.join(" ")}
           width={1920}
           height={1280}
-          className="absolute inset-0 size-full object-cover"
+          className="hero-image absolute inset-0 size-full object-cover"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.12_0_0/0.94)_0%,oklch(0.12_0_0/0.72)_50%,oklch(0.12_0_0/0.35)_100%)]" />
         <div className="relative mx-auto w-full max-w-[1500px] -translate-y-[8vh] px-6 text-center md:px-10">
@@ -127,8 +155,12 @@ function Index() {
           </Reveal>
           <Reveal immediate delay={140}>
             <h1 className="mt-8 max-w-3xl text-left font-display text-3xl leading-[1.2] text-beige md:text-5xl">
-              {copy.hero.titleLines.map((line) => (
-                <span key={line} className="block">
+              {copy.hero.titleLines.map((line, index) => (
+                <span
+                  key={line}
+                  className="hero-title-line block"
+                  style={{ animationDelay: `${0.35 + index * 0.18}s` }}
+                >
                   {line}
                 </span>
               ))}
