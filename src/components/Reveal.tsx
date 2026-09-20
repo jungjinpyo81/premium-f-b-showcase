@@ -1,20 +1,21 @@
-import { useEffect, useRef, useState, type ElementType, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ElementType,
+  type ReactNode,
+} from "react";
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
-  /** Stagger in ms. */
   delay?: number;
   as?: "div" | "section" | "article" | "span" | "li" | "header" | "figure";
-  /** Above-the-fold content: fade in right after mount instead of waiting for scroll. */
   immediate?: boolean;
-  /** Re-play the animation every time the element re-enters the viewport. */
   repeat?: boolean;
-  /** Visibility ratio required to trigger (0-1). */
   amount?: number;
 };
 
-/** Understated fade + slight rise on scroll. No flashy motion. */
 export function Reveal({
   children,
   className = "",
@@ -42,18 +43,23 @@ export function Reveal({
 
     const io = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
             setShown(true);
-            if (!repeat) io.disconnect();
+            if (!repeat) {
+              io.disconnect();
+            }
           } else if (repeat) {
             setShown(false);
           }
         }
       },
-      // threshold 0 keeps behaviour consistent for elements taller than the viewport
-      { threshold: amount, rootMargin: repeat ? "0px" : "0px 0px -10% 0px" },
+      {
+        threshold: amount,
+        rootMargin: repeat ? "0px" : "0px 0px -10% 0px",
+      },
     );
+
     io.observe(el);
     return () => io.disconnect();
   }, [immediate, repeat, amount]);
@@ -63,10 +69,26 @@ export function Reveal({
   return (
     <Tag
       ref={ref}
-      style={{ transitionDelay: shown ? `${delay}ms` : "0ms" }}
-      className={`transition-[opacity,transform] duration-[900ms] ease-out will-change-[opacity,transform] motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${
-        shown ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-      } ${className}`}
+      style={{
+        transitionDelay: shown ? `${delay}ms` : "0ms",
+      }}
+      className={`
+        will-change-[opacity,transform,filter]
+        transition-[opacity,transform,filter]
+        duration-[1000ms]
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        ${
+          shown
+            ? "translate-y-0 scale-100 opacity-100 blur-0"
+            : "translate-y-8 scale-[0.97] opacity-0 blur-[4px]"
+        }
+        motion-reduce:translate-y-0
+        motion-reduce:scale-100
+        motion-reduce:opacity-100
+        motion-reduce:blur-0
+        motion-reduce:transition-none
+        ${className}
+      `}
     >
       {children}
     </Tag>
